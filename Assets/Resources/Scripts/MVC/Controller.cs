@@ -52,7 +52,7 @@ public class Controller : MonoBehaviour
         HashSet<string> included = _model.GetIncluded();
         HashSet<string> pending = _model.GetPending();
         HashSet<string> disabled  = new HashSet<string>();
-        HashSet<string> hasUnmetMilestones = new HashSet<string>();
+        HashSet<string> haveUnmetMilestones = new HashSet<string>();
 
         foreach (KeyValuePair<string, HashSet<string>> kvp in _model.GetConditions())
         {
@@ -66,18 +66,40 @@ public class Controller : MonoBehaviour
         {
             if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
             {
-                hasUnmetMilestones.UnionWith(kvp.Value);
+                haveUnmetMilestones.UnionWith(kvp.Value);
             }            
         }
 
-        _view.UpdateView
-        (
-            activities,
-            executed,
-            included,
-            pending,
-            disabled,
-            hasUnmetMilestones
-        );
+        foreach (string activityId in activities)
+        {
+            GameObject activityObject = _view.Activities[activityId];
+            Activity activity = activityObject.GetComponent<Activity>();
+            
+            bool activityIsExecuted = _model.Executed.Contains(activityId);
+            bool activityIsPending = _model.Pending.Contains(activityId);
+            bool activityIsIncluded = _model.Included.Contains(activityId);
+            bool activityIsDisabled = disabled.Contains(activityId);
+            bool activityHasUnmetMilestones = haveUnmetMilestones.Contains(activityId);
+
+            activity.SetLightState(activityIsExecuted);
+            activity.UpdatePushButtonMaterial(activityIsExecuted);
+            activity.SetPendingState(activityIsPending);
+            activity.SetIncludedState(activityIsIncluded);
+            activity.SetDisabledOrUnmetMilestonesState(activityIsDisabled || activityHasUnmetMilestones);
+        }
+        UpdateGlobalEnvironment(pending.Count > 0);
+    }
+
+    private void UpdateGlobalEnvironment(bool hasPendingActivities)
+    {
+        GameObject moonlight = GameObject.Find("Moonlight");
+        GameObject sunlight = GameObject.Find("Sunlight");
+
+        if (moonlight != null) moonlight.SetActive(hasPendingActivities);
+        if (sunlight != null) sunlight.SetActive(!hasPendingActivities);
+
+        string skyboxMaterialPath = hasPendingActivities ? "Skyboxes/FS000_Night_01" : "Skyboxes/FS000_Day_03";
+        RenderSettings.skybox = Resources.Load<Material>(skyboxMaterialPath);
+        DynamicGI.UpdateEnvironment(); 
     }
 }

@@ -35,7 +35,7 @@ public class View : MonoBehaviour
             Activities.Add(kvp.Key, activtyObject);
         }
     }
-
+/*
     public void UpdateView(
         HashSet<string> activityIds,
         HashSet<string> executed,
@@ -84,6 +84,7 @@ public class View : MonoBehaviour
         
         DynamicGI.UpdateEnvironment(); // Update global illumination
     }
+*/
     public void forwardExecutedActivityId(Activity executedActivity){
         // Have Activy react to interaction (spi or something)
         onActivityExecutedReceived?.Invoke(executedActivity.Id);

@@ -19,6 +19,7 @@ public class Activity : MonoBehaviour
     GameObject PushButtonObjectExcluded;
     GameObject FogEffect;
     ButtonController ButtonController;
+    ButtonController ButtonControllerExcluded;
     Light[] ButtonBodyLights;
     Light[] PropLights;
     Light PushButtonLight;
@@ -27,7 +28,7 @@ public class Activity : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {/*
         //Child Objects
         GlitterObject = transform.Find("Glitter").gameObject;
         ActivityExecuteButton = transform.Find("ActivityExecuteButton").gameObject;
@@ -38,9 +39,6 @@ public class Activity : MonoBehaviour
         PushButtonObjectExcluded = transform.Find("ActivityExecuteButtonExcluded/PushButtonObject").gameObject;
         FogEffect = transform.Find("Fog/Fog").gameObject;
 
-        
-        //Child Object Components
-        ButtonController = ActivityExecuteButton.GetComponent<ButtonController>();
         
         // Light Component arrays
         ButtonBodyLights = CombineLights(
@@ -60,7 +58,11 @@ public class Activity : MonoBehaviour
 
         // Fog Component
         Fog = FogEffect.GetComponent<ParticleSystem>();
-
+*/
+        
+        //Child Object Components
+        ButtonController = transform.Find("ActivityExecuteButton").gameObject.GetComponent<ButtonController>();
+        ButtonControllerExcluded = transform.Find("ActivityExecuteButtonExcluded").gameObject.GetComponent<ButtonController>();
     }
 
     // Update is called once per frame
@@ -72,9 +74,9 @@ public class Activity : MonoBehaviour
     {
         Id = id;
         Label = label;
-        UpdateActivity(false, true, false, false, false);
 
         ButtonController.SubscribeToOnButtonPressed(OnButtonPressed);
+        ButtonControllerExcluded.SubscribeToOnButtonPressed(OnButtonPressed);
     }
 
     public void OnButtonPressed(ButtonController button)
@@ -84,7 +86,7 @@ public class Activity : MonoBehaviour
         // Display execution
         // Highlight outgoing constraints
     }
-
+    /*
     public void UpdateActivity(bool executed, bool included, bool pending, bool disabled, bool hasUnmetMilestones)
     {
         if (executed)
@@ -153,6 +155,145 @@ public class Activity : MonoBehaviour
 
             ActivityExecuteButtonExcluded.SetActive(true);
             ActivityPropsExcluded.SetActive(true);
+        }
+    }*/
+
+    public void SetLightState(bool isExecuted)
+    {
+        // Toggle Light under "ActivityExecuteButton"
+        var lightObject = transform.Find("ActivityExecuteButton/PushButtonObject/Light")?.gameObject;
+        if (lightObject != null)
+        {
+            lightObject.SetActive(isExecuted);
+        }
+
+        // Toggle Light under "ActivityExecuteButtonExcluded"
+        var lightObjectExcluded = transform.Find("ActivityExecuteButtonExcluded/PushButtonObject/Light")?.gameObject;
+        if (lightObjectExcluded != null)
+        {
+            lightObjectExcluded.SetActive(isExecuted);
+        }
+    }
+
+    
+    public void UpdatePushButtonMaterial(bool isExecuted)
+    {
+        string materialPath = isExecuted ? "Materials/ButtonGreenEmission" : "Materials/ButtonGreen";
+        UpdateMaterial("ActivityExecuteButton/PushButtonObject/PushButton", materialPath);
+    }
+
+
+    private void UpdateMaterial(string objectPath, string materialPath)
+    {
+        var gameObject = transform.Find(objectPath)?.gameObject;
+        if (gameObject != null)
+        {
+            var renderer = gameObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = Resources.Load<Material>(materialPath);
+            }
+        }
+    }
+
+    /*
+    public void SetPendingState(bool isPending)
+    {
+        ToggleChildObject("ActivityExecuteButton/BodyObject/Lights", isPending);
+        ToggleChildObject("ActivityExecuteButtonExcluded/BodyObject/Lights", isPending);
+        ToggleChildObject("ActivityProps/PropLights", isPending);
+        ToggleChildObject("ActivityPropsExcluded/PropLights", isPending);
+    }
+    */
+    public void SetPendingState(bool isPending)
+    {
+        ToggleChildObjects(isPending,
+            "ActivityExecuteButton/BodyObject/Lights",
+            "ActivityExecuteButtonExcluded/BodyObject/Lights",
+            "ActivityProps/PropLights",
+            "ActivityPropsExcluded/PropLights");
+    }
+    public void SetDisabledOrUnmetMilestonesState(bool isDisabledOrUnmetMilestones)
+    {
+        // Disable or enable "Glitter" object and buttons
+        ToggleChildObjects(!isDisabledOrUnmetMilestones, "Glitter");
+        SetButtonsEnabled(!isDisabledOrUnmetMilestones, "ActivityExecuteButton", "ActivityExecuteButtonExcluded");
+
+        // Enable or disable Fog component
+        var fogComponent = transform.Find("Fog/Fog")?.gameObject;
+
+        if (fogComponent != null)
+        {
+            fogComponent.SetActive(isDisabledOrUnmetMilestones);
+        }
+    }
+
+    public void SetIncludedState(bool isIncluded)
+    {
+        // Enable or disable specified child components
+        ToggleChildObjects(isIncluded, 
+            "ActivityExecuteButton", 
+            "ActivityProps");
+
+        ToggleChildObjects(!isIncluded, 
+            "ActivityExecuteButtonExcluded", 
+            "ActivityPropsExcluded",
+            "Glitter"); // Also handling "Glitter" in the same manner
+
+        // Handle button states as per disabled logic
+        SetButtonsEnabled(!isIncluded, 
+            "ActivityExecuteButton", 
+            "ActivityExecuteButtonExcluded");
+    }
+
+
+    /*
+    private void ToggleChildObject(string childPath, bool isActive)
+    {
+        var childObject = transform.Find(childPath)?.gameObject;
+        if (childObject != null)
+        {
+            childObject.SetActive(isActive);
+        }
+    }
+    */
+
+    private void ToggleChildObjects(bool isActive, params string[] childPaths)
+    {
+        foreach (var path in childPaths)
+        {
+            var childObject = transform.Find(path)?.gameObject;
+            if (childObject != null)
+            {
+                childObject.SetActive(isActive);
+            }
+        }
+    }
+    /*
+    private void SetButtonEnabled(string buttonPath, bool isEnabled)
+    {
+        var buttonObj = transform.Find(buttonPath)?.gameObject;
+        if (buttonObj != null)
+        {
+            var buttonController = buttonObj.GetComponent<ButtonController>();
+            if (buttonController != null)
+            {
+                buttonController.SetButtonEnabled(isEnabled);
+            }
+        }
+    }
+    */
+
+    private void SetButtonsEnabled(bool isEnabled, params string[] buttonPaths)
+    {
+        foreach (var path in buttonPaths)
+        {
+            var buttonObj = transform.Find(path)?.gameObject;
+            if (buttonObj != null)
+            {
+                var buttonController = buttonObj.GetComponent<ButtonController>();
+                buttonController?.SetButtonEnabled(isEnabled);
+            }
         }
     }
 
