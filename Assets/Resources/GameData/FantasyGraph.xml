@@ -1,12 +1,7 @@
-<dcrgraph title="FantasyGraph" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
+<dcrgraph title="FantasyGraph" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="-3" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
     <meta>
-        <graph id="1702863" hash="A78321EF2B5832C172A234EAB559104E" guid="97735DEE-517B-4597-AACD-C0074CEB6237" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
-        <revision id="3514117" type="minor" date="2023-12-03T08:51:05.183"/>
-        <organization id="18" name="DTU - Danish Technical University" type="Demonstration"/>
-    </meta>
-    <meta>
-        <graph id="1702863" hash="A78321EF2B5832C172A234EAB559104E" guid="97735DEE-517B-4597-AACD-C0074CEB6237" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
-        <revision id="3514117" type="minor" date="2023-12-03T08:51:05.183"/>
+        <graph id="1702863" hash="23A749594FDEDB5818618C2F077662B1" guid="97735DEE-517B-4597-AACD-C0074CEB6237" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
+        <revision id="3514456" type="minor" date="2023-12-04T00:26:03.063"/>
         <organization id="18" name="DTU - Danish Technical University" type="Demonstration"/>
     </meta>
     <specification>
@@ -16,7 +11,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="300" yLoc="525"/>
+                            <location xLoc="300" yLoc="675"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -49,7 +44,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="500" yLoc="525"/>
+                            <location xLoc="600" yLoc="675"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -82,7 +77,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="100" yLoc="525"/>
+                            <location xLoc="450" yLoc="525"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -115,7 +110,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="700" yLoc="525"/>
+                            <location xLoc="750" yLoc="525"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -148,7 +143,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="400" yLoc="325"/>
+                            <location xLoc="300" yLoc="525"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -181,7 +176,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="200" yLoc="325"/>
+                            <location xLoc="300" yLoc="325"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -214,7 +209,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="600" yLoc="325"/>
+                            <location xLoc="450" yLoc="325"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -247,7 +242,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="0" yLoc="325"/>
+                            <location xLoc="150" yLoc="325"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -313,7 +308,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="100" yLoc="125"/>
+                            <location xLoc="450" yLoc="125"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -346,7 +341,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="500" yLoc="125"/>
+                            <location xLoc="600" yLoc="325"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -379,7 +374,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="700" yLoc="125"/>
+                            <location xLoc="750" yLoc="125"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -471,20 +466,45 @@
         </resources>
         <constraints>
             <conditions>
-                <condition sourceId="Activity2" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity2" targetId="Activity9" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity0" targetId="Activity5" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity0" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity1" targetId="Activity4" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity1" targetId="Activity10" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity3" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
-                <condition sourceId="Activity3" targetId="Activity11" filterLevel="1" description="" time="" groups=""/>
+                <condition sourceId="Activity4" targetId="Activity6" filterLevel="1" description="" time="" groups="" link="Activity4--condition--Activity6"/>
+                <condition sourceId="Activity5" targetId="Activity7" filterLevel="1" description="" time="" groups="" link="Activity5--condition--Activity7"/>
+                <condition sourceId="Activity8" targetId="Activity9" filterLevel="1" description="" time="" groups=""/>
+                <condition sourceId="Activity7" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
+                <condition sourceId="Activity6" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
+                <condition sourceId="Activity3" targetId="Activity10" filterLevel="1" description="" time="" groups=""/>
+                <condition sourceId="Activity9" targetId="Activity10" filterLevel="1" description="" time="" groups=""/>
             </conditions>
-            <responses/>
+            <responses>
+                <response sourceId="Activity2" targetId="Activity0" filterLevel="1" description="" time="" groups=""/>
+                <response sourceId="Activity9" targetId="Activity10" filterLevel="1" description="" time="" groups=""/>
+                <response sourceId="Activity3" targetId="Activity10" filterLevel="1" description="" time="" groups=""/>
+            </responses>
             <coresponses/>
-            <excludes/>
-            <includes/>
-            <milestones/>
+            <excludes>
+                <exclude sourceId="Activity2" targetId="Activity3" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity3" targetId="Activity2" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity5" targetId="Activity4" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity4" targetId="Activity5" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity4" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity5" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity3" targetId="Activity3" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity2" targetId="Activity2" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity7" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity6" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity4" targetId="Activity4" filterLevel="1" description="" time="" groups=""/>
+                <exclude sourceId="Activity5" targetId="Activity5" filterLevel="1" description="" time="" groups=""/>
+            </excludes>
+            <includes>
+                <include sourceId="Activity1" targetId="Activity3" filterLevel="1" description="" time="" groups=""/>
+                <include sourceId="Activity1" targetId="Activity2" filterLevel="1" description="" time="" groups=""/>
+                <include sourceId="Activity3" targetId="Activity11" filterLevel="1" description="" time="" groups=""/>
+                <include sourceId="Activity9" targetId="Activity11" filterLevel="1" description="" time="" groups=""/>
+            </includes>
+            <milestones>
+                <milestone sourceId="Activity4" targetId="Activity6" filterLevel="1" description="" time="" groups="" link="Activity4--condition--Activity6"/>
+                <milestone sourceId="Activity5" targetId="Activity7" filterLevel="1" description="" time="" groups="" link="Activity5--condition--Activity7"/>
+                <milestone sourceId="Activity10" targetId="Activity11" filterLevel="1" description="" time="" groups=""/>
+            </milestones>
             <updates/>
             <spawns/>
             <templateSpawns/>
@@ -496,28 +516,19 @@
         </custom>
         <marking>
             <globalStore/>
-            <executed>
-                <event id="Activity4"/>
-                <event id="Activity7"/>
-                <event id="Activity9"/>
-                <event id="Activity10"/>
-            </executed>
+            <executed/>
             <included>
                 <event id="Activity0"/>
                 <event id="Activity1"/>
-                <event id="Activity2"/>
-                <event id="Activity3"/>
-                <event id="Activity8"/>
-                <event id="Activity9"/>
-                <event id="Activity10"/>
-                <event id="Activity11"/>
-            </included>
-            <pendingResponses>
+                <event id="Activity4"/>
                 <event id="Activity5"/>
+                <event id="Activity6"/>
                 <event id="Activity7"/>
                 <event id="Activity8"/>
                 <event id="Activity9"/>
-            </pendingResponses>
+                <event id="Activity10"/>
+            </included>
+            <pendingResponses/>
         </marking>
     </runtime>
 </dcrgraph>

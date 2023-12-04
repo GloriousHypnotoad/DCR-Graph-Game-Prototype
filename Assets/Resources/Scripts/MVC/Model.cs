@@ -454,5 +454,4 @@ public class Model
     {
         return new Dictionary<TKey, TValue>(originalDictionary);
     }
-
 }

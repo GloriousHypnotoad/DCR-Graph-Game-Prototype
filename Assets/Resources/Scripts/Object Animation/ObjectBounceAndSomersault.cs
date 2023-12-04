@@ -3,21 +3,39 @@ using System.Collections;
 
 public class ObjectBounceAndSomersault : MonoBehaviour
 {
-    public float jumpHeight = 5f;
-    public float jumpDuration = 1f;
-    public float waitTime = 1f;
+    public float jumpHeight = 30f;
+    public float jumpDuration = 3f;
+    public float waitTime = 3f;
     private Vector3 startPosition;
-    private Vector3 randomRotationAxis;
+    private bool isJumping = false; // Boolean flag to control jumping
+    private Coroutine jumpRoutine; // Reference to the coroutine
+    private bool stopAfterCurrentCycle = false; // Flag to indicate stopping after the current cycle
+
 
     void Start()
     {
         startPosition = transform.position;
-        StartCoroutine(JumpAndDualRotateRoutine());
+    }
+
+    public void StartAnimation()
+    {
+        if (!isJumping)
+        {
+            isJumping = true;
+            stopAfterCurrentCycle = false; // Reset the flag when animation starts
+            jumpRoutine = StartCoroutine(JumpAndDualRotateRoutine());
+        }
+    }
+
+    public void StopAnimation()
+    {
+        // Indicate that the animation should stop after the current cycle
+        stopAfterCurrentCycle = true;
     }
 
     IEnumerator JumpAndDualRotateRoutine()
     {
-        while (true)
+        while (isJumping)
         {
             // Determine random rotation axis for both somersaults
             Vector3 randomRotationAxis1 = new Vector3(Random.value, Random.value, Random.value).normalized;
@@ -41,10 +59,26 @@ public class ObjectBounceAndSomersault : MonoBehaviour
                 yield return null;
             }
 
-            // Reset rotation, position and wait
+            // Reset rotation and position at the end of jump
             transform.rotation = Quaternion.identity;
             transform.position = startPosition;
+
+            // Check if the animation should stop after the current cycle
+            if (stopAfterCurrentCycle)
+            {
+                isJumping = false;
+                yield break; // Exit the coroutine
+            }
+
+            // Wait for the specified time before next jump
             yield return new WaitForSeconds(waitTime);
         }
+    }
+
+
+    // Method to check if the animation is running
+    public bool IsAnimationRunning()
+    {
+        return isJumping;
     }
 }

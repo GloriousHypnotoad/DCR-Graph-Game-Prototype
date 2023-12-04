@@ -264,6 +264,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8234827965096992775}
   - component: {fileID: 3760864452235606431}
+  - component: {fileID: 8554721669818172477}
+  - component: {fileID: 4126661279058955548}
+  - component: {fileID: 6448944634528967551}
+  - component: {fileID: 6818066812657917429}
   - component: {fileID: 120842342651114890}
   m_Layer: 6
   m_Name: ActivityExecuteButtonExcluded
@@ -301,6 +305,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b7afe3561a5234583895d45235ff30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8554721669818172477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852338172106469403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc955e02188d19842996193cf3430b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 25
+  quickRotationSpeed: 900
+  numberOfQuickRotations: 3
+--- !u!114 &4126661279058955548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852338172106469403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261183af69f8082458fbc8a7481227ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 30
+  jumpDuration: 3
+  waitTime: 3
+--- !u!114 &6448944634528967551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852338172106469403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7740649ce23b24c89eb03bd36a6c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.5
+  shakeIntensity: 0.7
+--- !u!114 &6818066812657917429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852338172106469403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9402924061b383f4dbd2768ab19facf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 7
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!65 &120842342651114890
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -366,8 +430,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 1, b: 0, a: 1}
-  m_Intensity: 10
-  m_Range: 1
+  m_Intensity: 100
+  m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

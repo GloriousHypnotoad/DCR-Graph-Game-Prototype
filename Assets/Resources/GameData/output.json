@@ -4,59 +4,35 @@
     "@dataTypesStatus": "hide",
     "@filterLevel": "-1",
     "@insightFilter": "false",
-    "@zoomLevel": "0",
+    "@zoomLevel": "-3",
     "@formGroupStyle": "Normal",
     "@formLayoutStyle": "Horizontal",
     "@formShowPendingCount": "true",
     "@graphBG": "#f1f6fe",
     "@graphType": "0",
     "@exercise": "false",
-    "meta": [
-      {
-        "graph": {
-          "@id": "1702863",
-          "@hash": "A78321EF2B5832C172A234EAB559104E",
-          "@guid": "97735DEE-517B-4597-AACD-C0074CEB6237",
-          "@OwnerName": "Simon James Jensen",
-          "@OwnerId": "136208",
-          "@categoryId": "7309",
-          "@categoryTitle": "Default",
-          "@Keywords": ""
-        },
-        "revision": {
-          "@id": "3514117",
-          "@type": "minor",
-          "@date": "2023-12-03T08:51:05.183"
-        },
-        "organization": {
-          "@id": "18",
-          "@name": "DTU - Danish Technical University",
-          "@type": "Demonstration"
-        }
+    "meta": {
+      "graph": {
+        "@id": "1702863",
+        "@hash": "23A749594FDEDB5818618C2F077662B1",
+        "@guid": "97735DEE-517B-4597-AACD-C0074CEB6237",
+        "@OwnerName": "Simon James Jensen",
+        "@OwnerId": "136208",
+        "@categoryId": "7309",
+        "@categoryTitle": "Default",
+        "@Keywords": ""
       },
-      {
-        "graph": {
-          "@id": "1702863",
-          "@hash": "A78321EF2B5832C172A234EAB559104E",
-          "@guid": "97735DEE-517B-4597-AACD-C0074CEB6237",
-          "@OwnerName": "Simon James Jensen",
-          "@OwnerId": "136208",
-          "@categoryId": "7309",
-          "@categoryTitle": "Default",
-          "@Keywords": ""
-        },
-        "revision": {
-          "@id": "3514117",
-          "@type": "minor",
-          "@date": "2023-12-03T08:51:05.183"
-        },
-        "organization": {
-          "@id": "18",
-          "@name": "DTU - Danish Technical University",
-          "@type": "Demonstration"
-        }
+      "revision": {
+        "@id": "3514456",
+        "@type": "minor",
+        "@date": "2023-12-04T00:26:03.063"
+      },
+      "organization": {
+        "@id": "18",
+        "@name": "DTU - Danish Technical University",
+        "@type": "Demonstration"
       }
-    ],
+    },
     "specification": {
       "resources": {
         "events": {
@@ -70,7 +46,7 @@
                 "visualization": {
                   "location": {
                     "@xLoc": "300",
-                    "@yLoc": "525"
+                    "@yLoc": "675"
                   },
                   "colors": {
                     "@bg": "#f9f7ed",
@@ -114,8 +90,8 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "500",
-                    "@yLoc": "525"
+                    "@xLoc": "600",
+                    "@yLoc": "675"
                   },
                   "colors": {
                     "@bg": "#f9f7ed",
@@ -159,7 +135,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "100",
+                    "@xLoc": "450",
                     "@yLoc": "525"
                   },
                   "colors": {
@@ -204,7 +180,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "700",
+                    "@xLoc": "750",
                     "@yLoc": "525"
                   },
                   "colors": {
@@ -249,8 +225,8 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "400",
-                    "@yLoc": "325"
+                    "@xLoc": "300",
+                    "@yLoc": "525"
                   },
                   "colors": {
                     "@bg": "#f9f7ed",
@@ -294,7 +270,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "200",
+                    "@xLoc": "300",
                     "@yLoc": "325"
                   },
                   "colors": {
@@ -339,7 +315,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "600",
+                    "@xLoc": "450",
                     "@yLoc": "325"
                   },
                   "colors": {
@@ -384,7 +360,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "0",
+                    "@xLoc": "150",
                     "@yLoc": "325"
                   },
                   "colors": {
@@ -474,7 +450,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "100",
+                    "@xLoc": "450",
                     "@yLoc": "125"
                   },
                   "colors": {
@@ -519,8 +495,8 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "500",
-                    "@yLoc": "125"
+                    "@xLoc": "600",
+                    "@yLoc": "325"
                   },
                   "colors": {
                     "@bg": "#f9f7ed",
@@ -564,7 +540,7 @@
               "custom": {
                 "visualization": {
                   "location": {
-                    "@xLoc": "700",
+                    "@xLoc": "750",
                     "@yLoc": "125"
                   },
                   "colors": {
@@ -737,15 +713,25 @@
         "conditions": {
           "condition": [
             {
-              "@sourceId": "Activity2",
+              "@sourceId": "Activity4",
+              "@targetId": "Activity6",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": "",
+              "@link": "Activity4--condition--Activity6"
+            },
+            {
+              "@sourceId": "Activity5",
               "@targetId": "Activity7",
               "@filterLevel": "1",
               "@description": "",
               "@time": "",
-              "@groups": ""
+              "@groups": "",
+              "@link": "Activity5--condition--Activity7"
             },
             {
-              "@sourceId": "Activity2",
+              "@sourceId": "Activity8",
               "@targetId": "Activity9",
               "@filterLevel": "1",
               "@description": "",
@@ -753,15 +739,7 @@
               "@groups": ""
             },
             {
-              "@sourceId": "Activity0",
-              "@targetId": "Activity5",
-              "@filterLevel": "1",
-              "@description": "",
-              "@time": "",
-              "@groups": ""
-            },
-            {
-              "@sourceId": "Activity0",
+              "@sourceId": "Activity7",
               "@targetId": "Activity8",
               "@filterLevel": "1",
               "@description": "",
@@ -769,15 +747,43 @@
               "@groups": ""
             },
             {
-              "@sourceId": "Activity1",
-              "@targetId": "Activity4",
+              "@sourceId": "Activity6",
+              "@targetId": "Activity8",
               "@filterLevel": "1",
               "@description": "",
               "@time": "",
               "@groups": ""
             },
             {
-              "@sourceId": "Activity1",
+              "@sourceId": "Activity3",
+              "@targetId": "Activity10",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity9",
+              "@targetId": "Activity10",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
+        "responses": {
+          "response": [
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity0",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity9",
               "@targetId": "Activity10",
               "@filterLevel": "1",
               "@description": "",
@@ -786,7 +792,128 @@
             },
             {
               "@sourceId": "Activity3",
+              "@targetId": "Activity10",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
+        "coresponses": null,
+        "excludes": {
+          "exclude": [
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity3",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
+              "@targetId": "Activity2",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity5",
+              "@targetId": "Activity4",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity4",
+              "@targetId": "Activity5",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity4",
+              "@targetId": "Activity7",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity5",
               "@targetId": "Activity6",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
+              "@targetId": "Activity3",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity2",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity7",
+              "@targetId": "Activity7",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity6",
+              "@targetId": "Activity6",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity4",
+              "@targetId": "Activity4",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity5",
+              "@targetId": "Activity5",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
+        "includes": {
+          "include": [
+            {
+              "@sourceId": "Activity1",
+              "@targetId": "Activity3",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity1",
+              "@targetId": "Activity2",
               "@filterLevel": "1",
               "@description": "",
               "@time": "",
@@ -799,14 +926,47 @@
               "@description": "",
               "@time": "",
               "@groups": ""
+            },
+            {
+              "@sourceId": "Activity9",
+              "@targetId": "Activity11",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
             }
           ]
         },
-        "responses": null,
-        "coresponses": null,
-        "excludes": null,
-        "includes": null,
-        "milestones": null,
+        "milestones": {
+          "milestone": [
+            {
+              "@sourceId": "Activity4",
+              "@targetId": "Activity6",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": "",
+              "@link": "Activity4--condition--Activity6"
+            },
+            {
+              "@sourceId": "Activity5",
+              "@targetId": "Activity7",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": "",
+              "@link": "Activity5--condition--Activity7"
+            },
+            {
+              "@sourceId": "Activity10",
+              "@targetId": "Activity11",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
         "updates": null,
         "spawns": null,
         "templateSpawns": null
@@ -818,22 +978,7 @@
       },
       "marking": {
         "globalStore": null,
-        "executed": {
-          "event": [
-            {
-              "@id": "Activity4"
-            },
-            {
-              "@id": "Activity7"
-            },
-            {
-              "@id": "Activity9"
-            },
-            {
-              "@id": "Activity10"
-            }
-          ]
-        },
+        "executed": null,
         "included": {
           "event": [
             {
@@ -843,29 +988,13 @@
               "@id": "Activity1"
             },
             {
-              "@id": "Activity2"
+              "@id": "Activity4"
             },
-            {
-              "@id": "Activity3"
-            },
-            {
-              "@id": "Activity8"
-            },
-            {
-              "@id": "Activity9"
-            },
-            {
-              "@id": "Activity10"
-            },
-            {
-              "@id": "Activity11"
-            }
-          ]
-        },
-        "pendingResponses": {
-          "event": [
             {
               "@id": "Activity5"
+            },
+            {
+              "@id": "Activity6"
             },
             {
               "@id": "Activity7"
@@ -875,9 +1004,13 @@
             },
             {
               "@id": "Activity9"
+            },
+            {
+              "@id": "Activity10"
             }
           ]
-        }
+        },
+        "pendingResponses": null
       }
     }
   }

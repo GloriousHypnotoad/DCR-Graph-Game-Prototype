@@ -61,7 +61,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 655337523758486261}
   - {fileID: 8174758036281267136}
   - {fileID: 2557908873714341501}
   - {fileID: 4296304917631756614}
@@ -226,84 +225,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3360020456351306691, guid: eb5f3e0f7a547ae45a42b304e85ed023, type: 3}
   m_PrefabInstance: {fileID: 1530865719286823557}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1899359160307452571
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6525416616217342759}
-    m_Modifications:
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.046001293
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2209976
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.3890024
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.27519798
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.9613708
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.0000001909211
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.005675893
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 148.053
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -0.7369995
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.21099854
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731646951258653396, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-      propertyPath: m_Name
-      value: Broadsword.003
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
---- !u!4 &655337523758486261 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1388194000457521262, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-  m_PrefabInstance: {fileID: 1899359160307452571}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3311830175412569043
 PrefabInstance:

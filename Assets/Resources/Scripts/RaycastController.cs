@@ -11,50 +11,8 @@ public class ReticuleRaycaster : MonoBehaviour
     
     public float rayLength = 100f;  // Adjust as needed based on your scene scale.
     public LayerMask targetLayer;   // Set this to the layer of your target objects in the Inspector.
-/*
     void Update()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength, targetLayer))
-        {
-            if (hit.collider.gameObject.CompareTag("Target Cube"))
-            {
-                reticule.color = targetColor;
-            }
-        }
-        else
-        {
-            reticule.color = defaultColor;
-        }
-    }
-*/
-    void Update()
-    {/*
-        RaycastHit hit;
-        bool isTargetHit = Physics.Raycast(transform.position, transform.forward, out hit, rayLength, targetLayer);
-
-        if (isTargetHit && hit.collider.gameObject.CompareTag("ActivityExecuteButton"))
-        {
-            ButtonController buttonController = hit.collider.gameObject.GetComponent<ButtonController>();
-            
-            if (buttonController != null && buttonController.ButtonEnabled)
-            {
-                reticule.color = targetColor;
-            }
-            else
-            {
-                reticule.color = disabledColor;
-            }
-        }
-        else if (isTargetHit && hit.collider.gameObject.CompareTag("ActivityExecuteButtonExcluded"))
-        {
-            reticule.color = disabledColor;
-        }
-        else
-        {
-            reticule.color = defaultColor;
-        }
-        */
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength, targetLayer))
         {
@@ -74,11 +32,11 @@ public class ReticuleRaycaster : MonoBehaviour
                 {
                     hitGameObject.SendMessage("OnSelected", SendMessageOptions.DontRequireReceiver);
                 }
-            }        
-            else
-            {
-                reticule.color = defaultColor;
             }
+        }        
+        else
+        {
+            reticule.color = defaultColor;
         }
     }
 }
