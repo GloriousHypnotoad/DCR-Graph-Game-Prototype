@@ -1,0 +1,1102 @@
+{
+  "dcrgraph": {
+    "@title": "AbstractGraph",
+    "@dataTypesStatus": "hide",
+    "@filterLevel": "-1",
+    "@insightFilter": "false",
+    "@zoomLevel": "0",
+    "@formGroupStyle": "Normal",
+    "@formLayoutStyle": "Horizontal",
+    "@formShowPendingCount": "true",
+    "@graphBG": "#f1f6fe",
+    "@graphType": "0",
+    "@exercise": "false",
+    "meta": {
+      "graph": {
+        "@id": "1702987",
+        "@hash": "E6CA62E47427A2B73A471AFC80307ACA",
+        "@guid": "F84BE275-4D1B-477A-AA7A-6C58A52A277F",
+        "@OwnerName": "Simon James Jensen",
+        "@OwnerId": "136208",
+        "@categoryId": "7309",
+        "@categoryTitle": "Default",
+        "@Keywords": ""
+      },
+      "revision": {
+        "@id": "3521634",
+        "@type": "minor",
+        "@date": "2023-12-05T10:56:42.967"
+      },
+      "organization": {
+        "@id": "18",
+        "@name": "DTU - Danish Technical University",
+        "@type": "Demonstration"
+      }
+    },
+    "specification": {
+      "resources": {
+        "events": {
+          "event": [
+            {
+              "@id": "Activity0",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "0",
+                    "@yLoc": "75"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity. You can execute it as much as you want.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "1",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity1",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "200",
+                    "@yLoc": "75"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity. It has already executed at least once. You can still execute it as much as you want.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "2",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity2",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "400",
+                    "@yLoc": "75"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity, which is also pending. You can execute it as much as you want, but you have to execute it at least once during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "3",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity3",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "600",
+                    "@yLoc": "75"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity, which is also pending. It has already executed at least once. You can execute it as much as you want, but you have to execute it at least once during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "4",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity4",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "0",
+                    "@yLoc": "275"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an excluded activity. You cannot execute it.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "5",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity5",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "200",
+                    "@yLoc": "275"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an excluded activity. It has already executed at least once. You cannot execute it.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "6",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity6",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "400",
+                    "@yLoc": "275"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an excluded activity, which is also pending. You cannot execute it. As long as the activity is excluded, you do not have to execute it during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "7",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity7",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "600",
+                    "@yLoc": "275"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an excluded activity, which is also pending. It has already executed at least once. You cannot execute it. As long as the activity is excluded, you do not have to execute it during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "8",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity8",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "0",
+                    "@yLoc": "475"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity. You cannot execute it at the moment, because it has been disabled by an unmet condition.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "9",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity9",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "200",
+                    "@yLoc": "475"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity. It has already executed at least once. You cannot execute it at the moment, because it has been disabled by an unmet condition.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "10",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity10",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "400",
+                    "@yLoc": "475"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity, which is also pending. You cannot execute it at the moment, because it has been disabled by an unmet condition, but you have to execute it at least once during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "11",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity11",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "600",
+                    "@yLoc": "475"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": "<p>This is an included activity, which is also pending.. It has already executed at least once. You cannot execute it at the moment, because it has been disabled by an unmet condition, but you have to execute it at least once during this process.</p>",
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "12",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity12",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "0",
+                    "@yLoc": "675"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": null,
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "13",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity13",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "200",
+                    "@yLoc": "675"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": null,
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "14",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity14",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "400",
+                    "@yLoc": "675"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": null,
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "15",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            },
+            {
+              "@id": "Activity15",
+              "precondition": {
+                "@message": ""
+              },
+              "custom": {
+                "visualization": {
+                  "location": {
+                    "@xLoc": "600",
+                    "@yLoc": "675"
+                  },
+                  "colors": {
+                    "@bg": "#f9f7ed",
+                    "@textStroke": "#000000",
+                    "@stroke": "#cccccc"
+                  }
+                },
+                "roles": {
+                  "role": null
+                },
+                "readRoles": {
+                  "readRole": null
+                },
+                "groups": {
+                  "group": null
+                },
+                "phases": {
+                  "phase": null
+                },
+                "eventType": null,
+                "eventScope": "private",
+                "eventTypeData": null,
+                "eventDescription": null,
+                "purpose": null,
+                "guide": null,
+                "insight": {
+                  "@use": "false"
+                },
+                "level": "1",
+                "sequence": "16",
+                "costs": "0",
+                "eventData": null,
+                "interfaces": null
+              }
+            }
+          ]
+        },
+        "subProcesses": null,
+        "distribution": null,
+        "labels": {
+          "label": [
+            {
+              "@id": "Included"
+            },
+            {
+              "@id": "Included & Executed"
+            },
+            {
+              "@id": "Included & Pending"
+            },
+            {
+              "@id": "Included & Pending & Executed"
+            },
+            {
+              "@id": "Excluded"
+            },
+            {
+              "@id": "Excluded & Executed"
+            },
+            {
+              "@id": "Excluded & Pending"
+            },
+            {
+              "@id": "Excluded & Pending & Executed"
+            },
+            {
+              "@id": "Included & Disabled (Condition)"
+            },
+            {
+              "@id": "Included & Executed & Disabled (Condition)"
+            },
+            {
+              "@id": "Included & Pending & Disabled (Condition)"
+            },
+            {
+              "@id": "Included & Pending & Executed & Disabled (Condition)"
+            },
+            {
+              "@id": "Included & Disabled (Milestone)"
+            },
+            {
+              "@id": "Included & Executed & Disabled (Milestone)"
+            },
+            {
+              "@id": "Included & Pending & Disabled (Milestone)"
+            },
+            {
+              "@id": "Included & Pending & Executed & Disabled (Milestone)"
+            }
+          ]
+        },
+        "labelMappings": {
+          "labelMapping": [
+            {
+              "@eventId": "Activity0",
+              "@labelId": "Included"
+            },
+            {
+              "@eventId": "Activity1",
+              "@labelId": "Included & Executed"
+            },
+            {
+              "@eventId": "Activity2",
+              "@labelId": "Included & Pending"
+            },
+            {
+              "@eventId": "Activity3",
+              "@labelId": "Included & Pending & Executed"
+            },
+            {
+              "@eventId": "Activity4",
+              "@labelId": "Excluded"
+            },
+            {
+              "@eventId": "Activity5",
+              "@labelId": "Excluded & Executed"
+            },
+            {
+              "@eventId": "Activity6",
+              "@labelId": "Excluded & Pending"
+            },
+            {
+              "@eventId": "Activity7",
+              "@labelId": "Excluded & Pending & Executed"
+            },
+            {
+              "@eventId": "Activity8",
+              "@labelId": "Included & Disabled (Condition)"
+            },
+            {
+              "@eventId": "Activity9",
+              "@labelId": "Included & Executed & Disabled (Condition)"
+            },
+            {
+              "@eventId": "Activity10",
+              "@labelId": "Included & Pending & Disabled (Condition)"
+            },
+            {
+              "@eventId": "Activity11",
+              "@labelId": "Included & Pending & Executed & Disabled (Condition)"
+            },
+            {
+              "@eventId": "Activity12",
+              "@labelId": "Included & Disabled (Milestone)"
+            },
+            {
+              "@eventId": "Activity13",
+              "@labelId": "Included & Executed & Disabled (Milestone)"
+            },
+            {
+              "@eventId": "Activity14",
+              "@labelId": "Included & Pending & Disabled (Milestone)"
+            },
+            {
+              "@eventId": "Activity15",
+              "@labelId": "Included & Pending & Executed & Disabled (Milestone)"
+            }
+          ]
+        },
+        "expressions": null,
+        "variables": null,
+        "variableAccesses": {
+          "writeAccesses": null
+        },
+        "custom": {
+          "keywords": null,
+          "roles": null,
+          "groups": null,
+          "phases": null,
+          "eventTypes": null,
+          "eventParameters": null,
+          "graphDetails": "DCR Process",
+          "graphDocumentation": null,
+          "graphLanguage": "en-US",
+          "graphDomain": "process",
+          "graphFilters": {
+            "filteredGroups": null,
+            "filteredRoles": null,
+            "filteredPhases": null
+          },
+          "hightlighterMarkup": {
+            "@id": "HLM"
+          },
+          "highlighterMarkup": {
+            "highlightLayers": {
+              "highlightLayer": {
+                "@default": "true",
+                "@name": "description",
+                "#text": "DCR Process"
+              }
+            },
+            "highlights": null
+          }
+        }
+      },
+      "constraints": {
+        "conditions": {
+          "condition": [
+            {
+              "@sourceId": "Activity0",
+              "@targetId": "Activity8",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity0",
+              "@targetId": "Activity9",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity0",
+              "@targetId": "Activity10",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity0",
+              "@targetId": "Activity11",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
+        "responses": null,
+        "coresponses": null,
+        "excludes": null,
+        "includes": null,
+        "milestones": {
+          "milestone": [
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity12",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity13",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity14",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            }
+          ]
+        },
+        "updates": null,
+        "spawns": null,
+        "templateSpawns": null
+      }
+    },
+    "runtime": {
+      "custom": {
+        "globalMarking": null
+      },
+      "marking": {
+        "globalStore": null,
+        "executed": {
+          "event": [
+            {
+              "@id": "Activity1"
+            },
+            {
+              "@id": "Activity3"
+            },
+            {
+              "@id": "Activity5"
+            },
+            {
+              "@id": "Activity7"
+            },
+            {
+              "@id": "Activity9"
+            },
+            {
+              "@id": "Activity11"
+            },
+            {
+              "@id": "Activity13"
+            },
+            {
+              "@id": "Activity15"
+            }
+          ]
+        },
+        "included": {
+          "event": [
+            {
+              "@id": "Activity0"
+            },
+            {
+              "@id": "Activity1"
+            },
+            {
+              "@id": "Activity2"
+            },
+            {
+              "@id": "Activity3"
+            },
+            {
+              "@id": "Activity7"
+            },
+            {
+              "@id": "Activity8"
+            },
+            {
+              "@id": "Activity9"
+            },
+            {
+              "@id": "Activity10"
+            },
+            {
+              "@id": "Activity11"
+            },
+            {
+              "@id": "Activity12"
+            },
+            {
+              "@id": "Activity13"
+            },
+            {
+              "@id": "Activity14"
+            },
+            {
+              "@id": "Activity15"
+            }
+          ]
+        },
+        "pendingResponses": {
+          "event": [
+            {
+              "@id": "Activity2"
+            },
+            {
+              "@id": "Activity3"
+            },
+            {
+              "@id": "Activity6"
+            },
+            {
+              "@id": "Activity7"
+            },
+            {
+              "@id": "Activity10"
+            },
+            {
+              "@id": "Activity11"
+            },
+            {
+              "@id": "Activity14"
+            },
+            {
+              "@id": "Activity15"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
