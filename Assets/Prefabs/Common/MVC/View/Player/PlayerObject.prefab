@@ -310,7 +310,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4770081125960569996, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 270549202907061193, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
@@ -355,3 +356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33dc6434aaea8e4f9bafc71e3ff67a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reticule: {fileID: 0}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  targetColor: {r: 0, g: 1, b: 0, a: 1}
+  disabledColor: {r: 1, g: 0, b: 0, a: 1}
+  rayLength: 100
