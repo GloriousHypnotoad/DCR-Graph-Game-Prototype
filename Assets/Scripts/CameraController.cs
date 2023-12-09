@@ -15,18 +15,6 @@ public class CameraController : MonoBehaviour
     public void SetCameraMode(CameraMode mode)
     {
         _currentMode = mode;
-        switch (_currentMode)
-        {
-            case CameraMode.FirstPerson:
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                break;
-            case CameraMode.ThirdPerson:
-            case CameraMode.BirdsEye: // Currently, BirdsEye mode shares the same settings as ThirdPerson
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                break;
-        }
     }
 
     void Update()

@@ -9,5 +9,6 @@ public enum CameraMode
 {
     FirstPerson,
     ThirdPerson,
+    TopDown,
     BirdsEye
 }

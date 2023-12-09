@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6607543272119708009}
   - component: {fileID: 514771002206443251}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 6963213074819688405}
   - component: {fileID: 3471507650965930915}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: TopDownCamFeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
