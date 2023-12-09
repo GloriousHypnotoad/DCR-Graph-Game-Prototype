@@ -112,6 +112,7 @@ public class ViewActivity : MonoBehaviour
         {
             ToggleChildObjects(isIncluded, GlitterPath);
             SetButtonsEnabled(isIncluded);
+            ButtonController.StopRotation();
         }
     }
     private void UpdateMaterial(string objectPath, string materialPath)

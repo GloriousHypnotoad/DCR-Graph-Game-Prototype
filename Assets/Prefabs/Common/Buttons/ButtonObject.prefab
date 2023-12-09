@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8965184532631829880}
   - component: {fileID: 737226500657797718}
   - component: {fileID: 8977936444849941363}
+  - component: {fileID: 5396066956445453240}
+  - component: {fileID: 702525440080047085}
   m_Layer: 6
   m_Name: ButtonObject
   m_TagString: ButtonsContainer
@@ -86,6 +88,35 @@ MonoBehaviour:
   jumpDuration: 2
   waitTime: 2
 --- !u!114 &8977936444849941363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617403829952115963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc955e02188d19842996193cf3430b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 25
+  quickRotationSpeed: 900
+  numberOfQuickRotations: 3
+--- !u!114 &5396066956445453240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617403829952115963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7740649ce23b24c89eb03bd36a6c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.5
+  shakeIntensity: 0.1
+--- !u!114 &702525440080047085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

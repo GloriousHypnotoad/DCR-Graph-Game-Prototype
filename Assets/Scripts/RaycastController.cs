@@ -8,6 +8,7 @@ public class RaycastController : MonoBehaviour
     public Color targetColor = Color.green;
     public Color disabledColor = Color.red;    
     public float rayLength = 100f;  // Adjust as needed based on your scene scale.
+    private string _targetTag;
     private LayerMask _targetLayer;   // Set this to the layer of your target objects in the Inspector.
 
     void Awake()
@@ -15,7 +16,8 @@ public class RaycastController : MonoBehaviour
         reticule = GetComponentInChildren<Image>();
     }
 
-    public void SetTargetLayer(int targetLayer){
+    public void SetTarget(string targetTag, int targetLayer){
+        _targetTag = targetTag;
         _targetLayer = 1 << targetLayer;
     }
     void Update()
@@ -24,8 +26,9 @@ public class RaycastController : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength, _targetLayer))
         {
             GameObject hitGameObject = hit.collider.gameObject;
-            if (hitGameObject.CompareTag("ButtonsContainer"))
+            if (hitGameObject.CompareTag(_targetTag))
             {
+                // TODO: Emit an event to the View -> Controller instead.
                 ButtonController buttonController = hitGameObject.GetComponent<ButtonController>();
                 if (buttonController.ButtonEnabled)
                 {

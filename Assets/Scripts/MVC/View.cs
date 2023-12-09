@@ -17,7 +17,7 @@ public class View : MonoBehaviour
 
     void Awake()
     {
-        GetComponentInChildren<RaycastController>().SetTargetLayer(LayerMask.NameToLayer("InteractiveElements"));
+        GetComponentInChildren<RaycastController>().SetTarget("ButtonsContainer", LayerMask.NameToLayer("InteractiveElements"));
 
         playerObjectController = GetComponentInChildren<PlayerObjectController>();
         

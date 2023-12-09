@@ -10,7 +10,7 @@ public class ButtonController : MonoBehaviour
     private ObjectJumpAndSpin _objectJumpAndSpin;
     
     private ObjectShake _objectShake;
-    private ObjectRotation _rotation;
+    //private ObjectRotation _rotation;
 
     // Animation state tracking
     private bool stoppedBounceAndSomersault = false;
@@ -20,8 +20,8 @@ public class ButtonController : MonoBehaviour
         _objectRotation = GetComponent<ObjectRotation>();
         //_objectBobbing = GetComponent<ObjectBobbing>();
         _objectJumpAndSpin = GetComponent<ObjectJumpAndSpin>();
-        //_objectShake = GetComponent<ObjectShake>();
-        _rotation = GetComponent<ObjectRotation>();
+        _objectShake = GetComponent<ObjectShake>();
+        //_rotation = GetComponent<ObjectRotation>();
     }
     public void TogglePlayerIsNearby(bool playerIsNearby)
     {
@@ -32,11 +32,6 @@ public class ButtonController : MonoBehaviour
                 _objectJumpAndSpin.StopAnimation();
                 stoppedBounceAndSomersault = true;
             }
-            if (_rotation.IsAnimationRunning())
-            {
-                _rotation.StopAnimation();
-                stoppedRotation = true;
-            }
         } 
         else
         {    
@@ -44,11 +39,6 @@ public class ButtonController : MonoBehaviour
             {
                 _objectJumpAndSpin.StartAnimation();
                 stoppedBounceAndSomersault = false;
-            }
-            if (stoppedRotation && !_rotation.IsAnimationRunning())
-            {
-                _rotation.StartAnimation();
-                stoppedRotation = false;
             }
         }
     }
@@ -66,19 +56,30 @@ public class ButtonController : MonoBehaviour
     {
         _objectRotation.StopAnimation();
     }
-    /*
+    // TODO: Should just emit onSelected and let the View inform the controller for approval.
     public void OnSelected()
     {
         if (ButtonEnabled)
         {
             PerformQuickRotation();
-            _onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
+            //_onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
         }
         else
         {
             PerformShake();
         }
     }
+
+    public void PerformQuickRotation()
+    {
+        _objectRotation.PerformQuickRotation();
+    }
+
+    public void PerformShake()
+    {
+        _objectShake.StartShake();
+    }
+    /*
 
     public void StartBobbing()
     {
@@ -89,16 +90,6 @@ public class ButtonController : MonoBehaviour
     {
         //_objectBobbing.StopAnimation();
     }
-
-    public void PerformQuickRotation()
-    {
-        //_objectRotation.PerformQuickRotation();
-    }
-
-    public void PerformShake()
-    {
-        //_objectShake.StartShake();
-    }
 */
     public void StartJumping()
     {
@@ -108,12 +99,12 @@ public class ButtonController : MonoBehaviour
     {
         _objectJumpAndSpin.StopAnimation();
     }
-/*
 
     public void SubscribeToOnPressed(Action<float> subscriber)
     {
         _onPressed += subscriber;
     }
+/*
 
     void OnDestroy()
     {
