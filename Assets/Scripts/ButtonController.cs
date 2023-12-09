@@ -27,19 +27,11 @@ public class ButtonController : MonoBehaviour
     {
         if (playerIsNearby)
         {
-            if (_objectJumpAndSpin.IsAnimationRunning())
-            {
-                _objectJumpAndSpin.StopAnimation();
-                stoppedBounceAndSomersault = true;
-            }
+            // Do something if button enabled.
         } 
         else
         {    
-            if (stoppedBounceAndSomersault && !_objectJumpAndSpin.IsAnimationRunning())
-            {
-                _objectJumpAndSpin.StartAnimation();
-                stoppedBounceAndSomersault = false;
-            }
+            // Do something if button enabled.
         }
     }
     public void SetButtonEnabled(bool buttonEnabled)
@@ -62,7 +54,7 @@ public class ButtonController : MonoBehaviour
         if (ButtonEnabled)
         {
             PerformQuickRotation();
-            //_onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
+            _onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
         }
         else
         {

@@ -328,7 +328,6 @@ public class Model : MonoBehaviour
     {
         return CloneDictionary(Includes);
     }
-    /*
     
     public void ExecuteActivity(string clickedActivityId)
     {
@@ -363,8 +362,6 @@ public class Model : MonoBehaviour
             }
         }
     }
-    */
-
     // Helper methods
     private void CreateConstraints(Dictionary<string, HashSet<string>> constraintsDictionary, JToken constraints)
     {

@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour
     public void Run(string selectedGraphName)
     {
         
-        //_view.SubscribeToOnActivityExecuted(OnActivityExecuted);
+        _view.SubscribeToOnActivityExecuted(OnActivityExecuted);
         _model.ParseXmlFile(selectedGraphName);
         //_model.ProcessJsonFile($"{FileStrings.GetActiveSceneName()}{FileStrings.JsonExtension}");
         _model.ProcessJsonFile("Abstract.json");
@@ -36,7 +36,6 @@ public class Controller : MonoBehaviour
         UpdateView();
         
     }
-    /*
     // Listens to events emitted by the View when an Activity is clicked.
     private void OnActivityExecuted(string activityId)
     {       
@@ -46,7 +45,6 @@ public class Controller : MonoBehaviour
         // Call private method to handle updating the states of the activities in the view.
         UpdateView();
     }
-    */
     private void UpdateView()
     {
         HashSet<string> activities = _model.GetActivityIds();

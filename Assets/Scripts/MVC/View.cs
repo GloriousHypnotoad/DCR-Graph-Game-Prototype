@@ -73,9 +73,7 @@ public class View : MonoBehaviour
         _topDownCamFeed.gameObject.SetActive(isEnabled[2]);
         BirdsEyeCamera.gameObject.SetActive(isEnabled[3]);
     }
-/*
     private event Action<string> _onActivityExecuted;
-*/
     public Dictionary<string, GameObject> Activities { get; private set; }  = new Dictionary<string, GameObject>();
     public void CreateActivities(Dictionary<string, string> idsAndLabels)
     {
@@ -88,7 +86,7 @@ public class View : MonoBehaviour
             activity.Initialize(kvp.Key, kvp.Value);
             Activities.Add(kvp.Key, activtyObject);
 
-            //activity.SubscribeToOnExecuted(OnExecuted);
+            activity.SubscribeToOnExecuted(OnExecuted);
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
         }
     }
@@ -107,14 +105,12 @@ public class View : MonoBehaviour
     public void SetActivityIncluded(string activityId, bool isIncluded){
         Activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
     }
-    /*
     public void OnExecuted(ViewActivity activity){
         _onActivityExecuted?.Invoke(activity.Id);
     }
     public void SubscribeToOnActivityExecuted(Action<string> subscriber){
         _onActivityExecuted+=subscriber;
     }
-*/
 
     public void UpdateGlobalEnvironment(bool hasPendingActivities)
     {

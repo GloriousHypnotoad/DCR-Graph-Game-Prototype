@@ -8,7 +8,7 @@ public class ViewActivity : MonoBehaviour
     public string Label { get; private set; }
     public string Description { get; private set; }
     private ParticleSystem _glitterParticleSystem;
-    //private event Action<ViewActivity> _onExecuted;
+    private event Action<ViewActivity> _onExecuted;
     //private string ButtonName = FileStrings.ButtonName;
     private string GlitterPath = FileStrings.GlitterPath;
     private string FogPath = FileStrings.FogPath;
@@ -18,7 +18,7 @@ public class ViewActivity : MonoBehaviour
         _glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
         //_glitterParticleSystem = transform.Find("EffectsContainer/DisabledGlitterDisabledFalse").GetComponent<ParticleSystem>();
         ButtonController = GetComponentInChildren<ButtonController>();
-        //ButtonController.SubscribeToOnPressed(OnButtonPressed);
+        ButtonController.SubscribeToOnPressed(OnButtonPressed);
 
         GetComponentInChildren<ProximityDetector>().SubscribeToIsTargetNearby(OnPlayerNearButton);
     }
@@ -142,8 +142,8 @@ public class ViewActivity : MonoBehaviour
     {
         GetComponentInChildren<ButtonController>().SetButtonEnabled(isEnabled);
     }
-    /*
     // TODO: Move to separate script.
+    /*
     public void GlitterBurst(float duration)
     {
         SetGlitterColor(Color.green);
@@ -184,6 +184,7 @@ public class ViewActivity : MonoBehaviour
         var emissionModule = GetGlitterParticleSystem().emission;
         emissionModule.rateOverTime = emissionRate;
     }
+    */
     public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
         _onExecuted+=subscriber;
     }
@@ -194,9 +195,8 @@ public class ViewActivity : MonoBehaviour
     public void OnButtonPressed(float quickRotationDuration)
     {
         _onExecuted?.Invoke(this);
-        GlitterBurst(quickRotationDuration);
+        //GlitterBurst(quickRotationDuration);
         // Display execution
         // Highlight outgoing constraints
     }
-    */
 }
