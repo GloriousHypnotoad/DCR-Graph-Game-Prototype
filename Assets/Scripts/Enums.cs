@@ -4,3 +4,10 @@ public enum GlobalState
     PendingActivities,
     AllClear
 }
+
+public enum CameraMode
+{
+    FirstPerson,
+    ThirdPerson,
+    BirdsEye
+}

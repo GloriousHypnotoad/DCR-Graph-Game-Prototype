@@ -37,6 +37,7 @@ public class RaycastController : MonoBehaviour
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
+                    //TODO: emit an event for the controller instead.
                     hitGameObject.SendMessage("OnSelected", SendMessageOptions.DontRequireReceiver);
                 }
             }

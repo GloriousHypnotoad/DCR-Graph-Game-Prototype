@@ -3,42 +3,60 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class View : MonoBehaviour
-{    
-    //public Camera FirstPersonCamera;
-    //public Camera ThirdPersonCamera;
-    //public Camera TopDownCamera;
+{
+    
+    private PlayerObjectController playerObjectController;    
+    private CameraController FirstPersonCamera;
+    private CameraController ThirdPersonCamera;
+    private CameraController BirdsEyeCamera;
 
     void Awake()
     {
         GetComponentInChildren<RaycastController>().SetTargetLayer(LayerMask.NameToLayer("InteractiveElements"));
-            //FirstPersonCamera.enabled = true;
-            //ThirdPersonCamera.enabled = false;
-            //TopDownCamera.enabled = false;
+
+        playerObjectController = GetComponentInChildren<PlayerObjectController>();
+        
+        FirstPersonCamera = transform.Find("PlayerObject/FirstPersonCamera").GetComponent<CameraController>();
+        ThirdPersonCamera = transform.Find("PlayerObject/ThirdPersonCamera").GetComponent<CameraController>();
+        BirdsEyeCamera = transform.Find("BirdsEyeCamera").GetComponent<CameraController>();
+        
+        FirstPersonCamera.SetCameraMode(CameraMode.FirstPerson);
+        ThirdPersonCamera.SetCameraMode(CameraMode.ThirdPerson);
+        BirdsEyeCamera.SetCameraMode(CameraMode.BirdsEye);
+
+        SetCamerasAreEnabled(new bool[]{true, false, false});
     }
-/*
+
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            FirstPersonCamera.enabled = true;
-            ThirdPersonCamera.enabled = false;
-            TopDownCamera.enabled = false;
+            SetCamerasAreEnabled(new bool[]{true, false, false});
+            playerObjectController.SetCameraMode(CameraMode.FirstPerson);
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
-            FirstPersonCamera.enabled = false;
-            ThirdPersonCamera.enabled = true;
-            TopDownCamera.enabled = false;
+            SetCamerasAreEnabled(new bool[]{false, true, false});
+            playerObjectController.SetCameraMode(CameraMode.ThirdPerson);
         }
         else if (Input.GetKeyDown(KeyCode.F3))
         {
-            FirstPersonCamera.enabled = false;
-            ThirdPersonCamera.enabled = false;
-            TopDownCamera.enabled = true;
+            SetCamerasAreEnabled(new bool[]{false, false, true});
+            playerObjectController.SetCameraMode(CameraMode.BirdsEye);
         }
     }
+
+    private void SetCamerasAreEnabled(bool[] isEnabled)
+    {
+        FirstPersonCamera.gameObject.SetActive(isEnabled[0]);
+        ThirdPersonCamera.gameObject.SetActive(isEnabled[1]);
+        BirdsEyeCamera.gameObject.SetActive(isEnabled[2]);
+    }
+/*
     private event Action<string> _onActivityExecuted;
 */
     public Dictionary<string, GameObject> Activities { get; private set; }  = new Dictionary<string, GameObject>();
@@ -55,7 +73,6 @@ public class View : MonoBehaviour
 
             //activity.SubscribeToOnExecuted(OnExecuted);
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
-
         }
     }
     public void SetActivityExecuted(string activityId, bool isExecuted){
