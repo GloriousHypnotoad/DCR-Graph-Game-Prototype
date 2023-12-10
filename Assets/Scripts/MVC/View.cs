@@ -33,7 +33,16 @@ public class View : MonoBehaviour
         TopDownCamera.SetCameraMode(CameraMode.TopDown);
         BirdsEyeCamera.SetCameraMode(CameraMode.BirdsEye);
 
+        playerObjectController.SetCameraMode(CameraMode.FirstPerson);
+
         SetCamerasAreEnabled(new bool[]{true, false, true, false});
+    }
+
+    void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     void Update()
@@ -97,7 +106,6 @@ public class View : MonoBehaviour
         Activities[activityId].GetComponent<ViewActivity>().SetPending(isPending);
     }
     public void SetActivityDisabled(string activityId, bool isDisabled){
-        Debug.Log($"Setting {activityId} to disabled: {isDisabled}");
         Activities[activityId].GetComponent<ViewActivity>().SetDisabled(isDisabled);
     }
     /*
