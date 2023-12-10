@@ -42,7 +42,6 @@ public class View : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     void Update()

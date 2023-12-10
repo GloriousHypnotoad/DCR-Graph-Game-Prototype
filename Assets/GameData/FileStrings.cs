@@ -39,7 +39,7 @@ static class FileStrings
     private static string Fog = "Fog";
 
     // EFFECTSCONTAINER
-    public static string GlitterPath = EffectsContainer+"/"+Glitter;
+    public static string GlitterPath = Glitter;
     public static string LightPath = EffectsContainer+"/"+Spotlight;
     public static string FogPath = Fog;
     private static string PushButton = "PushButton";

@@ -10,7 +10,7 @@ public class ViewActivity : MonoBehaviour
     private ParticleSystem _glitterParticleSystem;
     private event Action<ViewActivity> _onExecuted;
     //private string ButtonName = FileStrings.ButtonName;
-    private string GlitterPath = FileStrings.GlitterPath;
+    //private string GlitterPath = FileStrings.GlitterPath;
     //private string FogPath = FileStrings.FogPath;
     private ButtonController _buttonController;
     private EffectsController _effectsController;
@@ -19,7 +19,7 @@ public class ViewActivity : MonoBehaviour
     void Awake(){
         _effectsController = GetComponentInChildren<EffectsController>();
         _proximityDetector = GetComponentInChildren<ProximityDetector>();
-        _glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
+        //_glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
         //_glitterParticleSystem = transform.Find("EffectsContainer/DisabledGlitterDisabledFalse").GetComponent<ParticleSystem>();
         _buttonController = GetComponentInChildren<ButtonController>();
         _buttonController.SubscribeToOnPressed(OnButtonPressed);
@@ -45,9 +45,7 @@ public class ViewActivity : MonoBehaviour
     }
     public void SetExecuted(bool isExecuted){
         if(isExecuted){
-            ParticleSystem ps = _glitterParticleSystem;
-            ParticleSystem.MainModule mainModule = ps.main;
-            mainModule.startColor = Color.green;
+            _effectsController.SwitchParticleColor(Color.green);
         }
         
         string materialPath = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
@@ -84,10 +82,11 @@ public class ViewActivity : MonoBehaviour
         }
 
         _effectsController.ToggleFog(isDisabled);
+        _effectsController.ToggleGlitter(!isDisabled);
 
 
         // ToggleChildObjects(isDisabled, FogPath);
-        ToggleChildObjects(!isDisabled, GlitterPath);
+        //ToggleChildObjects(!isDisabled, GlitterPath);
         SetButtonsEnabled(!isDisabled);
     }/*
     public void SetHasUnmetMilestones(bool hasUnmetMilestones)
@@ -118,8 +117,9 @@ public class ViewActivity : MonoBehaviour
         // Handle button states as per disabled logic
         if(!isIncluded)
         {
-            ToggleChildObjects(isIncluded, GlitterPath);
-            SetButtonsEnabled(isIncluded);
+            _effectsController.ToggleGlitter(false);
+            //ToggleChildObjects(isIncluded, GlitterPath);
+            SetButtonsEnabled(false);
             _buttonController.StopRotation();
         }
     }

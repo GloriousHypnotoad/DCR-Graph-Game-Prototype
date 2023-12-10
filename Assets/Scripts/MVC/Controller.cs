@@ -66,10 +66,6 @@ public class Controller : MonoBehaviour
         {
             if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
             {
-                foreach (string item in kvp.Value)
-                {
-                    Debug.Log($"{item} has an unmet milestone {kvp.Key}");                    
-                }
                 haveUnmetMilestones.UnionWith(kvp.Value);
             }            
         }
