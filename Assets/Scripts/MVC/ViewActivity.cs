@@ -8,108 +8,67 @@ public class ViewActivity : MonoBehaviour
     public string Label { get; private set; }
     public string Description { get; private set; }
     public bool Disabled { get; private set; }
-    private ParticleSystem _glitterParticleSystem;
-    private event Action<ViewActivity> _onExecuted;
-    //private string ButtonName = FileStrings.ButtonName;
-    //private string GlitterPath = FileStrings.GlitterPath;
-    //private string FogPath = FileStrings.FogPath;
+
     private ButtonController _buttonController;
-    private SceneryController _sceneryController;
     private EffectsController _effectsController;
     private ProximityDetector _proximityDetector;
-    private event Action<ViewActivity> _mouseOver;
-    private event Action<ViewActivity> _mouseExit;
-    private event Action<ViewActivity> _mouseDown;
+    private SceneryController _sceneryController;
+
+    private event Action<ViewActivity> _activityMouseOver;
+    private event Action<ViewActivity> _activityMouseExit;
+    private event Action<ViewActivity> _onExecuted;
 
     void Awake(){
+        ActivityDetectionTrigger activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
+
+        _buttonController = GetComponentInChildren<ButtonController>();
         _effectsController = GetComponentInChildren<EffectsController>();
         _proximityDetector = GetComponentInChildren<ProximityDetector>();
-        //_glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
-        //_glitterParticleSystem = transform.Find("EffectsContainer/DisabledGlitterDisabledFalse").GetComponent<ParticleSystem>();
-        _buttonController = GetComponentInChildren<ButtonController>();
         _sceneryController = GetComponentInChildren<SceneryController>();
+
         _buttonController.SubscribeToOnPressed(OnButtonPressed);
 
         _proximityDetector.SubscribeToIsTargetNearby(OnPlayerNearButton);
-        ActivityDetectionTrigger activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
-        activityDetectionTrigger.SubscribeToOnMouseOver(HandleMouseOverActivityDetectionTrigger);
-        activityDetectionTrigger.SubscribeToOnMouseExit(HandleMouseExitActivityDetectionTrigger);
-        activityDetectionTrigger.SubscribeToOnMouseDown(HandleMouseDownActivityDetectionTrigger);
+
+        activityDetectionTrigger.SubscribeToOnMouseOver(OnActivityMouseOver);
+        activityDetectionTrigger.SubscribeToOnMouseExit(OnActivityMouseExit);
+        activityDetectionTrigger.SubscribeToOnMouseDown(OnActivityMouseDown);
     }
 
-    private void HandleMouseOverActivityDetectionTrigger()
-    {
-        _mouseOver?.Invoke(this);
-    }
-
-    private void HandleMouseExitActivityDetectionTrigger()
-    {
-        _mouseExit?.Invoke(this);
-    }
-
-    private void HandleMouseDownActivityDetectionTrigger()
-    {
-        if(Disabled)
-        {
-            _buttonController.PressButtonRefuse();
-        }
-        else
-        {
-            _buttonController.PressButton();
-        }
-    }
-    public void SubscribeToOnMouseOver(Action<ViewActivity> subscriber)
-    {
-        _mouseOver += subscriber;
-    }
-    public void SubscribeToOnMouseExit(Action<ViewActivity> subscriber)
-    {
-        _mouseExit += subscriber;
-    }
-    public void SubscribeToOnMouseDown(Action<ViewActivity> subscriber)
-    {
-        _mouseDown += subscriber;
-    }
-
-    public void SetProximityDetectorTarget(int targetLayer)
-    {
-        _proximityDetector.SetTargetLayer(targetLayer);
-    }
-
-    private void OnPlayerNearButton(bool playerNearButton)
-    {
-        _buttonController.TogglePlayerIsNearby(playerNearButton);
-    }
-
+    // Initialize object with activity data from graph
     public void Initialize(string id, string label)
     {
-        //Child Object Components
         Id = id;
         Label = label;
     }
+
+    // Configures Activity visual elements as executed
     public void SetExecuted(bool isExecuted){
-        if(isExecuted){
+
+        if(isExecuted)
+        {
             _effectsController.SwitchParticleColor(Color.green);
         }
         
+        // Toggle animated elements on/off
         _sceneryController.ToggleAnimatedElements(isExecuted);
         
-        string materialPath = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
-        UpdateMaterial(FileStrings.PushButtonPath, materialPath);
-        
-        var gameObject = transform.Find(FileStrings.PushButtonPath).gameObject;
-        var renderer = gameObject.GetComponent<Renderer>();
-        renderer.material = Resources.Load<Material>(materialPath);
+        // Update button material to reflect executed status
+        string material = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
+        transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(material);
 
-        
-        ToggleChildObjects(isExecuted,
-            FileStrings.LightPath);
+        // Update button Light to reflect executed status
+        _effectsController.TogglePushButtonLight(isExecuted);
     }
+
     public void SetPending(bool isPending)
     {
+        _effectsController.ToggleSceneryLight(isPending);
+
         if (isPending)
         {
             //ButtonController.StartJumping();
+            
         }
         else
         {
@@ -148,6 +107,7 @@ public class ViewActivity : MonoBehaviour
     */
     public void SetIncluded(bool isIncluded)
     {
+        // TODO: Toggle pushbutton material dynamically
         _buttonController.SetOpaque(isIncluded);
         _sceneryController.SetOpaque(isIncluded);
         /*
@@ -175,28 +135,51 @@ public class ViewActivity : MonoBehaviour
             _buttonController.StopRotation();
         }
     }
-    private void UpdateMaterial(string objectPath, string materialPath)
+    // Allow subscribtion to Activity mouse events
+    public void SubscribeToActivityMouseOver(Action<ViewActivity> subscriber)
     {
-        var gameObject = transform.Find(objectPath)?.gameObject;
-        if (gameObject != null)
+        _activityMouseOver += subscriber;
+    }
+    public void SubscribeToActivityMouseExit(Action<ViewActivity> subscriber)
+    {
+        _activityMouseExit += subscriber;
+    }
+
+    // Forwards configuration data to Proximity Detector.
+    public void SetProximityDetectorTarget(int targetLayer)
+    {
+        _proximityDetector.SetTargetLayer(targetLayer);
+    }
+
+    // Forward MouseOver event to View
+    private void OnActivityMouseOver()
+    {
+        _activityMouseOver?.Invoke(this);
+    }
+
+    // Forward MouseOver event to View
+    private void OnActivityMouseExit()
+    {
+        _activityMouseExit?.Invoke(this);
+    }
+
+    // Forward control to ButtonController On Mouse Down.
+    private void OnActivityMouseDown()
+    {
+        if(Disabled)
         {
-            var renderer = gameObject.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                renderer.material = Resources.Load<Material>(materialPath);
-            }
+            _buttonController.PressButtonRefuse();
+        }
+        else
+        {
+            _buttonController.PressButton();
         }
     }
-    private void ToggleChildObjects(bool isActive, params string[] childPaths)
+
+    // Inform Button Controller on event from Proximity Detector
+    private void OnPlayerNearButton(bool playerNearButton)
     {
-        foreach (var path in childPaths)
-        {
-            var childObject = transform.Find(path)?.gameObject;
-            if (childObject != null)
-            {
-                childObject.SetActive(isActive);
-            }
-        }
+        _buttonController.TogglePlayerIsNearby(playerNearButton);
     }
     /*
     private void SetButtonsEnabled(bool isEnabled)

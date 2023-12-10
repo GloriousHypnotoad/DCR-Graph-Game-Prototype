@@ -420,9 +420,29 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Range
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Intensity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7090382752858353287, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_Name
       value: EffectsContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236127454799412944, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Name
+      value: SceneryLight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

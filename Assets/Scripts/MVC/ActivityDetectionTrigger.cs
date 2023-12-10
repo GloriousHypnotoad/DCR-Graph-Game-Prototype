@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivityDetectionTrigger : MonoBehaviour
@@ -9,6 +7,7 @@ public class ActivityDetectionTrigger : MonoBehaviour
     private event Action _mouseExit;
     private event Action _mouseDown;
 
+    // Triggers
     void OnMouseOver()
     {
         _mouseOver?.Invoke();
@@ -21,6 +20,8 @@ public class ActivityDetectionTrigger : MonoBehaviour
     {
         _mouseDown?.Invoke();
     }
+
+    // Subscribe to Triggers
     public void SubscribeToOnMouseOver(Action subject)
     {
         _mouseOver += subject;

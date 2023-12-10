@@ -96,9 +96,8 @@ public class View : MonoBehaviour
             activity.Initialize(kvp.Key, kvp.Value);
             Activities.Add(kvp.Key, activtyObject);
 
-            activity.SubscribeToOnMouseOver(OnActivityMouseOver);
-            activity.SubscribeToOnMouseExit(OnActivityMouseExit);
-            activity.SubscribeToOnMouseDown(OnActivityMouseDown);
+            activity.SubscribeToActivityMouseOver(OnActivityMouseOver);
+            activity.SubscribeToActivityMouseExit(OnActivityMouseExit);
             activity.SubscribeToOnExecuted(OnActivityExecuted);
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
         }
@@ -118,9 +117,6 @@ public class View : MonoBehaviour
     }
     private void OnActivityMouseExit(ViewActivity activity){
         _reticule.color = Color.white;
-    }
-    private void OnActivityMouseDown(ViewActivity activity){
-        //TODO: Replace button onExecute
     }
 
     public void SetActivityExecuted(string activityId, bool isExecuted){
