@@ -11,26 +11,30 @@ public class ViewActivity : MonoBehaviour
     private event Action<ViewActivity> _onExecuted;
     //private string ButtonName = FileStrings.ButtonName;
     private string GlitterPath = FileStrings.GlitterPath;
-    private string FogPath = FileStrings.FogPath;
-    ButtonController ButtonController;
+    //private string FogPath = FileStrings.FogPath;
+    private ButtonController _buttonController;
+    private EffectsController _effectsController;
+    private ProximityDetector _proximityDetector;
 
     void Awake(){
+        _effectsController = GetComponentInChildren<EffectsController>();
+        _proximityDetector = GetComponentInChildren<ProximityDetector>();
         _glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
         //_glitterParticleSystem = transform.Find("EffectsContainer/DisabledGlitterDisabledFalse").GetComponent<ParticleSystem>();
-        ButtonController = GetComponentInChildren<ButtonController>();
-        ButtonController.SubscribeToOnPressed(OnButtonPressed);
+        _buttonController = GetComponentInChildren<ButtonController>();
+        _buttonController.SubscribeToOnPressed(OnButtonPressed);
 
         GetComponentInChildren<ProximityDetector>().SubscribeToIsTargetNearby(OnPlayerNearButton);
     }
 
     public void SetProximityDetectorTarget(int targetLayer)
     {
-        transform.GetComponentInChildren<ProximityDetector>().SetTargetLayer(targetLayer);
+        _proximityDetector.SetTargetLayer(targetLayer);
     }
 
     private void OnPlayerNearButton(bool playerNearButton)
     {
-        ButtonController.TogglePlayerIsNearby(playerNearButton);
+        _buttonController.TogglePlayerIsNearby(playerNearButton);
     }
 
     public void Initialize(string id, string label)
@@ -61,28 +65,31 @@ public class ViewActivity : MonoBehaviour
     {
         if (isPending)
         {
-            ButtonController.StartJumping();
+            //ButtonController.StartJumping();
         }
         else
         {
-            ButtonController.StopJumping();
+            //ButtonController.StopJumping();
         }
     }
     public void SetDisabled(bool isDisabled)
     {
         if (!isDisabled)
         {
-            ButtonController.StartRotation();
+            _buttonController.StartRotation();
         }
         else
         {
-            ButtonController.StopRotation();
+            _buttonController.StopRotation();
         }
-        // Disable or enable "Glitter" object and buttons
-        ToggleChildObjects(isDisabled, FogPath);
+
+        _effectsController.ToggleFog(isDisabled);
+
+
+        // ToggleChildObjects(isDisabled, FogPath);
         ToggleChildObjects(!isDisabled, GlitterPath);
         SetButtonsEnabled(!isDisabled);
-    }
+    }/*
     public void SetHasUnmetMilestones(bool hasUnmetMilestones)
     {
         if(!transform.Find(FogPath).gameObject.activeInHierarchy){
@@ -92,6 +99,7 @@ public class ViewActivity : MonoBehaviour
         SetButtonsEnabled(!hasUnmetMilestones);
         }
     }
+    */
     public void SetIncluded(bool isIncluded)
     {
         // Enable or disable specified child components
@@ -112,7 +120,7 @@ public class ViewActivity : MonoBehaviour
         {
             ToggleChildObjects(isIncluded, GlitterPath);
             SetButtonsEnabled(isIncluded);
-            ButtonController.StopRotation();
+            _buttonController.StopRotation();
         }
     }
     private void UpdateMaterial(string objectPath, string materialPath)
@@ -141,6 +149,20 @@ public class ViewActivity : MonoBehaviour
     private void SetButtonsEnabled(bool isEnabled)
     {
         GetComponentInChildren<ButtonController>().SetButtonEnabled(isEnabled);
+    }
+    public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
+        _onExecuted+=subscriber;
+    }
+    public override string ToString()
+    {
+        return $"Activity ID: {Id}, Label: {Label}";
+    }
+    public void OnButtonPressed(float quickRotationDuration)
+    {
+        _onExecuted?.Invoke(this);
+        //GlitterBurst(quickRotationDuration);
+        // Display execution
+        // Highlight outgoing constraints
     }
     // TODO: Move to separate script.
     /*
@@ -185,18 +207,4 @@ public class ViewActivity : MonoBehaviour
         emissionModule.rateOverTime = emissionRate;
     }
     */
-    public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
-        _onExecuted+=subscriber;
-    }
-    public override string ToString()
-    {
-        return $"Activity ID: {Id}, Label: {Label}";
-    }
-    public void OnButtonPressed(float quickRotationDuration)
-    {
-        _onExecuted?.Invoke(this);
-        //GlitterBurst(quickRotationDuration);
-        // Display execution
-        // Highlight outgoing constraints
-    }
 }

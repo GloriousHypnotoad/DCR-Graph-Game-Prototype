@@ -97,11 +97,14 @@ public class View : MonoBehaviour
         Activities[activityId].GetComponent<ViewActivity>().SetPending(isPending);
     }
     public void SetActivityDisabled(string activityId, bool isDisabled){
+        Debug.Log($"Setting {activityId} to disabled: {isDisabled}");
         Activities[activityId].GetComponent<ViewActivity>().SetDisabled(isDisabled);
     }
+    /*
     public void SetActivityHasUnmetMilestones(string activityId, bool hasUnmetMilestones){
         Activities[activityId].GetComponent<ViewActivity>().SetHasUnmetMilestones(hasUnmetMilestones);
     }
+    */
     public void SetActivityIncluded(string activityId, bool isIncluded){
         Activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
     }

@@ -25,8 +25,8 @@ public class Controller : MonoBehaviour
     {
         
         _view.SubscribeToOnActivityExecuted(OnActivityExecuted);
+
         _model.ParseXmlFile(selectedGraphName);
-        //_model.ProcessJsonFile($"{FileStrings.GetActiveSceneName()}{FileStrings.JsonExtension}");
         _model.ProcessJsonFile("Abstract.json");
 
         // Create Activity objects in the view from data in Model.
@@ -66,6 +66,10 @@ public class Controller : MonoBehaviour
         {
             if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
             {
+                foreach (string item in kvp.Value)
+                {
+                    Debug.Log($"{item} has an unmet milestone {kvp.Key}");                    
+                }
                 haveUnmetMilestones.UnionWith(kvp.Value);
             }            
         }
@@ -74,8 +78,7 @@ public class Controller : MonoBehaviour
         {           
             _view.SetActivityExecuted(activityId, executed.Contains(activityId));
             _view.SetActivityPending(activityId, pending.Contains(activityId));
-            _view.SetActivityDisabled(activityId, disabled.Contains(activityId));
-            _view.SetActivityHasUnmetMilestones(activityId, haveUnmetMilestones.Contains(activityId));
+            _view.SetActivityDisabled(activityId, disabled.Contains(activityId)||haveUnmetMilestones.Contains(activityId));
             _view.SetActivityIncluded(activityId, included.Contains(activityId));
         }
 

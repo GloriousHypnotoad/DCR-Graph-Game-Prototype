@@ -34,14 +34,14 @@ static class FileStrings
     public static string SceneryPath = SceneryContainer+"/"+Scenery;
     public static string SceneryTransparentPath = SceneryContainer+"/"+SceneryTransparent;
     private static string EffectsContainer = "EffectsContainer";
-    private static string Disabled = "Disabled";
-    private static string Executed = "Executed";
-    private static string GlitterDisabledFalse = "GlitterDisabledFalse";
-    private static string LightExecutedTrue = "LightExecutedTrue";
-    private static string FogDisabledTrue = "FogDisabledTrue";
-    public static string GlitterPath = EffectsContainer+"/"+Disabled+"/"+GlitterDisabledFalse;
-    public static string LightPath = EffectsContainer+"/"+Executed+"/"+LightExecutedTrue;
-    public static string FogPath = EffectsContainer+"/"+Disabled+"/"+FogDisabledTrue;
+    private static string Glitter = "Glitter";
+    private static string Spotlight = "Spotlight";
+    private static string Fog = "Fog";
+
+    // EFFECTSCONTAINER
+    public static string GlitterPath = EffectsContainer+"/"+Glitter;
+    public static string LightPath = EffectsContainer+"/"+Spotlight;
+    public static string FogPath = Fog;
     private static string PushButton = "PushButton";
     public static string PushButtonPath = ButtonPath+"/"+PushButton;
 
