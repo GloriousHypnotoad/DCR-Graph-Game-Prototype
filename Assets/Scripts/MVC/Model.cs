@@ -143,7 +143,21 @@ public class Model : MonoBehaviour
                 };
                 
                 if (!ActivityDescriptions.TryGetValue(id, out _)){
-                    ActivityDescriptions.Add(id, RemoveHtmlTags(eventDescription));
+                    if(eventDescription != null)
+                    {
+                        if (eventDescription.Length > 0)
+                        {
+                            ActivityDescriptions.Add(id, RemoveHtmlTags(eventDescription));
+                        }
+                        else
+                        {
+                            ActivityDescriptions.Add(id, "");
+                        }
+                    }
+                    else
+                    {
+                        ActivityDescriptions.Add(id, "");
+                    }
                 };
                 
                 if (!ActivityPurposes.TryGetValue(id, out _)){
@@ -364,7 +378,7 @@ public class Model : MonoBehaviour
         }
     }
     // Helper methods
-    private void CreateConstraints(Dictionary<string, HashSet<string>> constraintsDictionary, JToken constraints)
+    internal void CreateConstraints(Dictionary<string, HashSet<string>> constraintsDictionary, JToken constraints)
     {
         if (constraints != null)
         {
@@ -387,7 +401,7 @@ public class Model : MonoBehaviour
             }
         }
     }
-    private void CreateMarkings(HashSet<string> markingsHashSet, JToken markings)
+    internal void CreateMarkings(HashSet<string> markingsHashSet, JToken markings)
     {
         if (markings.Type == JTokenType.Array)
         {
@@ -402,7 +416,7 @@ public class Model : MonoBehaviour
         }
     }
     
-    private void InsertValuesIntoDictionary(Dictionary<string, HashSet<string>> constraintsDictionary, string sourceId, string targetId)
+    internal void InsertValuesIntoDictionary(Dictionary<string, HashSet<string>> constraintsDictionary, string sourceId, string targetId)
     {
         if (!ActivityIds.TryGetValue(sourceId, out string key))
         {
@@ -431,7 +445,7 @@ public class Model : MonoBehaviour
         }
     }
 
-    private void InsertValueIntoHashSet(HashSet<string> markingsHashSet, string eventId)
+    internal void InsertValueIntoHashSet(HashSet<string> markingsHashSet, string eventId)
     {
         if (!ActivityIds.TryGetValue(eventId, out string evt))
         {
@@ -441,17 +455,17 @@ public class Model : MonoBehaviour
 
         markingsHashSet.Add(evt);
     }
-    private HashSet<T> CloneHashSet<T>(HashSet<T> originalHashSet)
+    internal HashSet<T> CloneHashSet<T>(HashSet<T> originalHashSet)
     {
         return new HashSet<T>(originalHashSet);
     }
 
-    private Dictionary<TKey, TValue> CloneDictionary<TKey, TValue>(Dictionary<TKey, TValue> originalDictionary)
+    internal Dictionary<TKey, TValue> CloneDictionary<TKey, TValue>(Dictionary<TKey, TValue> originalDictionary)
     {
         return new Dictionary<TKey, TValue>(originalDictionary);
     }
 
-    private string RemoveHtmlTags(string input)
+    internal string RemoveHtmlTags(string input)
     {
         // Regular expression to match any HTML tag
         var regex = new Regex("<.*?>");

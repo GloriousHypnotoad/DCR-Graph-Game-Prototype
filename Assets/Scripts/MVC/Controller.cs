@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour
         
     }
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
-    private void OnActivityExecuted(string activityId)
+    internal void OnActivityExecuted(string activityId)
     {       
         _model.ExecuteActivity(activityId);
 
@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour
     }
 
     // Gets data from the Model, process and forward to the View for rendering.
-    private void UpdateView()
+    internal void UpdateView()
     {
         HashSet<string> activities = _model.GetActivityIds();
         HashSet<string> executed = _model.GetExecuted();

@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     public bool ButtonEnabled { get; private set; }
     private ObjectRotation _objectRotation;
+    private ObjectBobbing _objectBobbing;
     public event Action<float> _onPressed;
     private GameObject _buttonOpaque;
     private GameObject _buttonTransparent;
@@ -15,6 +16,7 @@ public class ButtonController : MonoBehaviour
 
     void Awake()
     {
+        _objectBobbing = GetComponentInChildren<ObjectBobbing>();
         _objectRotation = GetComponent<ObjectRotation>();
         _objectShake = GetComponent<ObjectShake>();
         _buttonOpaque = transform.Find(FileStrings.ButtonOpaque).gameObject;
@@ -23,16 +25,9 @@ public class ButtonController : MonoBehaviour
     void Start()
     {
     }
-    public void TogglePlayerIsNearby(bool playerIsNearby)
+    public void TogglePushButtonAnimation(bool playerIsNearby)
     {
-        if (playerIsNearby)
-        {
-            // Do something if button enabled.
-        } 
-        else
-        {    
-            // Do something if button enabled.
-        }
+        _objectBobbing.ToggleAnimation(playerIsNearby);
     }
 
     public void ToggleRotation(bool isRotating)

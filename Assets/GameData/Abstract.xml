@@ -1,7 +1,7 @@
 <dcrgraph title="AbstractGraph" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
     <meta>
-        <graph id="1702987" hash="59FD64CC5A7F682FD364F59179B0595F" guid="F84BE275-4D1B-477A-AA7A-6C58A52A277F" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
-        <revision id="3539599" type="minor" date="2023-12-10T10:58:54.213"/>
+        <graph id="1702987" hash="51C39CE45F461700848729DABA9A1391" guid="F84BE275-4D1B-477A-AA7A-6C58A52A277F" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
+        <revision id="3541174" type="minor" date="2023-12-11T00:01:03.900"/>
         <organization id="18" name="DTU - Danish Technical University" type="Demonstration"/>
     </meta>
     <specification>
@@ -425,7 +425,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription/>
+                        <eventDescription>&lt;p&gt;This is an included activity. You cannot execute it at the moment, because it has been disabled by a pending milestone.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>
@@ -458,7 +458,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription/>
+                        <eventDescription>&lt;p&gt;This is an included activity. It has already executed at least once. You cannot execute it at the moment, because it has been disabled by a pending milestone.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>
@@ -491,7 +491,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription/>
+                        <eventDescription>&lt;p&gt;This is an included activity, which is also pending. You cannot execute it at the moment, because it has been disabled by a pending milestone, but you have to execute it at least once during this process.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>
@@ -524,7 +524,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription/>
+                        <eventDescription>&lt;p&gt;This is an included activity, which is also pending.. It has already executed at least once. You cannot execute it at the moment, because it has been disabled by a pending milestone, but you have to execute it at least once during this process.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>

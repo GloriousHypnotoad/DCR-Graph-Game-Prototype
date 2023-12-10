@@ -57,4 +57,9 @@ public class EffectsController : MonoBehaviour
     {
         _glitterBurst.GetComponent<ParticleSystem>().Play();
     }
+
+    internal void TogglePulsePushButtonLight(bool playerNearButton)
+    {
+        //TODO;
+    }
 }

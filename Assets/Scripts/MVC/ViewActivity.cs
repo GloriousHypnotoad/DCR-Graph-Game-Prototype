@@ -126,19 +126,19 @@ public class ViewActivity : MonoBehaviour
     }
 
     // Forward MouseOver event to View
-    private void OnActivityMouseOver()
+    internal void OnActivityMouseOver()
     {
         _activityMouseOver?.Invoke(this);
     }
 
     // Forward MouseOver event to View
-    private void OnActivityMouseExit()
+    internal void OnActivityMouseExit()
     {
         _activityMouseExit?.Invoke(this);
     }
 
     // Forward control to ButtonController On Mouse Down.
-    private void OnActivityMouseDown()
+    internal void OnActivityMouseDown()
     {
         if(Disabled)
         {
@@ -151,11 +151,15 @@ public class ViewActivity : MonoBehaviour
     }
 
     // Inform Button Controller on event from Proximity Detector
-    private void OnPlayerNearButton(bool playerNearButton)
+    internal void OnPlayerNearButton(bool playerNearButton)
     {
-        _buttonController.TogglePlayerIsNearby(playerNearButton);
+        if(!Disabled){
+            _effectsController.TogglePulsePushButtonLight(playerNearButton);
+            _buttonController.TogglePushButtonAnimation(playerNearButton);
+
+        }
     }
-    private void OnButtonPressed(float quickRotationDuration)
+    internal void OnButtonPressed(float quickRotationDuration)
     {
         _onExecuted?.Invoke(this);
         _effectsController.GlitterBurst(quickRotationDuration);

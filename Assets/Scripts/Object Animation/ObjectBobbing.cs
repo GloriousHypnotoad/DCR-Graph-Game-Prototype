@@ -1,46 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectBobbing : MonoBehaviour
 {
-    public float amplitude = 0.25f;
-    public float frequency = 0.75f;
+    private float amplitude = 0.1f;
+    private float frequency = 2f;
 
     private Vector3 startPos;
-    private float tempVal;
-    private bool isBobbing = false; // Boolean flag to control bobbing
+    private bool _isBobbing;
 
-    void Start()
+    void Awake()
     {
         startPos = transform.position;
-        isBobbing = true;
+        _isBobbing = false;
     }
 
     void Update()
     {
-        if (isBobbing) // Only bob if isBobbing is true
+        if (_isBobbing)
         {
-            tempVal = startPos.y + amplitude * Mathf.Sin(Time.time * frequency);
+            float tempVal = startPos.y + amplitude * Mathf.Sin(Time.time * frequency);
             transform.position = new Vector3(startPos.x, tempVal, startPos.z);
         }
     }
 
-    // Method to start bobbing
-    public void StartAnimation()
+    public void ToggleAnimation(bool isBobbing)
     {
-        isBobbing = true;
+        _isBobbing = isBobbing;
+        if (!_isBobbing)
+        {
+            StartCoroutine(ReturnToStart());
+        }
     }
 
-    // Method to stop bobbing
-    public void StopAnimation()
+    private IEnumerator ReturnToStart()
     {
-        isBobbing = false;
+        while (transform.position != startPos)
+        {
+            transform.position = Vector3.Lerp(transform.position, startPos, Time.deltaTime);
+            yield return null;
+        }
     }
 
-    // Method to check if the animation is running
     public bool IsAnimationRunning()
     {
-        return isBobbing;
+        return _isBobbing;
     }
 }

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 783898380309658072}
   - component: {fileID: 6088234854266987942}
   - component: {fileID: 6407131238731711382}
+  - component: {fileID: 1757832727170413329}
   m_Layer: 0
   m_Name: PushButton
   m_TagString: Untagged
@@ -116,6 +117,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1757832727170413329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101480468779658896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f284331e71e21c142bbf0cd18b3b050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7065369733550655074
 GameObject:
   m_ObjectHideFlags: 0

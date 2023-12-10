@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -143,7 +144,7 @@ public class View : MonoBehaviour
     }
 
     // Helper method for toggling cameras on/off
-    private void SetCamerasAreEnabled(bool[] isEnabled)
+    internal void SetCamerasAreEnabled(bool[] isEnabled)
     {
         _firstPersonCamera.gameObject.SetActive(isEnabled[0]);
         _thirdPersonCamera.gameObject.SetActive(isEnabled[1]);
@@ -152,7 +153,7 @@ public class View : MonoBehaviour
     }
 
     // Event handlers
-    private void OnActivityMouseOver(ViewActivity activity)
+    internal void OnActivityMouseOver(ViewActivity activity)
     {
         if (!activity.Disabled)
         {
@@ -162,13 +163,27 @@ public class View : MonoBehaviour
         {
             _reticule.color = Color.red;
         }
+        string label = activity.Label;
+        string description = activity.Description;
+
+        DisplayActivityText(label, description);
     }
-    private void OnActivityMouseExit(ViewActivity activity){
+    internal void DisplayActivityText(string label, string description)
+    {
+        TextMeshProUGUI labelDisplay = GameObject.Find("HUD/LabelDisplay").GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI descriptionDisplay = GameObject.Find("HUD/DescriptionDisplay").GetComponentInChildren<TextMeshProUGUI>();
+
+        labelDisplay.text = label;
+        descriptionDisplay.text = description;
+    }
+    internal void OnActivityMouseExit(ViewActivity activity){
         _reticule.color = Color.white;
+        DisplayActivityText("", "");
+
     }
 
     // Method for passing on Activity ID to the Controller when Activity executes
-    private void OnActivityExecuted(ViewActivity activity){
+    internal void OnActivityExecuted(ViewActivity activity){
         _activityExecuted?.Invoke(activity.Id);
     }
 }
