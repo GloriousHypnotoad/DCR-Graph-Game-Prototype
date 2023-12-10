@@ -13,6 +13,7 @@ public class ViewActivity : MonoBehaviour
     //private string GlitterPath = FileStrings.GlitterPath;
     //private string FogPath = FileStrings.FogPath;
     private ButtonController _buttonController;
+    private SceneryController _sceneryController;
     private EffectsController _effectsController;
     private ProximityDetector _proximityDetector;
 
@@ -22,6 +23,7 @@ public class ViewActivity : MonoBehaviour
         //_glitterParticleSystem = transform.Find(FileStrings.GlitterPath).GetComponent<ParticleSystem>();
         //_glitterParticleSystem = transform.Find("EffectsContainer/DisabledGlitterDisabledFalse").GetComponent<ParticleSystem>();
         _buttonController = GetComponentInChildren<ButtonController>();
+        _sceneryController = GetComponentInChildren<SceneryController>();
         _buttonController.SubscribeToOnPressed(OnButtonPressed);
 
         GetComponentInChildren<ProximityDetector>().SubscribeToIsTargetNearby(OnPlayerNearButton);
@@ -102,6 +104,9 @@ public class ViewActivity : MonoBehaviour
     */
     public void SetIncluded(bool isIncluded)
     {
+        _buttonController.SetOpaque(isIncluded);
+        _sceneryController.SetOpaque(isIncluded);
+        /*
         // Enable or disable specified child components
         ToggleChildObjects(
             isIncluded, 
@@ -114,6 +119,7 @@ public class ViewActivity : MonoBehaviour
             FileStrings.ButtonTransparentPath, 
             FileStrings.SceneryTransparentPath
         ); // Also handling "Glitter" in the same manner
+        */
 
         // Handle button states as per disabled logic
         if(!isIncluded)

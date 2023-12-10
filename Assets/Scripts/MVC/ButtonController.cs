@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ButtonController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ButtonController : MonoBehaviour
     public event Action<float> _onPressed;
     private ObjectBobbing _objectBobbing;
     private ObjectJumpAndSpin _objectJumpAndSpin;
+    private GameObject _buttonOpaque;
+    private GameObject _buttonTransparent;
     
     private ObjectShake _objectShake;
     //private ObjectRotation _rotation;
@@ -22,6 +25,11 @@ public class ButtonController : MonoBehaviour
         _objectJumpAndSpin = GetComponent<ObjectJumpAndSpin>();
         _objectShake = GetComponent<ObjectShake>();
         //_rotation = GetComponent<ObjectRotation>();
+        _buttonOpaque = transform.Find(FileStrings.ButtonOpaque).gameObject;
+        _buttonTransparent = transform.Find(FileStrings.ButtonTransparent).gameObject;
+    }
+    void Start()
+    {
     }
     public void TogglePlayerIsNearby(bool playerIsNearby)
     {
@@ -96,10 +104,16 @@ public class ButtonController : MonoBehaviour
     {
         _onPressed += subscriber;
     }
-/*
 
-    void OnDestroy()
+    public void SetOpaque(bool opaque)
     {
+        _buttonOpaque.SetActive(opaque);
+        _buttonTransparent.SetActive(!opaque);
     }
-    */
+    /*
+
+   void OnDestroy()
+   {
+   }
+   */
 }

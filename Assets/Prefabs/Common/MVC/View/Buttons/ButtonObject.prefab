@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3010050095149906512, guid: 0507a9d6f522bf447a68c4938503c9da, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: ButtonOpaque
       objectReference: {fileID: 0}
     - target: {fileID: 3010050095149906512, guid: 0507a9d6f522bf447a68c4938503c9da, type: 3}
       propertyPath: m_Layer

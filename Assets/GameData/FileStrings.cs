@@ -24,14 +24,14 @@ static class FileStrings
 
     // ACTIVITY
     private static string ButtonObject = "ButtonObject";
-    private static string Button = "Button";
-    private static string ButtonTransparent= "ButtonTransparent";
-    public static string ButtonPath = ButtonObject+"/"+Button;
+    public static string ButtonOpaque = "ButtonOpaque";
+    public static string ButtonTransparent= "ButtonTransparent";
+    public static string ButtonPath = ButtonObject+"/"+ButtonOpaque;
     public static string ButtonTransparentPath = ButtonObject+"/"+ButtonTransparent;
     private static string SceneryContainer = "SceneryContainer";
-    private static string Scenery = "Scenery";
-    private static string SceneryTransparent = "SceneryTransparent";
-    public static string SceneryPath = SceneryContainer+"/"+Scenery;
+    public static string SceneryOpaque = "SceneryOpaque";
+    public static string SceneryTransparent = "SceneryTransparent";
+    public static string SceneryPath = SceneryContainer+"/"+SceneryOpaque;
     public static string SceneryTransparentPath = SceneryContainer+"/"+SceneryTransparent;
     private static string EffectsContainer = "EffectsContainer";
     private static string Glitter = "Glitter";
