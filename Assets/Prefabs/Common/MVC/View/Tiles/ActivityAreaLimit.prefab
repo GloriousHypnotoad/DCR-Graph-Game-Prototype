@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2596776736358601979}
   - component: {fileID: 2848980989015918248}
   m_Layer: 0
-  m_Name: Activity
+  m_Name: ActivityAreaLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
