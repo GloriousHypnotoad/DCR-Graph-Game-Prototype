@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour
     public void Run(string selectedGraphName)
     {
         
-        _view.SubscribeToOnActivityExecuted(OnActivityExecuted);
+        _view.SubscribeToActivityExecuted(OnActivityExecuted);
 
         _model.ParseXmlFile(selectedGraphName);
         _model.ProcessJsonFile("Abstract.json");

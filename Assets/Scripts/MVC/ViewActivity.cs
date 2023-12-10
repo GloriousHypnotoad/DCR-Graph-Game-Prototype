@@ -16,6 +16,9 @@ public class ViewActivity : MonoBehaviour
     private SceneryController _sceneryController;
     private EffectsController _effectsController;
     private ProximityDetector _proximityDetector;
+    private event Action<ViewActivity> _mouseOver;
+    private event Action<ViewActivity> _mouseExit;
+    private event Action<ViewActivity> _mouseDown;
 
     void Awake(){
         _effectsController = GetComponentInChildren<EffectsController>();
@@ -26,7 +29,38 @@ public class ViewActivity : MonoBehaviour
         _sceneryController = GetComponentInChildren<SceneryController>();
         _buttonController.SubscribeToOnPressed(OnButtonPressed);
 
-        GetComponentInChildren<ProximityDetector>().SubscribeToIsTargetNearby(OnPlayerNearButton);
+        _proximityDetector.SubscribeToIsTargetNearby(OnPlayerNearButton);
+        ActivityDetectionTrigger activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
+        activityDetectionTrigger.SubscribeToOnMouseOver(HandleMouseOverActivityDetectionTrigger);
+        activityDetectionTrigger.SubscribeToOnMouseExit(HandleMouseExitActivityDetectionTrigger);
+        activityDetectionTrigger.SubscribeToOnMouseDown(HandleMouseDownActivityDetectionTrigger);
+    }
+
+    private void HandleMouseOverActivityDetectionTrigger()
+    {
+        _mouseOver?.Invoke(this);
+    }
+
+    private void HandleMouseExitActivityDetectionTrigger()
+    {
+        _mouseExit?.Invoke(this);
+    }
+
+    private void HandleMouseDownActivityDetectionTrigger()
+    {
+        Debug.Log($"MouseDown: {Label}");
+    }
+    public void SubscribeToOnMouseOver(Action<ViewActivity> subscriber)
+    {
+        _mouseOver += subscriber;
+    }
+    public void SubscribeToOnMouseExit(Action<ViewActivity> subscriber)
+    {
+        _mouseExit += subscriber;
+    }
+    public void SubscribeToOnMouseDown(Action<ViewActivity> subscriber)
+    {
+        _mouseDown += subscriber;
     }
 
     public void SetProximityDetectorTarget(int targetLayer)

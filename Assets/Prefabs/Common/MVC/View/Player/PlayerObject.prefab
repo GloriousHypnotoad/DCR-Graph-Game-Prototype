@@ -376,35 +376,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4770081125960569996, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 234064945531895561, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 195821326130628447}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
 --- !u!4 &4028142623628955206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7288935646963136029, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
   m_PrefabInstance: {fileID: 5963141965148649563}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5908378384070887250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 234064945531895561, guid: f200bf96925cf354ebcc2a3982ecbb95, type: 3}
-  m_PrefabInstance: {fileID: 5963141965148649563}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &195821326130628447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5908378384070887250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c33dc6434aaea8e4f9bafc71e3ff67a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reticule: {fileID: 0}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  targetColor: {r: 0, g: 1, b: 0, a: 1}
-  disabledColor: {r: 1, g: 0, b: 0, a: 1}
-  rayLength: 100

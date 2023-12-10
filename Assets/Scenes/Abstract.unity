@@ -210,6 +210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2022313409116446917, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2100808012190253797, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -374,6 +378,10 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5160833235341043681, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7172070632066199449, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 330.8
@@ -427,7 +435,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6191539265176814268, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1899650327588949539, guid: 9609083adad1d0d40b51ff2fabf64af2, type: 3}

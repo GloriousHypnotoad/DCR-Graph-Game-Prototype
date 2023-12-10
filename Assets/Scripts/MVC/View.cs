@@ -14,10 +14,11 @@ public class View : MonoBehaviour
     private CameraController TopDownCamera;
     private CameraController BirdsEyeCamera;
     private RawImage _topDownCamFeed;
+    private Image _reticule;
 
     void Awake()
     {
-        GetComponentInChildren<RaycastController>().SetTarget("ButtonsContainer", LayerMask.NameToLayer("InteractiveElements"));
+        //GetComponentInChildren<RaycastController>().SetTarget("ButtonsContainer", LayerMask.NameToLayer("InteractiveElements"));
 
         playerObjectController = GetComponentInChildren<PlayerObjectController>();
         
@@ -27,6 +28,7 @@ public class View : MonoBehaviour
         BirdsEyeCamera = transform.Find("BirdsEyeCamera").GetComponent<CameraController>();
 
         _topDownCamFeed = transform.GetComponentInChildren<RawImage>();
+        _reticule = GetComponentInChildren<Image>();
         
         FirstPersonCamera.SetCameraMode(CameraMode.FirstPerson);
         ThirdPersonCamera.SetCameraMode(CameraMode.ThirdPerson);
@@ -81,7 +83,7 @@ public class View : MonoBehaviour
         _topDownCamFeed.gameObject.SetActive(isEnabled[2]);
         BirdsEyeCamera.gameObject.SetActive(isEnabled[3]);
     }
-    private event Action<string> _onActivityExecuted;
+    private event Action<string> _activityExecuted;
     public Dictionary<string, GameObject> Activities { get; private set; }  = new Dictionary<string, GameObject>();
     public void CreateActivities(Dictionary<string, string> idsAndLabels)
     {
@@ -94,10 +96,33 @@ public class View : MonoBehaviour
             activity.Initialize(kvp.Key, kvp.Value);
             Activities.Add(kvp.Key, activtyObject);
 
-            activity.SubscribeToOnExecuted(OnExecuted);
+            activity.SubscribeToOnMouseOver(OnActivityMouseOver);
+            activity.SubscribeToOnMouseExit(OnActivityMouseExit);
+            activity.SubscribeToOnMouseDown(OnActivityMouseDown);
+            activity.SubscribeToOnExecuted(OnActivityExecuted);
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
         }
     }
+
+    private void OnActivityMouseOver(ViewActivity activity)
+    {
+        ButtonController buttonController = activity.gameObject.GetComponentInChildren<ButtonController>();
+        if (buttonController.ButtonEnabled)
+        {
+            _reticule.color = Color.green;
+        }
+        else
+        {
+            _reticule.color = Color.red;
+        }
+    }
+    private void OnActivityMouseExit(ViewActivity activity){
+        _reticule.color = Color.white;
+    }
+    private void OnActivityMouseDown(ViewActivity activity){
+        //TODO: Replace button onExecute
+    }
+
     public void SetActivityExecuted(string activityId, bool isExecuted){
         Activities[activityId].GetComponent<ViewActivity>().SetExecuted(isExecuted);
     }
@@ -115,11 +140,11 @@ public class View : MonoBehaviour
     public void SetActivityIncluded(string activityId, bool isIncluded){
         Activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
     }
-    public void OnExecuted(ViewActivity activity){
-        _onActivityExecuted?.Invoke(activity.Id);
+    public void OnActivityExecuted(ViewActivity activity){
+        _activityExecuted?.Invoke(activity.Id);
     }
-    public void SubscribeToOnActivityExecuted(Action<string> subscriber){
-        _onActivityExecuted+=subscriber;
+    public void SubscribeToActivityExecuted(Action<string> subscriber){
+        _activityExecuted+=subscriber;
     }
 
     public void UpdateGlobalEnvironment(bool hasPendingActivities)
