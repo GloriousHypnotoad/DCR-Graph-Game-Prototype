@@ -87,7 +87,8 @@ public class ViewActivity : MonoBehaviour
 
         // ToggleChildObjects(isDisabled, FogPath);
         //ToggleChildObjects(!isDisabled, GlitterPath);
-        SetButtonsEnabled(!isDisabled);
+        _buttonController.SetButtonEnabled(!isDisabled);
+        //SetButtonsEnabled(!isDisabled);
     }/*
     public void SetHasUnmetMilestones(bool hasUnmetMilestones)
     {
@@ -119,7 +120,8 @@ public class ViewActivity : MonoBehaviour
         {
             _effectsController.ToggleGlitter(false);
             //ToggleChildObjects(isIncluded, GlitterPath);
-            SetButtonsEnabled(false);
+            _buttonController.SetButtonEnabled(false);
+            //SetButtonsEnabled(false);
             _buttonController.StopRotation();
         }
     }
@@ -146,10 +148,12 @@ public class ViewActivity : MonoBehaviour
             }
         }
     }
+    /*
     private void SetButtonsEnabled(bool isEnabled)
     {
         GetComponentInChildren<ButtonController>().SetButtonEnabled(isEnabled);
     }
+    */
     public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
         _onExecuted+=subscriber;
     }
