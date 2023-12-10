@@ -7,6 +7,7 @@ public class ViewActivity : MonoBehaviour
     public string Id { get; private set; }
     public string Label { get; private set; }
     public string Description { get; private set; }
+    public bool Disabled { get; private set; }
     private ParticleSystem _glitterParticleSystem;
     private event Action<ViewActivity> _onExecuted;
     //private string ButtonName = FileStrings.ButtonName;
@@ -48,7 +49,14 @@ public class ViewActivity : MonoBehaviour
 
     private void HandleMouseDownActivityDetectionTrigger()
     {
-        Debug.Log($"MouseDown: {Label}");
+        if(Disabled)
+        {
+            _buttonController.PressButtonRefuse();
+        }
+        else
+        {
+            _buttonController.PressButton();
+        }
     }
     public void SubscribeToOnMouseOver(Action<ViewActivity> subscriber)
     {
@@ -125,7 +133,7 @@ public class ViewActivity : MonoBehaviour
 
         // ToggleChildObjects(isDisabled, FogPath);
         //ToggleChildObjects(!isDisabled, GlitterPath);
-        _buttonController.SetButtonEnabled(!isDisabled);
+        Disabled = isDisabled;
         //SetButtonsEnabled(!isDisabled);
     }/*
     public void SetHasUnmetMilestones(bool hasUnmetMilestones)
@@ -162,7 +170,7 @@ public class ViewActivity : MonoBehaviour
         {
             _effectsController.ToggleGlitter(false);
             //ToggleChildObjects(isIncluded, GlitterPath);
-            _buttonController.SetButtonEnabled(false);
+            Disabled = !isIncluded;
             //SetButtonsEnabled(false);
             _buttonController.StopRotation();
         }

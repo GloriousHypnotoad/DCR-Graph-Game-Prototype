@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -57,17 +58,15 @@ public class ButtonController : MonoBehaviour
         _objectRotation.StopAnimation();
     }
     // TODO: Should just emit onSelected and let the View inform the controller for approval.
-    public void OnSelected()
+    public void PressButton()
     {
-        if (ButtonEnabled)
-        {
-            PerformQuickRotation();
-            _onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
-        }
-        else
-        {
-            PerformShake();
-        }
+        PerformQuickRotation();
+        _onPressed?.Invoke(_objectRotation.getQuickRotationDuration());
+    }
+
+    public void PressButtonRefuse()
+    {
+        PerformShake();
     }
 
     public void PerformQuickRotation()

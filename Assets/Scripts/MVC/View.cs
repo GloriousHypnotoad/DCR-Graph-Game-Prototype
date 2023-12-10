@@ -106,8 +106,8 @@ public class View : MonoBehaviour
 
     private void OnActivityMouseOver(ViewActivity activity)
     {
-        ButtonController buttonController = activity.gameObject.GetComponentInChildren<ButtonController>();
-        if (buttonController.ButtonEnabled)
+//        ButtonController buttonController = activity.gameObject.GetComponentInChildren<ButtonController>();
+        if (!activity.Disabled)
         {
             _reticule.color = Color.green;
         }
