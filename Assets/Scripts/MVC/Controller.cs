@@ -23,9 +23,10 @@ public class Controller : MonoBehaviour
     
     public void Run(string selectedGraphName)
     {
-        
+        // Listen for executed events from the view
         _view.SubscribeToActivityExecuted(OnActivityExecuted);
 
+        // Parse graph XML file -> JSON -> Local data structures.
         _model.ParseXmlFile(selectedGraphName);
         _model.ProcessJsonFile("Abstract.json");
 
@@ -36,15 +37,15 @@ public class Controller : MonoBehaviour
         UpdateView();
         
     }
-    // Listens to events emitted by the View when an Activity is clicked.
+    // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
     {       
-        // Instruct the Model to make marking changes based on executed activity.
         _model.ExecuteActivity(activityId);
 
-        // Call private method to handle updating the states of the activities in the view.
         UpdateView();
     }
+
+    // Gets data from the Model, process and forward to the View for rendering.
     private void UpdateView()
     {
         HashSet<string> activities = _model.GetActivityIds();

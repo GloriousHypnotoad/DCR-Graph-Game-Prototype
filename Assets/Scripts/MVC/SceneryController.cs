@@ -19,24 +19,24 @@ public class SceneryController : MonoBehaviour
         _animatableElementsTransparent = new List<IAnimatable>(transform.Find("SceneryTransparent/AnimatedElementsContainer").GetComponentsInChildren<IAnimatable>());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ToggleAnimatedElements(bool isAnimated)
     {
-        foreach (IAnimatable animatableElement in _animatableElementsOpaque)
+        if (_sceneryOpaque != null && _sceneryOpaque.activeInHierarchy)
         {
-            animatableElement.ToggleAnimation(isAnimated);
+            foreach (IAnimatable animatableElement in _animatableElementsOpaque)
+            {
+                animatableElement.ToggleAnimation(isAnimated);
+            }
         }
-        foreach (IAnimatable animatableElement in _animatableElementsTransparent)
+
+        if (_sceneryTransparent != null && _sceneryTransparent.activeInHierarchy)
         {
-            animatableElement.ToggleAnimation(isAnimated);
+            foreach (IAnimatable animatableElement in _animatableElementsTransparent)
+            {
+                animatableElement.ToggleAnimation(isAnimated);
+            }
         }
     }
-
     public void SetOpaque(bool opaque)
     {
         _sceneryOpaque.SetActive(opaque);

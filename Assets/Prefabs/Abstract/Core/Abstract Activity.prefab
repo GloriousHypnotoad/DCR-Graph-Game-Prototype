@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1737295043156571596}
   - component: {fileID: 1874687168785333867}
   - component: {fileID: 5831957838991135621}
-  - component: {fileID: 5904378059836940579}
+  - component: {fileID: 7495028924267357018}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5904378059836940579
+--- !u!114 &7495028924267357018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,11 +115,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1328574142391672683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13df56c23eb05c54fb11ae8e6ff33c57, type: 3}
+  m_Script: {fileID: 11500000, guid: 261183af69f8082458fbc8a7481227ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  diameter: 4
 --- !u!1 &1791515474415550275
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +342,7 @@ GameObject:
   - component: {fileID: 1886308832577306345}
   - component: {fileID: 6089729601289851862}
   - component: {fileID: 5320067603007526505}
-  - component: {fileID: 439869029342746427}
+  - component: {fileID: 3516004275457144244}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -438,7 +436,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &439869029342746427
+--- !u!114 &3516004275457144244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,11 +445,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6188850420354100283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13df56c23eb05c54fb11ae8e6ff33c57, type: 3}
+  m_Script: {fileID: 11500000, guid: 261183af69f8082458fbc8a7481227ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  diameter: 4
 --- !u!1 &7320281374529059880
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,24 +8,15 @@ public class ButtonController : MonoBehaviour
     public bool ButtonEnabled { get; private set; }
     private ObjectRotation _objectRotation;
     public event Action<float> _onPressed;
-    private ObjectBobbing _objectBobbing;
-    private ObjectJumpAndSpin _objectJumpAndSpin;
     private GameObject _buttonOpaque;
     private GameObject _buttonTransparent;
     
     private ObjectShake _objectShake;
-    //private ObjectRotation _rotation;
 
-    // Animation state tracking
-    private bool stoppedBounceAndSomersault = false;
-    private bool stoppedRotation = false;
     void Awake()
     {
         _objectRotation = GetComponent<ObjectRotation>();
-        //_objectBobbing = GetComponent<ObjectBobbing>();
-        _objectJumpAndSpin = GetComponent<ObjectJumpAndSpin>();
         _objectShake = GetComponent<ObjectShake>();
-        //_rotation = GetComponent<ObjectRotation>();
         _buttonOpaque = transform.Find(FileStrings.ButtonOpaque).gameObject;
         _buttonTransparent = transform.Find(FileStrings.ButtonTransparent).gameObject;
     }
@@ -43,19 +34,10 @@ public class ButtonController : MonoBehaviour
             // Do something if button enabled.
         }
     }
-    public void SetButtonEnabled(bool buttonEnabled)
-    {
-        ButtonEnabled = buttonEnabled;
-    }
 
-    public void StartRotation()
+    public void ToggleRotation(bool isRotating)
     {
-        _objectRotation.StartAnimation();       
-    }
-
-    public void StopRotation()
-    {
-        _objectRotation.StopAnimation();
+        _objectRotation.ToggleAnimation(isRotating);       
     }
     // TODO: Should just emit onSelected and let the View inform the controller for approval.
     public void PressButton()
@@ -77,26 +59,6 @@ public class ButtonController : MonoBehaviour
     public void PerformShake()
     {
         _objectShake.StartShake();
-    }
-    /*
-
-    public void StartBobbing()
-    {
-        //_objectBobbing.StartAnimation();       
-    }
-
-    public void StopBobbing()
-    {
-        //_objectBobbing.StopAnimation();
-    }
-*/
-    public void StartJumping()
-    {
-        _objectJumpAndSpin.StartAnimation();
-    }
-    public void StopJumping()
-    {
-        _objectJumpAndSpin.StopAnimation();
     }
 
     public void SubscribeToOnPressed(Action<float> subscriber)

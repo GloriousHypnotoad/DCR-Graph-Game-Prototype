@@ -33,25 +33,26 @@ static class FileStrings
     public static string SceneryTransparent = "SceneryTransparent";
     public static string SceneryPath = SceneryContainer+"/"+SceneryOpaque;
     public static string SceneryTransparentPath = SceneryContainer+"/"+SceneryTransparent;
-    private static string EffectsContainer = "EffectsContainer";
-    private static string Fog = "Fog";
+    private static string PushButton = "PushButton";
+    public static string PushButtonPath = ButtonPath+"/"+PushButton;
 
     // EFFECTSCONTAINER
     public static string Glitter = "Glitter";
     public static string SceneryLight = "SceneryLight";
     public static string PushButtonLight = "PushButtonLight";
-    public static string FogPath = Fog;
-    private static string PushButton = "PushButton";
-    public static string PushButtonPath = ButtonPath+"/"+PushButton;
+    public static string Fog = "Fog";
+    public static string Firework = "Firework";
 
     // RESOURCES
     private static string Environment = "Environment";
     private static string Materials = "Materials";
     private static string Common = "Common";
     private static string ButtonGreen = "ButtonGreen";
+    private static string Transparent = "Transparent";
     private static string ButtonGreenEmission = "ButtonGreenEmission";
     public static string ButtonGreenPath = Materials+"/"+Common+"/"+ButtonGreen;
     public static string ButtonGreenEmissionPath = Materials+"/"+Common+"/"+ButtonGreenEmission;
+    public static string TransparentPath = Materials+"/"+Common+"/"+Transparent;
 
     
     // ACTIVITY - BUTTONS CONTAINER OBJECTS

@@ -7,7 +7,7 @@ public class ObjectRotation : MonoBehaviour
     private float originalSpeed;
     public float quickRotationSpeed = 900.0f;
     public int numberOfQuickRotations = 3;
-    private bool isRotating = false;
+    private bool _isRotating = false;
 
     void Start()
     {
@@ -16,20 +16,15 @@ public class ObjectRotation : MonoBehaviour
 
     void Update()
     {
-        if (isRotating)
+        if (_isRotating)
         {
             transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
         }
     }
 
-    public void StartAnimation()
+    public void ToggleAnimation(bool isRotating)
     {
-        isRotating = true;
-    }
-
-    public void StopAnimation()
-    {
-        isRotating = false;
+        _isRotating = isRotating;
     }
 
     public void PerformQuickRotation()
@@ -51,6 +46,6 @@ public class ObjectRotation : MonoBehaviour
     // Method to check if the animation is running
     public bool IsAnimationRunning()
     {
-        return isRotating;
+        return _isRotating;
     }
 }

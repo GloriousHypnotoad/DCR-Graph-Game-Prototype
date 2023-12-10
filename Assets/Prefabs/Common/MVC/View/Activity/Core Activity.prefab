@@ -368,10 +368,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8067672033229793234}
     m_Modifications:
-    - target: {fileID: 402101513255184893, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2803298534827161207, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -412,37 +408,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Name
-      value: Godray
-      objectReference: {fileID: 0}
-    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Range
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Intensity
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057427698065692236, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7090382752858353287, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_Name
       value: EffectsContainer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236127454799412944, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Name
-      value: SceneryLight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

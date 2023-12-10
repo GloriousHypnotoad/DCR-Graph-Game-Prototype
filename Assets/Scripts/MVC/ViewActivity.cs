@@ -13,26 +13,27 @@ public class ViewActivity : MonoBehaviour
     private EffectsController _effectsController;
     private ProximityDetector _proximityDetector;
     private SceneryController _sceneryController;
+    private ActivityDetectionTrigger _activityDetectionTrigger;
 
     private event Action<ViewActivity> _activityMouseOver;
     private event Action<ViewActivity> _activityMouseExit;
     private event Action<ViewActivity> _onExecuted;
 
-    void Awake(){
-        ActivityDetectionTrigger activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
-
+    void Awake()
+    {
+        // Sub component controllers
         _buttonController = GetComponentInChildren<ButtonController>();
         _effectsController = GetComponentInChildren<EffectsController>();
         _proximityDetector = GetComponentInChildren<ProximityDetector>();
         _sceneryController = GetComponentInChildren<SceneryController>();
+        _activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
 
+        // Subscribe to sub component events
         _buttonController.SubscribeToOnPressed(OnButtonPressed);
-
         _proximityDetector.SubscribeToIsTargetNearby(OnPlayerNearButton);
-
-        activityDetectionTrigger.SubscribeToOnMouseOver(OnActivityMouseOver);
-        activityDetectionTrigger.SubscribeToOnMouseExit(OnActivityMouseExit);
-        activityDetectionTrigger.SubscribeToOnMouseDown(OnActivityMouseDown);
+        _activityDetectionTrigger.SubscribeToOnMouseOver(OnActivityMouseOver);
+        _activityDetectionTrigger.SubscribeToOnMouseExit(OnActivityMouseExit);
+        _activityDetectionTrigger.SubscribeToOnMouseDown(OnActivityMouseDown);
     }
 
     // Initialize object with activity data from graph
@@ -42,7 +43,7 @@ public class ViewActivity : MonoBehaviour
         Label = label;
     }
 
-    // Configures Activity visual elements as executed
+    // Public methods to set the visual state of the Activity
     public void SetExecuted(bool isExecuted){
 
         if(isExecuted)
@@ -54,8 +55,8 @@ public class ViewActivity : MonoBehaviour
         _sceneryController.ToggleAnimatedElements(isExecuted);
         
         // Update button material to reflect executed status
-        string material = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
-        transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(material);
+        string buttonMaterial = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
+        transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(buttonMaterial);
 
         // Update button Light to reflect executed status
         _effectsController.TogglePushButtonLight(isExecuted);
@@ -63,76 +64,50 @@ public class ViewActivity : MonoBehaviour
 
     public void SetPending(bool isPending)
     {
+        // Toggle light on the activity scene
         _effectsController.ToggleSceneryLight(isPending);
+        _effectsController.ToggleFireworks(isPending);
 
+        /*
         if (isPending)
         {
-            //ButtonController.StartJumping();
+            ButtonController.StartJumping();
             
         }
         else
         {
-            //ButtonController.StopJumping();
+            ButtonController.StopJumping();
         }
+        */
     }
+
     public void SetDisabled(bool isDisabled)
     {
-        if (!isDisabled)
-        {
-            _buttonController.StartRotation();
-        }
-        else
-        {
-            _buttonController.StopRotation();
-        }
-
+        // Toggle effects
         _effectsController.ToggleFog(isDisabled);
         _effectsController.ToggleGlitter(!isDisabled);
+        _buttonController.ToggleRotation(!isDisabled);
 
-
-        // ToggleChildObjects(isDisabled, FogPath);
-        //ToggleChildObjects(!isDisabled, GlitterPath);
+        // Set class variable
         Disabled = isDisabled;
-        //SetButtonsEnabled(!isDisabled);
-    }/*
-    public void SetHasUnmetMilestones(bool hasUnmetMilestones)
-    {
-        if(!transform.Find(FogPath).gameObject.activeInHierarchy){
 
-        ToggleChildObjects(hasUnmetMilestones, FogPath);
-        ToggleChildObjects(!hasUnmetMilestones, GlitterPath);
-        SetButtonsEnabled(!hasUnmetMilestones);
-        }
     }
-    */
+
     public void SetIncluded(bool isIncluded)
     {
         // TODO: Toggle pushbutton material dynamically
         _buttonController.SetOpaque(isIncluded);
         _sceneryController.SetOpaque(isIncluded);
-        /*
-        // Enable or disable specified child components
-        ToggleChildObjects(
-            isIncluded, 
-            FileStrings.ButtonPath, 
-            FileStrings.SceneryPath
-        );
 
-        ToggleChildObjects(
-            !isIncluded, 
-            FileStrings.ButtonTransparentPath, 
-            FileStrings.SceneryTransparentPath
-        ); // Also handling "Glitter" in the same manner
-        */
-
-        // Handle button states as per disabled logic
         if(!isIncluded)
         {
+            Disabled = true;
             _effectsController.ToggleGlitter(false);
-            //ToggleChildObjects(isIncluded, GlitterPath);
-            Disabled = !isIncluded;
-            //SetButtonsEnabled(false);
-            _buttonController.StopRotation();
+            _buttonController.ToggleRotation(false);
+
+            // Update button material to reflect executed status
+            string buttonMaterial = FileStrings.TransparentPath;
+            transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(buttonMaterial);
         }
     }
     // Allow subscribtion to Activity mouse events

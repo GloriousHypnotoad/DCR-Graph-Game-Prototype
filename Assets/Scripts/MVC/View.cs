@@ -8,104 +8,151 @@ using UnityEngine.UI;
 public class View : MonoBehaviour
 {
     
-    private PlayerObjectController playerObjectController;    
-    private CameraController FirstPersonCamera;
-    private CameraController ThirdPersonCamera;
-    private CameraController TopDownCamera;
-    private CameraController BirdsEyeCamera;
+    private PlayerObjectController _playerObjectController;    
+    private CameraController _firstPersonCamera;
+    private CameraController _thirdPersonCamera;
+    private CameraController _topDownCamera;
+    private CameraController _birdsEyeCamera;
     private RawImage _topDownCamFeed;
     private Image _reticule;
+    private event Action<string> _activityExecuted;
+    private Dictionary<string, GameObject> _activities = new Dictionary<string, GameObject>();
 
     void Awake()
     {
-        //GetComponentInChildren<RaycastController>().SetTarget("ButtonsContainer", LayerMask.NameToLayer("InteractiveElements"));
-
-        playerObjectController = GetComponentInChildren<PlayerObjectController>();
+        // Controller for moving the player avatar
+        _playerObjectController = GetComponentInChildren<PlayerObjectController>();
         
-        FirstPersonCamera = transform.Find("PlayerObject/FirstPersonCamera").GetComponent<CameraController>();
-        ThirdPersonCamera = transform.Find("PlayerObject/ThirdPersonCamera").GetComponent<CameraController>();
-        TopDownCamera = transform.Find("PlayerObject/TopDownCamera").GetComponent<CameraController>();
-        BirdsEyeCamera = transform.Find("BirdsEyeCamera").GetComponent<CameraController>();
+        // Controllers for all four cameras in the game.
+        _firstPersonCamera = transform.Find("PlayerObject/FirstPersonCamera").GetComponent<CameraController>();
+        _thirdPersonCamera = transform.Find("PlayerObject/ThirdPersonCamera").GetComponent<CameraController>();
+        _topDownCamera = transform.Find("PlayerObject/TopDownCamera").GetComponent<CameraController>();
+        _birdsEyeCamera = transform.Find("BirdsEyeCamera").GetComponent<CameraController>();
 
+        // UI elements (Top down camera and targeting reticule for first person)
         _topDownCamFeed = transform.GetComponentInChildren<RawImage>();
         _reticule = GetComponentInChildren<Image>();
         
-        FirstPersonCamera.SetCameraMode(CameraMode.FirstPerson);
-        ThirdPersonCamera.SetCameraMode(CameraMode.ThirdPerson);
-        TopDownCamera.SetCameraMode(CameraMode.TopDown);
-        BirdsEyeCamera.SetCameraMode(CameraMode.BirdsEye);
+        // Configure Camera controllers for individual purposes
+        _firstPersonCamera.SetCameraMode(CameraMode.FirstPerson);
+        _thirdPersonCamera.SetCameraMode(CameraMode.ThirdPerson);
+        _topDownCamera.SetCameraMode(CameraMode.TopDown);
+        _birdsEyeCamera.SetCameraMode(CameraMode.BirdsEye);
 
-        playerObjectController.SetCameraMode(CameraMode.FirstPerson);
+        // Initally set player controls for first person
+        _playerObjectController.SetCameraMode(CameraMode.FirstPerson);
 
+        // Enable first person camera
         SetCamerasAreEnabled(new bool[]{true, false, true, false});
     }
 
     void Start()
     {
+        // Remove cursor from initial first person mode
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        
+        // Configurations for each camera mode
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             SetCamerasAreEnabled(new bool[]{true, false, true, false});
-            playerObjectController.SetCameraMode(CameraMode.FirstPerson);
+            _playerObjectController.SetCameraMode(CameraMode.FirstPerson);
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, true, true, false});
-            playerObjectController.SetCameraMode(CameraMode.ThirdPerson);
+            _playerObjectController.SetCameraMode(CameraMode.ThirdPerson);
         }
         else if (Input.GetKeyDown(KeyCode.F3))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, false, false, true});
-            playerObjectController.SetCameraMode(CameraMode.BirdsEye);
+            _playerObjectController.SetCameraMode(CameraMode.BirdsEye);
         }
         else if (Input.GetKeyDown(KeyCode.F4))
         {
+            // Toggle topdown feed on/off
             _topDownCamFeed.gameObject.SetActive(!_topDownCamFeed.gameObject.activeSelf);
         }
     }
 
-    private void SetCamerasAreEnabled(bool[] isEnabled)
-    {
-        FirstPersonCamera.gameObject.SetActive(isEnabled[0]);
-        ThirdPersonCamera.gameObject.SetActive(isEnabled[1]);
-        _topDownCamFeed.gameObject.SetActive(isEnabled[2]);
-        BirdsEyeCamera.gameObject.SetActive(isEnabled[3]);
-    }
-    private event Action<string> _activityExecuted;
-    public Dictionary<string, GameObject> Activities { get; private set; }  = new Dictionary<string, GameObject>();
+    // Create individual activities in View
     public void CreateActivities(Dictionary<string, string> idsAndLabels)
     {
-        //TODO: Create Setup activity scripts
+        
         foreach (KeyValuePair<string, string> kvp in idsAndLabels)
         {
+            // Get pre-configured activity object from game space
             GameObject activtyObject = transform.Find("ViewActivityContainer").Find(kvp.Value).gameObject;
             ViewActivity activity = activtyObject.GetComponent<ViewActivity>();
 
+            // Pass ID and label to to game object script
             activity.Initialize(kvp.Key, kvp.Value);
-            Activities.Add(kvp.Key, activtyObject);
+            _activities.Add(kvp.Key, activtyObject);
 
+            // Subscribe to user input events handled by the Activity
             activity.SubscribeToActivityMouseOver(OnActivityMouseOver);
             activity.SubscribeToActivityMouseExit(OnActivityMouseExit);
             activity.SubscribeToOnExecuted(OnActivityExecuted);
+
+            // Configure proximity detector for player object.
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
         }
     }
 
+    // Methods for passing state data to Activities
+    public void SetActivityExecuted(string activityId, bool isExecuted){
+        _activities[activityId].GetComponent<ViewActivity>().SetExecuted(isExecuted);
+    }
+    public void SetActivityPending(string activityId, bool isPending){
+        _activities[activityId].GetComponent<ViewActivity>().SetPending(isPending);
+    }
+    public void SetActivityDisabled(string activityId, bool isDisabled){
+        _activities[activityId].GetComponent<ViewActivity>().SetDisabled(isDisabled);
+    }
+    public void SetActivityIncluded(string activityId, bool isIncluded){
+        _activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
+    }
+
+    // Method for updating the global lighting when activities are pending or milestones are unmet
+    public void UpdateGlobalEnvironment(bool hasPendingActivities)
+    {
+        string skyBoxesPath = FileStrings.SkyBoxesPath;
+        string environmentLightsPath = FileStrings.EnvironmentLightsPath;
+            
+        string skybox = hasPendingActivities ? Path.Combine(skyBoxesPath, FileStrings.SkyBoxPendingName) : Path.Combine(skyBoxesPath, FileStrings.SkyBoxAllClearName);
+        string sun = hasPendingActivities ? Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsPendingName) : Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsAllClearName);
+        
+        RenderSettings.skybox = Resources.Load<Material>(skybox);
+        RenderSettings.sun = Resources.Load<Light>(sun);
+        DynamicGI.UpdateEnvironment(); 
+    }
+    
+    // Method for subscribing to Activity ID
+    public void SubscribeToActivityExecuted(Action<string> subscriber){
+        _activityExecuted+=subscriber;
+    }
+
+    // Helper method for toggling cameras on/off
+    private void SetCamerasAreEnabled(bool[] isEnabled)
+    {
+        _firstPersonCamera.gameObject.SetActive(isEnabled[0]);
+        _thirdPersonCamera.gameObject.SetActive(isEnabled[1]);
+        _topDownCamFeed.gameObject.SetActive(isEnabled[2]);
+        _birdsEyeCamera.gameObject.SetActive(isEnabled[3]);
+    }
+
+    // Event handlers
     private void OnActivityMouseOver(ViewActivity activity)
     {
-//        ButtonController buttonController = activity.gameObject.GetComponentInChildren<ButtonController>();
         if (!activity.Disabled)
         {
             _reticule.color = Color.green;
@@ -119,40 +166,8 @@ public class View : MonoBehaviour
         _reticule.color = Color.white;
     }
 
-    public void SetActivityExecuted(string activityId, bool isExecuted){
-        Activities[activityId].GetComponent<ViewActivity>().SetExecuted(isExecuted);
-    }
-    public void SetActivityPending(string activityId, bool isPending){
-        Activities[activityId].GetComponent<ViewActivity>().SetPending(isPending);
-    }
-    public void SetActivityDisabled(string activityId, bool isDisabled){
-        Activities[activityId].GetComponent<ViewActivity>().SetDisabled(isDisabled);
-    }
-    /*
-    public void SetActivityHasUnmetMilestones(string activityId, bool hasUnmetMilestones){
-        Activities[activityId].GetComponent<ViewActivity>().SetHasUnmetMilestones(hasUnmetMilestones);
-    }
-    */
-    public void SetActivityIncluded(string activityId, bool isIncluded){
-        Activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
-    }
-    public void OnActivityExecuted(ViewActivity activity){
+    // Method for passing on Activity ID to the Controller when Activity executes
+    private void OnActivityExecuted(ViewActivity activity){
         _activityExecuted?.Invoke(activity.Id);
-    }
-    public void SubscribeToActivityExecuted(Action<string> subscriber){
-        _activityExecuted+=subscriber;
-    }
-
-    public void UpdateGlobalEnvironment(bool hasPendingActivities)
-    {
-        string skyBoxesPath = FileStrings.SkyBoxesPath;
-        string environmentLightsPath = FileStrings.EnvironmentLightsPath;
-            
-        string skybox = hasPendingActivities ? Path.Combine(skyBoxesPath, FileStrings.SkyBoxPendingName) : Path.Combine(skyBoxesPath, FileStrings.SkyBoxAllClearName);
-        string sun = hasPendingActivities ? Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsPendingName) : Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsAllClearName);
-        
-        RenderSettings.skybox = Resources.Load<Material>(skybox);
-        RenderSettings.sun = Resources.Load<Light>(sun);
-        DynamicGI.UpdateEnvironment(); 
     }
 }
