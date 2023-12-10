@@ -85,7 +85,7 @@ public class View : MonoBehaviour
     }
 
     // Create individual activities in View
-    public void CreateActivities(Dictionary<string, string> idsAndLabels)
+    public void CreateActivities(Dictionary<string, string> idsAndLabels, Dictionary<string, string> descriptions)
     {
         
         foreach (KeyValuePair<string, string> kvp in idsAndLabels)
@@ -96,6 +96,7 @@ public class View : MonoBehaviour
 
             // Pass ID and label to to game object script
             activity.Initialize(kvp.Key, kvp.Value);
+            activity.SetDescription(descriptions[kvp.Key]);
             _activities.Add(kvp.Key, activtyObject);
 
             // Subscribe to user input events handled by the Activity

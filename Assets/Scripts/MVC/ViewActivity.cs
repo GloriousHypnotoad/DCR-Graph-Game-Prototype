@@ -37,14 +37,14 @@ public class ViewActivity : MonoBehaviour
     }
 
     // Initialize object with activity data from graph
-    public void Initialize(string id, string label)
+    internal void Initialize(string id, string label)
     {
         Id = id;
         Label = label;
     }
 
     // Public methods to set the visual state of the Activity
-    public void SetExecuted(bool isExecuted){
+    internal void SetExecuted(bool isExecuted){
 
         if(isExecuted)
         {
@@ -62,14 +62,14 @@ public class ViewActivity : MonoBehaviour
         _effectsController.TogglePushButtonLight(isExecuted);
     }
 
-    public void SetPending(bool isPending)
+    internal void SetPending(bool isPending)
     {
         // Toggle lights and effects on the activity scene
         _effectsController.ToggleSceneryLight(isPending);
         _effectsController.ToggleFireworks(isPending);
     }
 
-    public void SetDisabled(bool isDisabled)
+    internal void SetDisabled(bool isDisabled)
     {
         // Toggle effects
         _effectsController.ToggleFog(isDisabled);
@@ -81,7 +81,7 @@ public class ViewActivity : MonoBehaviour
 
     }
 
-    public void SetIncluded(bool isIncluded)
+    internal void SetIncluded(bool isIncluded)
     {
         // Set opacity to reflect inclusion.
         _buttonController.SetOpaque(isIncluded);
@@ -100,28 +100,29 @@ public class ViewActivity : MonoBehaviour
         }
     }
     // Allow subscribtion to Activity mouse events
-    public void SubscribeToActivityMouseOver(Action<ViewActivity> subscriber)
+    internal void SubscribeToActivityMouseOver(Action<ViewActivity> subscriber)
     {
         _activityMouseOver += subscriber;
     }
-    public void SubscribeToActivityMouseExit(Action<ViewActivity> subscriber)
+    internal void SubscribeToActivityMouseExit(Action<ViewActivity> subscriber)
     {
         _activityMouseExit += subscriber;
     }
 
     // Forwards configuration data to Proximity Detector.
-    public void SetProximityDetectorTarget(int targetLayer)
+    internal void SetProximityDetectorTarget(int targetLayer)
     {
         _proximityDetector.SetTargetLayer(targetLayer);
     }
 
     // Allows View to subscribe to activity execution event
-    public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
+    internal void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
         _onExecuted+=subscriber;
     }
-    public override string ToString()
+
+    internal void SetDescription(string description)
     {
-        return $"Activity ID: {Id}, Label: {Label}";
+        Description = description;
     }
 
     // Forward MouseOver event to View

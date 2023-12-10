@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using UnityEngine;
 public class Model : MonoBehaviour
@@ -142,7 +143,7 @@ public class Model : MonoBehaviour
                 };
                 
                 if (!ActivityDescriptions.TryGetValue(id, out _)){
-                    ActivityDescriptions.Add(id, eventDescription);
+                    ActivityDescriptions.Add(id, RemoveHtmlTags(eventDescription));
                 };
                 
                 if (!ActivityPurposes.TryGetValue(id, out _)){
@@ -448,5 +449,14 @@ public class Model : MonoBehaviour
     private Dictionary<TKey, TValue> CloneDictionary<TKey, TValue>(Dictionary<TKey, TValue> originalDictionary)
     {
         return new Dictionary<TKey, TValue>(originalDictionary);
+    }
+
+    private string RemoveHtmlTags(string input)
+    {
+        // Regular expression to match any HTML tag
+        var regex = new Regex("<.*?>");
+
+        // Replace all HTML tags with an empty string
+        return regex.Replace(input, "");
     }
 }

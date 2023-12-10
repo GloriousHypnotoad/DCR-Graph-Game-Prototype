@@ -31,7 +31,7 @@ public class Controller : MonoBehaviour
         _model.ProcessJsonFile("Abstract.json");
 
         // Create Activity objects in the view from data in Model.
-        _view.CreateActivities(_model.GetActivityLabels());
+        _view.CreateActivities(_model.GetActivityLabels(), _model.GetActivityDescriptions());
 
         // Once created call private method to set Activity states to initial values.
         UpdateView();
