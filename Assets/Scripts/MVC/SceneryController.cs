@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +7,16 @@ public class SceneryController : MonoBehaviour
     GameObject _sceneryOpaque;
     GameObject _sceneryTransparent;
 
-    void Start()
+    private List<IAnimatable> _animatableElementsOpaque;
+    private List<IAnimatable> _animatableElementsTransparent;
+
+    void Awake()
     {
         _sceneryOpaque = transform.Find(FileStrings.SceneryOpaque).gameObject;
         _sceneryTransparent = transform.Find(FileStrings.SceneryTransparent).gameObject;
+
+        _animatableElementsOpaque = new List<IAnimatable>(transform.Find("SceneryOpaque/AnimatedElementsContainer").GetComponentsInChildren<IAnimatable>());
+        _animatableElementsTransparent = new List<IAnimatable>(transform.Find("SceneryTransparent/AnimatedElementsContainer").GetComponentsInChildren<IAnimatable>());
     }
 
     // Update is called once per frame
@@ -19,9 +25,16 @@ public class SceneryController : MonoBehaviour
         
     }
 
-    public void ToggleAnimatedElement(bool isAnimated)
+    public void ToggleAnimatedElements(bool isAnimated)
     {
-
+        foreach (IAnimatable animatableElement in _animatableElementsOpaque)
+        {
+            animatableElement.ToggleAnimation(isAnimated);
+        }
+        foreach (IAnimatable animatableElement in _animatableElementsTransparent)
+        {
+            animatableElement.ToggleAnimation(isAnimated);
+        }
     }
 
     public void SetOpaque(bool opaque)

@@ -50,6 +50,8 @@ public class ViewActivity : MonoBehaviour
             _effectsController.SwitchParticleColor(Color.green);
         }
         
+        _sceneryController.ToggleAnimatedElements(isExecuted);
+        
         string materialPath = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
         UpdateMaterial(FileStrings.PushButtonPath, materialPath);
         
