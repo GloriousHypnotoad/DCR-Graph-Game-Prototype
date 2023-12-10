@@ -10,6 +10,7 @@ public class EffectsController : MonoBehaviour
     private GameObject _pushButtonLight;
     private GameObject _sceneryLight;
     private GameObject _firework;
+    private GameObject _glitterBurst;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class EffectsController : MonoBehaviour
         _pushButtonLight = transform.Find(FileStrings.PushButtonLight).gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _firework = transform.Find(FileStrings.Firework).gameObject;
+        _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
     }
 
     public void SwitchParticleColor(Color color)
@@ -49,5 +51,10 @@ public class EffectsController : MonoBehaviour
     public void ToggleFireworks(bool isFiring)
     {
         _firework.GetComponent<Firework>().ToggleFireworks(isFiring);
+    }
+
+    public void GlitterBurst(float duration)
+    {
+        _glitterBurst.GetComponent<ParticleSystem>().Play();
     }
 }

@@ -38,6 +38,7 @@ static class FileStrings
 
     // EFFECTSCONTAINER
     public static string Glitter = "Glitter";
+    public static string GlitterBurst = "GlitterBurst";
     public static string SceneryLight = "SceneryLight";
     public static string PushButtonLight = "PushButtonLight";
     public static string Fog = "Fog";

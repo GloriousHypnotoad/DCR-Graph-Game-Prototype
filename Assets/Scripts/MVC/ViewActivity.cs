@@ -64,21 +64,9 @@ public class ViewActivity : MonoBehaviour
 
     public void SetPending(bool isPending)
     {
-        // Toggle light on the activity scene
+        // Toggle lights and effects on the activity scene
         _effectsController.ToggleSceneryLight(isPending);
         _effectsController.ToggleFireworks(isPending);
-
-        /*
-        if (isPending)
-        {
-            ButtonController.StartJumping();
-            
-        }
-        else
-        {
-            ButtonController.StopJumping();
-        }
-        */
     }
 
     public void SetDisabled(bool isDisabled)
@@ -95,12 +83,13 @@ public class ViewActivity : MonoBehaviour
 
     public void SetIncluded(bool isIncluded)
     {
-        // TODO: Toggle pushbutton material dynamically
+        // Set opacity to reflect inclusion.
         _buttonController.SetOpaque(isIncluded);
         _sceneryController.SetOpaque(isIncluded);
 
         if(!isIncluded)
         {
+            // Disable activity if excluded.
             Disabled = true;
             _effectsController.ToggleGlitter(false);
             _buttonController.ToggleRotation(false);
@@ -124,6 +113,15 @@ public class ViewActivity : MonoBehaviour
     public void SetProximityDetectorTarget(int targetLayer)
     {
         _proximityDetector.SetTargetLayer(targetLayer);
+    }
+
+    // Allows View to subscribe to activity execution event
+    public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
+        _onExecuted+=subscriber;
+    }
+    public override string ToString()
+    {
+        return $"Activity ID: {Id}, Label: {Label}";
     }
 
     // Forward MouseOver event to View
@@ -156,67 +154,10 @@ public class ViewActivity : MonoBehaviour
     {
         _buttonController.TogglePlayerIsNearby(playerNearButton);
     }
-    /*
-    private void SetButtonsEnabled(bool isEnabled)
-    {
-        GetComponentInChildren<ButtonController>().SetButtonEnabled(isEnabled);
-    }
-    */
-    public void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
-        _onExecuted+=subscriber;
-    }
-    public override string ToString()
-    {
-        return $"Activity ID: {Id}, Label: {Label}";
-    }
-    public void OnButtonPressed(float quickRotationDuration)
+    private void OnButtonPressed(float quickRotationDuration)
     {
         _onExecuted?.Invoke(this);
-        //GlitterBurst(quickRotationDuration);
-        // Display execution
+        _effectsController.GlitterBurst(quickRotationDuration);
         // Highlight outgoing constraints
     }
-    // TODO: Move to separate script.
-    /*
-    public void GlitterBurst(float duration)
-    {
-        SetGlitterColor(Color.green);
-        // Access the particle system
-        ParticleSystem glitterSystem = GetGlitterParticleSystem();
-
-        // Save initial values
-        float initialStartSpeedMin = glitterSystem.main.startSpeed.constantMin;
-        float initialStartSpeedMax = glitterSystem.main.startSpeed.constantMax;
-        
-        float initialLifetimedMin = glitterSystem.main.startLifetime.constantMin;
-        float initialLifetimedMax = glitterSystem.main.startLifetime.constantMax;
-
-        float initialEmissionRate = glitterSystem.emission.rateOverTime.constant;
-
-        // Triple the speed and emission rate
-        var mainModule = glitterSystem.main;
-        mainModule.startSpeed = 50;
-        mainModule.startLifetime = 1000;
-
-        var emissionModule = glitterSystem.emission;
-        emissionModule.rateOverTime = 1000;
-
-        // Wait for the duration
-        StartCoroutine(ResetAfterDuration(duration, initialStartSpeedMin, initialStartSpeedMax, initialLifetimedMin, initialLifetimedMax, initialEmissionRate));
-    }
-
-    private IEnumerator ResetAfterDuration(float duration, float speedMin, float speedMax, float lifetimeMin, float lifetimeMax, float emissionRate)
-    {
-        // Wait for the specified duration
-        yield return new WaitForSeconds(duration);
-
-        // Reset to initial values
-        var mainModule = GetGlitterParticleSystem().main;
-        mainModule.startSpeed = new ParticleSystem.MinMaxCurve(speedMin, speedMax);
-        mainModule.startLifetime = new ParticleSystem.MinMaxCurve(lifetimeMin, lifetimeMax);
-
-        var emissionModule = GetGlitterParticleSystem().emission;
-        emissionModule.rateOverTime = emissionRate;
-    }
-    */
 }
