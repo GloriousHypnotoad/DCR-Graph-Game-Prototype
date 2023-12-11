@@ -12,6 +12,7 @@ public class EffectsController : MonoBehaviour
     private GameObject _sceneryLight;
     private GameObject _firework;
     private GameObject _glitterBurst;
+    private GameObject _godray;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class EffectsController : MonoBehaviour
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
+        _godray = transform.Find(FileStrings.GodRay).gameObject;
     }
 
     public void SwitchParticleColor(Color color)
@@ -50,9 +52,9 @@ public class EffectsController : MonoBehaviour
     {
         _sceneryLight.SetActive(isPending);
     }
-    public void ToggleFireworks(bool isFiring)
+    public void LauchFirework()
     {
-        _firework.GetComponent<Firework>().ToggleFireworks(isFiring);
+        _firework.GetComponent<Firework>().LaunchOne();
     }
 
     public void GlitterBurst(float duration)
@@ -63,5 +65,14 @@ public class EffectsController : MonoBehaviour
     internal void TogglePulsePushButtonLight(bool playerNearButton)
     {
         _pulsatingLight.GetComponent<PulsatingLight>().TogglePulse(playerNearButton);
+    }
+
+    internal void ToggleGodray(bool isActive)
+    {
+        GodRay godRay =_godray.GetComponent<GodRay>();
+        if (godRay.GetIsActive() != isActive)
+        {
+            godRay.toggleActive(isActive);
+        }
     }
 }

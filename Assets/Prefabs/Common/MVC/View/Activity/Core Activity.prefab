@@ -408,6 +408,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_Name
+      value: GodRay
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7090382752858353287, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_Name
       value: EffectsContainer

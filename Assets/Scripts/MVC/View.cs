@@ -81,7 +81,9 @@ public class View : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.F4))
         {
             // Toggle topdown feed on/off
-            _topDownCamFeed.gameObject.SetActive(!_topDownCamFeed.gameObject.activeSelf);
+            if (!_birdsEyeCamera.gameObject.activeSelf){
+                _topDownCamFeed.gameObject.SetActive(!_topDownCamFeed.gameObject.activeSelf);
+            }
         }
     }
 
@@ -122,6 +124,15 @@ public class View : MonoBehaviour
     }
     public void SetActivityIncluded(string activityId, bool isIncluded){
         _activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
+    }
+    public void SetActivityStateChanged(string activityId)
+    {
+        // Perform your action
+        if (_activities.TryGetValue(activityId, out var activity))
+        {
+            activity.GetComponent<ViewActivity>().SetStateChanged();
+        }
+
     }
 
     // Method for updating the global lighting when activities are pending or milestones are unmet
@@ -185,5 +196,49 @@ public class View : MonoBehaviour
     // Method for passing on Activity ID to the Controller when Activity executes
     internal void OnActivityExecuted(ViewActivity activity){
         _activityExecuted?.Invoke(activity.Id);
+    }
+
+    internal void UpdateDeltaLists(List<string> addedToIncluded, List<string> removedFromIncluded, List<string> addedToPending, List<string> removedFromPending, List<string> addedToHaveUnmetMilestones, List<string> removedFromHaveUnmetMilestones, List<string> addedToDisabled, List<string> removedFromDisabled)
+    {
+        Debug.Log("addedToIncluded");
+        foreach (var item in addedToIncluded)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("removedFromIncluded");
+        foreach (var item in removedFromIncluded)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("addedToPending");
+        foreach (var item in addedToPending)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("removedFromPending");
+        foreach (var item in removedFromPending)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("addedToHaveUnmetMilestones");
+        foreach (var item in addedToHaveUnmetMilestones)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("removedFromHaveUnmetMilestones");
+        foreach (var item in removedFromHaveUnmetMilestones)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("addedToDisabled");
+        foreach (var item in addedToDisabled)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("removedFromDisabled");
+        foreach (var item in removedFromDisabled)
+        {
+            Debug.Log(item);
+        }
     }
 }

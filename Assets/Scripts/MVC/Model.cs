@@ -28,6 +28,8 @@ public class Model : MonoBehaviour
     public Dictionary<string, HashSet<string>> Excludes { get; private set; } = new Dictionary<string, HashSet<string>>();
     public Dictionary<string, HashSet<string>> Includes { get; private set; } = new Dictionary<string, HashSet<string>>();
     public Dictionary<string, HashSet<string>> Milestones { get; private set; } = new Dictionary<string, HashSet<string>>();
+
+    private List<ModelState> history = new List<ModelState>();
     
     public void ParseXmlFile(string fileName)
     {
@@ -279,6 +281,9 @@ public class Model : MonoBehaviour
         {
             Debug.Log($" {e.Message}: The JSON file contains no pending events\n");
         }
+
+        history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
+
     }
     public Dictionary<string, string> GetActivityLabels()
     {
@@ -376,7 +381,19 @@ public class Model : MonoBehaviour
                 Included.Add(activity);
             }
         }
+        history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
     }
+
+    // Get specific state in history
+    public ModelState GetStateAt(int index)
+    {
+        return history[index];
+    }
+    public int GetHistoryLength()
+    {
+        return history.Count;
+    }
+
     // Helper methods
     internal void CreateConstraints(Dictionary<string, HashSet<string>> constraintsDictionary, JToken constraints)
     {

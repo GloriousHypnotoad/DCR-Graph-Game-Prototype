@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 3705677504837165244}
   - component: {fileID: 4584765714741709378}
   - component: {fileID: 546724154669856438}
+  - component: {fileID: 1173110869707600939}
   m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
@@ -88,7 +89,7 @@ ParticleSystem:
   m_GameObject: {fileID: 5876703789129757380}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 10
+  simulationSpeed: 40
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -162,8 +163,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 1
+      scalar: 1000
+      minScalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -215,7 +216,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -657,7 +658,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.0001
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4876,6 +4877,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1173110869707600939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5876703789129757380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51d4f78c364f834aafe6037fc44922c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7549424328984815085
 GameObject:
   m_ObjectHideFlags: 0

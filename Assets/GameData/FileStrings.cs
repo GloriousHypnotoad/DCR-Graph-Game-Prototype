@@ -44,6 +44,7 @@ static class FileStrings
     public static string PulsatingLight = "PulsatingLight";
     public static string Fog = "Fog";
     public static string Firework = "Firework";
+    public static string GodRay = "GodRay";
 
     // RESOURCES
     private static string Environment = "Environment";

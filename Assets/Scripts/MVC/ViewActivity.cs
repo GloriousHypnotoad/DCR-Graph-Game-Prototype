@@ -66,7 +66,6 @@ public class ViewActivity : MonoBehaviour
     {
         // Toggle lights and effects on the activity scene
         _effectsController.ToggleSceneryLight(isPending);
-        _effectsController.ToggleFireworks(isPending);
     }
 
     internal void SetDisabled(bool isDisabled)
@@ -128,6 +127,7 @@ public class ViewActivity : MonoBehaviour
     // Forward MouseOver event to View
     internal void OnActivityMouseOver()
     {
+        _effectsController.ToggleGodray(false);
         _activityMouseOver?.Invoke(this);
     }
 
@@ -164,5 +164,10 @@ public class ViewActivity : MonoBehaviour
         _onExecuted?.Invoke(this);
         _effectsController.GlitterBurst(quickRotationDuration);
         // Highlight outgoing constraints
+    }
+
+    internal void SetStateChanged()
+    {
+        _effectsController.ToggleGodray(true);
     }
 }

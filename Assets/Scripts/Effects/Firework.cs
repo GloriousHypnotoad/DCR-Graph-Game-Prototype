@@ -4,7 +4,7 @@ using UnityEngine;
 public class Firework : MonoBehaviour
 {
     private float _speed = 50.0f;
-    private float _height = 25.0f;
+    private float _height = 50.0f;
     private float relaunchFrequency = 5.0f;
     private ParticleSystem _explosionEffect;
     private ParticleSystem _plumeEffect;
@@ -25,7 +25,7 @@ public class Firework : MonoBehaviour
         _plumeEffect.Stop();
     }
 
-    public void ToggleFireworks(bool firing)
+    public void LaunchContinuously(bool firing)
     {
         isFiring = firing;
 
@@ -54,6 +54,13 @@ public class Firework : MonoBehaviour
             Launch();
             yield return new WaitForSeconds(relaunchFrequency);
         }
+    }
+
+    public void LaunchOne()
+    {
+        ResetFirework();
+        Launch();
+        isFiring = false; // Ensure continuous firing is stopped after one launch
     }
 
     private void ResetFirework()
