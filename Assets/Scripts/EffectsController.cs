@@ -8,6 +8,7 @@ public class EffectsController : MonoBehaviour
     private GameObject _fog;
     private GameObject _glitter;
     private GameObject _pushButtonLight;
+    private GameObject _pulsatingLight;
     private GameObject _sceneryLight;
     private GameObject _firework;
     private GameObject _glitterBurst;
@@ -17,6 +18,7 @@ public class EffectsController : MonoBehaviour
         _fog = transform.Find(FileStrings.Fog).gameObject;
         _glitter = transform.Find(FileStrings.Glitter).gameObject;
         _pushButtonLight = transform.Find(FileStrings.PushButtonLight).gameObject;
+        _pulsatingLight = transform.Find(FileStrings.PulsatingLight).gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
@@ -60,6 +62,6 @@ public class EffectsController : MonoBehaviour
 
     internal void TogglePulsePushButtonLight(bool playerNearButton)
     {
-        //TODO;
+        _pulsatingLight.GetComponent<PulsatingLight>().TogglePulse(playerNearButton);
     }
 }

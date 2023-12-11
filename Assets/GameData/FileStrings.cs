@@ -41,6 +41,7 @@ static class FileStrings
     public static string GlitterBurst = "GlitterBurst";
     public static string SceneryLight = "SceneryLight";
     public static string PushButtonLight = "PushButtonLight";
+    public static string PulsatingLight = "PulsatingLight";
     public static string Fog = "Fog";
     public static string Firework = "Firework";
 
