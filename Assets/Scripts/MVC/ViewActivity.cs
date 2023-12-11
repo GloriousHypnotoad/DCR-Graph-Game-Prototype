@@ -44,6 +44,7 @@ public class ViewActivity : MonoBehaviour
         Label = label;
         Description = description;
         Color = color;
+        _effectsController.SwitchSceneryLightColor(color);
     }
 
     // Public methods to set the visual state of the Activity

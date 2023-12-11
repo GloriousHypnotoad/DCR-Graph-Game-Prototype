@@ -19,7 +19,7 @@ public class EffectsController : MonoBehaviour
         _fog = transform.Find(FileStrings.Fog).gameObject;
         _glitter = transform.Find(FileStrings.Glitter).gameObject;
         _pushButtonLight = transform.Find(FileStrings.PushButtonLight).gameObject;
-        _pulsatingLight = transform.Find(FileStrings.PulsatingLight).gameObject;
+        _pulsatingLight = transform.Find("PulsatingLight").gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
@@ -46,6 +46,11 @@ public class EffectsController : MonoBehaviour
     public void TogglePushButtonLight(bool active)
     {
         _pushButtonLight.SetActive(active);
+    }
+
+    internal void SwitchSceneryLightColor(Color color)
+    {
+        _sceneryLight.GetComponent<Light>().color = color;
     }
 
     public void ToggleSceneryLight(bool isPending)
