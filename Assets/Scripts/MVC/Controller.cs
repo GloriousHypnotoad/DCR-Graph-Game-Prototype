@@ -34,47 +34,51 @@ public class Controller : MonoBehaviour
         _model.ProcessJsonFile("Abstract.json");
 
         // Create Activity objects in the view from data in Model.
-        _view.CreateActivities(_model.GetActivityLabels(), _model.GetActivityDescriptions());
-
+        _view.CreateActivities(_model.GetActivityLabels(), _model.GetActivityDescriptions(), GenerateColorsHelper());
+    
+        // Once created call private method to set Activity states to initial values.
+        UpdateView();
+        
+    }
+    internal Dictionary<string, Color> GenerateColorsHelper(){
+        
         Dictionary<string, HashSet<string>> Conditions = _model.GetConditions();
         Dictionary<string, HashSet<string>> Responses = _model.GetResponses();
         HashSet<string> pending = _model.GetPending();
+        
+        Dictionary<string, Color> activityColors = new Dictionary<string, Color>();
 
-        Dictionary<string, Color> colors = new Dictionary<string, Color>();
+        HashSet<string> rgbs = new HashSet<string>();
+
+        foreach (string id in _model.GetActivityIds())
+        {
+            activityColors[id] = Color.white;
+        }
 
         foreach (KeyValuePair<string, HashSet<string>> kvp in Conditions)
         {
-            colors[kvp.Key] = Color.black;
+            rgbs.Add(kvp.Key);
         }
 
         foreach (string item in pending)
         {
-                if(!colors.ContainsKey(item))
-                {
-                    colors[item] = Color.black;
-                }
+            rgbs.Add(item);
         }
 
         foreach (KeyValuePair<string, HashSet<string>> kvp in Responses)
         {
             foreach (string value in kvp.Value)
             {
-                if(!colors.ContainsKey(value))
-                {
-                    colors[value] = Color.black;
-                }
-                
+                rgbs.Add(value);                
             }
         }
-        colors = _colorGenerator.GenerateColors(colors);
-        foreach (KeyValuePair<string, Color> kvp in colors)
+        Dictionary<string, Color> rgbColors = _colorGenerator.GenerateColors(rgbs);
+        foreach (KeyValuePair<string, Color> kvp in rgbColors)
         {
-            Debug.Log($"{kvp.Key}: {kvp.Value}");
+            activityColors[kvp.Key] = kvp.Value;
         }
 
-        // Once created call private method to set Activity states to initial values.
-        UpdateView();
-        
+        return activityColors;
     }
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     internal void OnActivityExecuted(string activityId)

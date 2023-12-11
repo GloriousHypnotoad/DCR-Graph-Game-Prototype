@@ -8,18 +8,21 @@ public class ColorGenerator
     private int alternationCounter = 0;
     private float minColorDistance = 0.7f;
 
-    public Dictionary<string, Color> GenerateColors(Dictionary<string, Color> myDictionary)
+    public Dictionary<string, Color> GenerateColors(HashSet<string> activities)
     {
-        Dictionary<string, Color> newDictionary = new Dictionary<string, Color>();
-        foreach (var key in myDictionary.Keys)
+        Dictionary<string, Color> colorDictionary = new Dictionary<string, Color>();
+        foreach (var id in activities)
         {
+            /*
             Color newColor;
             do
             {
                 newColor = GenerateColor();
             } while (!IsColorSufficientlyDistant(newColor));
+            */
+            Color newColor = GenerateColor();
 
-            newDictionary[key] = newColor;
+            colorDictionary[id] = newColor;
             generatedColors.Add(newColor);
 
             runCounter++;
@@ -29,7 +32,7 @@ public class ColorGenerator
             }
         }
 
-        return newDictionary;
+        return colorDictionary;        
     }
 
     private Color GenerateColor()
