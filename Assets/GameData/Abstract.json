@@ -11,28 +11,52 @@
     "@graphBG": "#f1f6fe",
     "@graphType": "0",
     "@exercise": "false",
-    "meta": {
-      "graph": {
-        "@id": "1702987",
-        "@hash": "51C39CE45F461700848729DABA9A1391",
-        "@guid": "F84BE275-4D1B-477A-AA7A-6C58A52A277F",
-        "@OwnerName": "Simon James Jensen",
-        "@OwnerId": "136208",
-        "@categoryId": "7309",
-        "@categoryTitle": "Default",
-        "@Keywords": ""
+    "meta": [
+      {
+        "graph": {
+          "@id": "1702987",
+          "@hash": "D2826AA3F92DB1E462144142AA9D4FE9",
+          "@guid": "F84BE275-4D1B-477A-AA7A-6C58A52A277F",
+          "@OwnerName": "Simon James Jensen",
+          "@OwnerId": "136208",
+          "@categoryId": "7309",
+          "@categoryTitle": "Default",
+          "@Keywords": ""
+        },
+        "revision": {
+          "@id": "3548914",
+          "@type": "minor",
+          "@date": "2023-12-12T23:04:38.900"
+        },
+        "organization": {
+          "@id": "18",
+          "@name": "DTU - Danish Technical University",
+          "@type": "Demonstration"
+        }
       },
-      "revision": {
-        "@id": "3541174",
-        "@type": "minor",
-        "@date": "2023-12-11T00:01:03.900"
-      },
-      "organization": {
-        "@id": "18",
-        "@name": "DTU - Danish Technical University",
-        "@type": "Demonstration"
+      {
+        "graph": {
+          "@id": "1702987",
+          "@hash": "D2826AA3F92DB1E462144142AA9D4FE9",
+          "@guid": "F84BE275-4D1B-477A-AA7A-6C58A52A277F",
+          "@OwnerName": "Simon James Jensen",
+          "@OwnerId": "136208",
+          "@categoryId": "7309",
+          "@categoryTitle": "Default",
+          "@Keywords": ""
+        },
+        "revision": {
+          "@id": "3548914",
+          "@type": "minor",
+          "@date": "2023-12-12T23:04:38.900"
+        },
+        "organization": {
+          "@id": "18",
+          "@name": "DTU - Danish Technical University",
+          "@type": "Demonstration"
+        }
       }
-    },
+    ],
     "specification": {
       "resources": {
         "events": {
@@ -951,6 +975,38 @@
               "@description": "",
               "@time": "",
               "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity8",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity9",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity10",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity2",
+              "@targetId": "Activity11",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
             }
           ]
         },
@@ -986,6 +1042,38 @@
             },
             {
               "@sourceId": "Activity2",
+              "@targetId": "Activity15",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
+              "@targetId": "Activity12",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
+              "@targetId": "Activity13",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
+              "@targetId": "Activity14",
+              "@filterLevel": "1",
+              "@description": "",
+              "@time": "",
+              "@groups": ""
+            },
+            {
+              "@sourceId": "Activity3",
               "@targetId": "Activity15",
               "@filterLevel": "1",
               "@description": "",

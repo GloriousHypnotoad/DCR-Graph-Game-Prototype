@@ -368,6 +368,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8067672033229793234}
     m_Modifications:
+    - target: {fileID: 2300160617788663512, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
+      objectReference: {fileID: 0}
     - target: {fileID: 2803298534827161207, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -412,10 +416,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GodRay
       objectReference: {fileID: 0}
-    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7090382752858353287, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_Name
       value: EffectsContainer
@@ -438,6 +438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8067672033229793234}
     m_Modifications:
+    - target: {fileID: 3440813086709018570, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3582986999363806558, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -481,6 +485,10 @@ PrefabInstance:
     - target: {fileID: 7617403829952115963, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
       propertyPath: m_Name
       value: ButtonObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707961499133499640, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

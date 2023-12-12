@@ -117,8 +117,8 @@ public class View : MonoBehaviour
     public void SetActivityPending(string activityId, bool isPending){
         _activities[activityId].GetComponent<ViewActivity>().SetPending(isPending);
     }
-    public void SetActivityDisabled(string activityId, bool isDisabled){
-        _activities[activityId].GetComponent<ViewActivity>().SetDisabled(isDisabled);
+    public void SetActivityDisabled(string activityId, HashSet<Color> colors){
+        _activities[activityId].GetComponent<ViewActivity>().SetDisabled(colors);
     }
     public void SetActivityIncluded(string activityId, bool isIncluded){
         _activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);

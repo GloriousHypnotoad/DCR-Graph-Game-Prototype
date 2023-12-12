@@ -7,8 +7,6 @@ public class EffectsController : MonoBehaviour
 {
     private GameObject _fog;
     private GameObject _glitter;
-    private GameObject _pushButtonLight;
-    private GameObject _pulsatingLight;
     private GameObject _sceneryLight;
     private GameObject _firework;
     private GameObject _glitterBurst;
@@ -18,37 +16,30 @@ public class EffectsController : MonoBehaviour
     {
         _fog = transform.Find(FileStrings.Fog).gameObject;
         _glitter = transform.Find(FileStrings.Glitter).gameObject;
-        _pushButtonLight = transform.Find(FileStrings.PushButtonLight).gameObject;
-        _pulsatingLight = transform.Find("PulsatingLight").gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
         _godray = transform.Find(FileStrings.GodRay).gameObject;
     }
 
-    public void SwitchParticleColor(Color color)
+    public void ChangehGlitterColor(Color color)
     {
         ParticleSystem ps = _glitter.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule mainModule = ps.main;
         mainModule.startColor = color;
     }
 
-    public void ToggleFog(bool active)
+    public void ToggleFog(bool isActive)
     {
-        _fog.SetActive(active);
+        _fog.SetActive(isActive);
     }
 
-    public void ToggleGlitter(bool active)
+    public void ToggleGlitter(bool isActive)
     {
-        _glitter.SetActive(active);
+        _glitter.SetActive(isActive);
     }
 
-    public void TogglePushButtonLight(bool active)
-    {
-        _pushButtonLight.SetActive(active);
-    }
-
-    internal void SwitchSceneryLightColor(Color color)
+    internal void ChangeSceneryLightColor(Color color)
     {
         _sceneryLight.GetComponent<Light>().color = color;
     }
@@ -67,9 +58,9 @@ public class EffectsController : MonoBehaviour
         _glitterBurst.GetComponent<ParticleSystem>().Play();
     }
 
-    internal void TogglePulsePushButtonLight(bool playerNearButton)
+    internal void TogglePulseOnSceneryLight(bool isPulsating)
     {
-        _pulsatingLight.GetComponent<PulsatingLight>().TogglePulse(playerNearButton);
+        _sceneryLight.GetComponent<PulsatingLight>().TogglePulse(isPulsating);
     }
 
     internal void ToggleGodray(bool isActive)

@@ -281,6 +281,7 @@ public class Model : MonoBehaviour
         {
             Debug.Log($" {e.Message}: The JSON file contains no pending events\n");
         }
+        
 
         history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
 

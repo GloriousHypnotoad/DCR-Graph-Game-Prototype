@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 public class ViewActivity : MonoBehaviour
 {
@@ -44,43 +46,70 @@ public class ViewActivity : MonoBehaviour
         Label = label;
         Description = description;
         Color = color;
-        _effectsController.SwitchSceneryLightColor(color);
-    }
-
-    // Public methods to set the visual state of the Activity
-    internal void SetExecuted(bool isExecuted){
-
-        if(isExecuted)
-        {
-            _effectsController.SwitchParticleColor(Color.green);
-        }
-        
-        // Toggle animated elements on/off
-        _sceneryController.ToggleAnimatedElements(isExecuted);
-        
-        // Update button material to reflect executed status
-        string buttonMaterial = isExecuted ? FileStrings.ButtonGreenEmissionPath : FileStrings.ButtonGreenPath;
-        transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(buttonMaterial);
-
-        // Update button Light to reflect executed status
-        _effectsController.TogglePushButtonLight(isExecuted);
     }
 
     internal void SetPending(bool isPending)
     {
         // Toggle lights and effects on the activity scene
         _effectsController.ToggleSceneryLight(isPending);
+        _effectsController.ChangeSceneryLightColor(Color);
+        _effectsController.TogglePulseOnSceneryLight(isPending);
     }
 
+    /*
     internal void SetDisabled(bool isDisabled)
     {
         // Toggle effects
         _effectsController.ToggleFog(isDisabled);
-        _effectsController.ToggleGlitter(!isDisabled);
         _buttonController.ToggleRotation(!isDisabled);
 
         // Set class variable
         Disabled = isDisabled;
+    }
+    */
+
+    internal void SetDisabled(HashSet<Color> colors)
+    {
+        foreach (Color color in colors)
+        {
+            Debug.Log(color.ToString());
+        }
+        bool isDisabled = false;
+        if (colors.Count != 0){
+            isDisabled = true;
+            if (colors.Count == 1)
+            {
+                _buttonController.SetPushButtonColor(colors.First());
+                _buttonController.StopPushButtonColorCycle();
+            }
+            else
+            {
+                _buttonController.StartPushButtonColorCycle(colors);
+            }
+        }
+        else
+        {
+            _buttonController.SetPushButtonColor(Color.white);
+        }
+
+        // Toggle effects
+        _effectsController.ToggleFog(isDisabled);
+        _buttonController.ToggleRotation(!isDisabled);
+
+        // Set class variable
+        Disabled = isDisabled;
+    }
+
+    // Public methods to set the visual state of the Activity
+    internal void SetExecuted(bool isExecuted){
+
+        // Toggle Glitter off
+        _effectsController.ToggleGlitter(!isExecuted);
+        _effectsController.ToggleSceneryLight(isExecuted);
+        _effectsController.TogglePulseOnSceneryLight(!isExecuted);
+        
+        // Toggle animated elements on/off
+        _sceneryController.ToggleAnimatedElements(isExecuted);
 
     }
 
@@ -94,12 +123,9 @@ public class ViewActivity : MonoBehaviour
         {
             // Disable activity if excluded.
             Disabled = true;
-            _effectsController.ToggleGlitter(false);
-            _buttonController.ToggleRotation(false);
 
-            // Update button material to reflect executed status
-            string buttonMaterial = FileStrings.TransparentPath;
-            transform.Find(FileStrings.PushButtonPath).gameObject.GetComponent<Renderer>().material = Resources.Load<Material>(buttonMaterial);
+            _buttonController.ToggleRotation(false);
+            _sceneryController.SetOpaque(isIncluded);
         }
     }
     // Allow subscribtion to Activity mouse events
@@ -153,12 +179,11 @@ public class ViewActivity : MonoBehaviour
     internal void OnPlayerNearButton(bool playerNearButton)
     {
         if(!Disabled){
-            _effectsController.TogglePulsePushButtonLight(playerNearButton);
             _buttonController.TogglePushButtonAnimation(playerNearButton);
 
         }
     }
-    internal void OnButtonPressed(float quickRotationDuration)
+    private void OnButtonPressed(float quickRotationDuration)
     {
         _onExecuted?.Invoke(this);
         _effectsController.GlitterBurst(quickRotationDuration);

@@ -22,25 +22,18 @@ static class FileStrings
     public static string EnvironmentLightsAllClearName = "Sunlight";
     public static string EnvironmentLightsPendingName = "Moonlight";
 
-    // ACTIVITY
-    private static string ButtonObject = "ButtonObject";
+    // BUTTON CONTROLLER
     public static string ButtonOpaque = "ButtonOpaque";
+    public static string ButtonOpaquePushButton = "ButtonOpaque/PushButton";
     public static string ButtonTransparent= "ButtonTransparent";
-    public static string ButtonPath = ButtonObject+"/"+ButtonOpaque;
-    public static string ButtonTransparentPath = ButtonObject+"/"+ButtonTransparent;
-    private static string SceneryContainer = "SceneryContainer";
+    public static string ButtonTransparentPushButton = "ButtonTransparent/PushButton";
     public static string SceneryOpaque = "SceneryOpaque";
     public static string SceneryTransparent = "SceneryTransparent";
-    public static string SceneryPath = SceneryContainer+"/"+SceneryOpaque;
-    public static string SceneryTransparentPath = SceneryContainer+"/"+SceneryTransparent;
-    private static string PushButton = "PushButton";
-    public static string PushButtonPath = ButtonPath+"/"+PushButton;
 
     // EFFECTSCONTAINER
     public static string Glitter = "Glitter";
     public static string GlitterBurst = "GlitterBurst";
     public static string SceneryLight = "SceneryLight";
-    public static string PushButtonLight = "PushButtonLight";
     public static string PulsatingLight = "PulsatingLight";
     public static string Fog = "Fog";
     public static string Firework = "Firework";
