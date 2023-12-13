@@ -43,7 +43,7 @@ public class Model : MonoBehaviour
         // Convert the XML to JSON
         string jsonText = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
         // Define the path for the output file
-        string outputPath = Path.Combine(Application.persistentDataPath, "Abstract.json");
+        string outputPath = Path.Combine(Application.persistentDataPath, $"{GameSettings.Scene[0]}.json");
 
         // Save the JSON to a file
         File.WriteAllText(outputPath, jsonText);
@@ -55,7 +55,7 @@ public class Model : MonoBehaviour
         {
             Directory.CreateDirectory(resourcesFolderPath);
         }
-        string resourcesPath = Path.Combine(resourcesFolderPath, "Abstract.json");
+        string resourcesPath = Path.Combine(resourcesFolderPath, $"{GameSettings.Scene[0]}.json");
         File.WriteAllText(resourcesPath, jsonText);
         #endif
     }

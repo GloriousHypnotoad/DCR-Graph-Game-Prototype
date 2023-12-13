@@ -230,6 +230,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4127163711420320814, guid: 41679d97015849a46afcdf687c1e7e64, type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127163711420320814, guid: 41679d97015849a46afcdf687c1e7e64, type: 3}
+      propertyPath: m_Intensity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6070237101994024808, guid: 41679d97015849a46afcdf687c1e7e64, type: 3}
       propertyPath: m_Name
       value: SceneryLight

@@ -82,8 +82,6 @@ public class ButtonController : MonoBehaviour
         
         material.EnableKeyword("_EMISSION");
         material.SetColor("_EmissionColor", color);
-
-        Debug.Log($"ButtonController: GameObject {gameObject.name} color updated to: {color}");
     }
 
     internal void StopPushButtonColorCycle()

@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
     private string _activeSceneName;
     private ColorGenerator _colorGenerator;
     private Dictionary<string, Color> _activityColors;
+    private Dictionary<string, HashSet<string>> _activitiesWithActiveConditionsAndOrMilestones;
     
 
     private
@@ -27,17 +28,19 @@ public class Controller : MonoBehaviour
     void Start()
     {
         //Run(Path.Combine(Application.dataPath, FileStrings.GameDataPath, $"{FileStrings.GetActiveSceneName()}{FileStrings.GraphFileExtension}"));
-        Run("Abstract.xml");
+        Run($"{GameSettings.Scene[0]}.xml");
     }
     
     public void Run(string selectedGraphName)
     {
         // Listen for executed events from the view
         _view.SubscribeToActivityExecuted(OnActivityExecuted);
+        _view.SubscribeToActivityExecuteRefused(OnExecuteRefused);
+
 
         // Parse graph XML file -> JSON -> Local data structures.
         _model.ParseXmlFile(selectedGraphName);
-        _model.ProcessJsonFile("Abstract.json");
+        _model.ProcessJsonFile($"{GameSettings.Scene[0]}.json");
 
         _activityColors = GenerateColorsHelper();
 
@@ -49,19 +52,6 @@ public class Controller : MonoBehaviour
         
     }
 
-    
-        // This guy needs to access the list of colors for the string. colors is a Dict of strings and colors.
-        // I need to:
-        //  1. Get the Conditions list.
-        //      i. loop thorugh it
-        //      ii. for each condition, get its color from the colors dict you are sending to view.CreateActivities
-        //      iii. get its values and assign the values to a dictionary of string hashset of colors.
-        //      iv. if the value is already in the dict, just add the color.
-        //  2. Do the same for the Responses list
-        //  3. You now know the hashset of colors for each object with an incoming condition or a response relation.
-
-    // Method to generate a dictionary of all activities that should have a unique identifying color
-    // (initially pending activities, activities that are responses, conditions)
     private Dictionary<string, Color> GenerateColorsHelper(){
         
         Dictionary<string, HashSet<string>> Conditions = _model.GetConditions();
@@ -110,6 +100,16 @@ public class Controller : MonoBehaviour
         UpdateView();
     }
 
+    private void OnExecuteRefused(string activityId)
+    {
+        _view.ClearSignals();
+        UpdateView();
+        foreach (string activity in _activitiesWithActiveConditionsAndOrMilestones[activityId])
+        {
+            _view.SignalActivity(activity);
+        }
+    }
+
     // Gets data from the Model, process and forward to the View for rendering.
     private void UpdateView()
     {
@@ -118,13 +118,13 @@ public class Controller : MonoBehaviour
         HashSet<string> executed = _model.GetExecuted();
         HashSet<string> pending = _model.GetPending();
         
-        Dictionary<string, HashSet<string>> activitiesWithActiveConditionsAndOrMilestones = CalculateActivitiesWithActiveConditionsAndOrMilestones(included, executed, pending, new Dictionary<string, HashSet<string>>());
+        _activitiesWithActiveConditionsAndOrMilestones = CalculateActivitiesWithActiveConditionsAndOrMilestones(included, executed, pending, new Dictionary<string, HashSet<string>>());
 
         foreach (string activityId in activities)
         {
             HashSet<Color> colors = new HashSet<Color>();
             
-            if(activitiesWithActiveConditionsAndOrMilestones.TryGetValue(activityId, out var conditionsOrMilestones))
+            if(_activitiesWithActiveConditionsAndOrMilestones.TryGetValue(activityId, out var conditionsOrMilestones))
             {
                 foreach (string activity in conditionsOrMilestones)
                 {
@@ -139,7 +139,17 @@ public class Controller : MonoBehaviour
             _view.SetActivityIncluded(activityId, included.Contains(activityId));
         }
 
-        _view.UpdateGlobalEnvironment(pending.Count > 0);
+        bool unMetPending = false;
+        foreach (KeyValuePair<string, HashSet<string>> kvp in _model.GetMilestones())
+        {
+            if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
+            {
+                unMetPending = true;
+                break;
+            }            
+        }
+
+        _view.UpdateGlobalEnvironment(unMetPending);
     
         int currentStateIndex = _model.GetHistoryLength() - 1;
         int previousStateIndex = currentStateIndex - 1;

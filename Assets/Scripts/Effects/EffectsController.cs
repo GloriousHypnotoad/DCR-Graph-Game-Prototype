@@ -11,6 +11,9 @@ public class EffectsController : MonoBehaviour
     private GameObject _firework;
     private GameObject _glitterBurst;
     private GameObject _godray;
+    private ParticleSystem _particleSystem;
+    private ParticleSystem.EmissionModule _emissionModule;
+    private float _initialEmissionRate;
 
     void Awake()
     {
@@ -20,6 +23,9 @@ public class EffectsController : MonoBehaviour
         _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
         _godray = transform.Find(FileStrings.GodRay).gameObject;
+        _particleSystem =_glitter.GetComponent<ParticleSystem>();
+        _emissionModule = _particleSystem.emission;
+        _initialEmissionRate = _emissionModule.rateOverTime.constant;
     }
 
     public void ChangehGlitterColor(Color color)
@@ -37,6 +43,12 @@ public class EffectsController : MonoBehaviour
     public void ToggleGlitter(bool isActive)
     {
         _glitter.SetActive(isActive);
+    }
+
+    public void ChangeGlitterColor(Color color)
+    {
+        var mainModule = _glitter.GetComponent<ParticleSystem>().main;
+        mainModule.startColor = color;
     }
 
     internal void ChangeSceneryLightColor(Color color)
@@ -70,5 +82,20 @@ public class EffectsController : MonoBehaviour
         {
             godRay.toggleActive(isActive);
         }
+    }
+
+    internal void SetGlitterRate(float v)
+    {
+        _emissionModule.rateOverTime = v;
+    }
+
+    internal void ResetGlitterRate()
+    {
+        _emissionModule.rateOverTime = _initialEmissionRate;
+    }
+
+    internal void StartPushButtonColorCycle(HashSet<Color> colors)
+    {
+        _glitter.GetComponent<ColorCycler>().StartCycle(colors);
     }
 }

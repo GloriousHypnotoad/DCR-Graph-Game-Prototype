@@ -17,10 +17,11 @@ public class ViewActivity : MonoBehaviour
     private ProximityDetector _proximityDetector;
     private SceneryController _sceneryController;
     private ActivityDetectionTrigger _activityDetectionTrigger;
-
     private event Action<ViewActivity> _activityMouseOver;
     private event Action<ViewActivity> _activityMouseExit;
     private event Action<ViewActivity> _onExecuted;
+    private event Action<ViewActivity> _pressButtonRefused;
+    private HashSet<Color> _disabledColors;
 
     void Awake()
     {
@@ -48,43 +49,46 @@ public class ViewActivity : MonoBehaviour
         Color = color;
     }
 
+    // Public methods to set the visual state of the Activity
+    internal void SetExecuted(bool isExecuted){
+
+        // Toggle Glitter off
+        _effectsController.ToggleGlitter(!isExecuted);
+        _effectsController.ToggleSceneryLight(isExecuted);       
+        
+        // Toggle animated elements on/off
+        _sceneryController.ToggleAnimatedElements(isExecuted);
+
+    }
+
     internal void SetPending(bool isPending)
     {
-        // Toggle lights and effects on the activity scene
-        _effectsController.ToggleSceneryLight(isPending);
-        _effectsController.ChangeSceneryLightColor(Color);
-        _effectsController.TogglePulseOnSceneryLight(isPending);
+        if(isPending){
+            _effectsController.ToggleSceneryLight(true);
+            _effectsController.ChangeSceneryLightColor(Color);
+            _effectsController.TogglePulseOnSceneryLight(isPending);
+        }
+        else {
+            _effectsController.ToggleSceneryLight(false);
+        }
     }
-
-    /*
-    internal void SetDisabled(bool isDisabled)
-    {
-        // Toggle effects
-        _effectsController.ToggleFog(isDisabled);
-        _buttonController.ToggleRotation(!isDisabled);
-
-        // Set class variable
-        Disabled = isDisabled;
-    }
-    */
 
     internal void SetDisabled(HashSet<Color> colors)
     {
-        foreach (Color color in colors)
-        {
-            Debug.Log(color.ToString());
-        }
+        _disabledColors = colors;
+
         bool isDisabled = false;
-        if (colors.Count != 0){
+        
+        if (_disabledColors.Count != 0){
             isDisabled = true;
-            if (colors.Count == 1)
+            if (_disabledColors.Count == 1)
             {
-                _buttonController.SetPushButtonColor(colors.First());
                 _buttonController.StopPushButtonColorCycle();
+                _buttonController.SetPushButtonColor(_disabledColors.First());
             }
             else
             {
-                _buttonController.StartPushButtonColorCycle(colors);
+                _buttonController.StartPushButtonColorCycle(_disabledColors);
             }
         }
         else
@@ -100,19 +104,6 @@ public class ViewActivity : MonoBehaviour
         Disabled = isDisabled;
     }
 
-    // Public methods to set the visual state of the Activity
-    internal void SetExecuted(bool isExecuted){
-
-        // Toggle Glitter off
-        _effectsController.ToggleGlitter(!isExecuted);
-        _effectsController.ToggleSceneryLight(isExecuted);
-        _effectsController.TogglePulseOnSceneryLight(!isExecuted);
-        
-        // Toggle animated elements on/off
-        _sceneryController.ToggleAnimatedElements(isExecuted);
-
-    }
-
     internal void SetIncluded(bool isIncluded)
     {
         // Set opacity to reflect inclusion.
@@ -125,7 +116,6 @@ public class ViewActivity : MonoBehaviour
             Disabled = true;
 
             _buttonController.ToggleRotation(false);
-            _sceneryController.SetOpaque(isIncluded);
         }
     }
     // Allow subscribtion to Activity mouse events
@@ -136,6 +126,10 @@ public class ViewActivity : MonoBehaviour
     internal void SubscribeToActivityMouseExit(Action<ViewActivity> subscriber)
     {
         _activityMouseExit += subscriber;
+    }
+    internal void SubscribeToPressButtonRefused(Action<ViewActivity> subscriber)
+    {
+        _pressButtonRefused += subscriber;
     }
 
     // Forwards configuration data to Proximity Detector.
@@ -168,6 +162,26 @@ public class ViewActivity : MonoBehaviour
         if(Disabled)
         {
             _buttonController.PressButtonRefuse();
+            _pressButtonRefused?.Invoke(this);
+            
+            if (_disabledColors.Count != 0){
+                if (_disabledColors.Count == 1)
+                {
+                    _buttonController.SetPushButtonColor(_disabledColors.First());
+                    _buttonController.StopPushButtonColorCycle();
+                }
+                else
+                {
+                    _buttonController.StartPushButtonColorCycle(_disabledColors);
+                }
+            }
+            else
+            {
+                _buttonController.SetPushButtonColor(Color.white);
+            }
+            _effectsController.ToggleGlitter(true);
+            _effectsController.SetGlitterRate(50f);
+            _effectsController.StartPushButtonColorCycle(_disabledColors);
         }
         else
         {
@@ -193,5 +207,18 @@ public class ViewActivity : MonoBehaviour
     internal void SetStateChanged()
     {
         _effectsController.ToggleGodray(true);
+    }
+
+    internal void Signal()
+    {
+        _effectsController.ToggleGlitter(true);
+        _effectsController.SetGlitterRate(50f);
+        _effectsController.ChangeGlitterColor(Color);
+    }
+
+    internal void ResetSignal()
+    {
+        _effectsController.ResetGlitterRate();
+        _effectsController.ChangeGlitterColor(Color.white);
     }
 }

@@ -17,7 +17,9 @@ public class View : MonoBehaviour
     private RawImage _topDownCamFeed;
     private Image _reticule;
     private event Action<string> _activityExecuted;
+    private event Action<string> _activityExecuteRefused;
     private Dictionary<string, GameObject> _activities = new Dictionary<string, GameObject>();
+    
 
     void Awake()
     {
@@ -104,6 +106,7 @@ public class View : MonoBehaviour
             activity.SubscribeToActivityMouseOver(OnActivityMouseOver);
             activity.SubscribeToActivityMouseExit(OnActivityMouseExit);
             activity.SubscribeToOnExecuted(OnActivityExecuted);
+            activity.SubscribeToPressButtonRefused(OnPressButtonRefused);
 
             // Configure proximity detector for player object.
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
@@ -148,9 +151,15 @@ public class View : MonoBehaviour
     }
     
     // Method for subscribing to Activity ID
-    public void SubscribeToActivityExecuted(Action<string> subscriber){
+    public void SubscribeToActivityExecuted(Action<string> subscriber)
+    {
         _activityExecuted+=subscriber;
     }
+
+    public void SubscribeToActivityExecuteRefused(Action<string> subscriber)
+    {
+        _activityExecuteRefused+=subscriber;
+    } 
 
     // Helper method for toggling cameras on/off
     internal void SetCamerasAreEnabled(bool[] isEnabled)
@@ -177,6 +186,12 @@ public class View : MonoBehaviour
 
         DisplayActivityText(label, description);
     }
+
+    private void OnPressButtonRefused(ViewActivity activity)
+    {
+        _activityExecuteRefused?.Invoke(activity.Id);
+    }
+
     internal void DisplayActivityText(string label, string description)
     {
         TextMeshProUGUI labelDisplay = GameObject.Find("HUD/LabelDisplay").GetComponentInChildren<TextMeshProUGUI>();
@@ -238,5 +253,18 @@ public class View : MonoBehaviour
         {
             Debug.Log(item);
         }
+    }
+
+    internal void SignalActivity(string activityId)
+    {
+        _activities[activityId].GetComponent<ViewActivity>().Signal();
+    }
+
+    internal void ClearSignals()
+    {
+        foreach (KeyValuePair<string, GameObject> kvp in _activities)
+        {
+            kvp.Value.GetComponent<ViewActivity>().ResetSignal();
+        };
     }
 }

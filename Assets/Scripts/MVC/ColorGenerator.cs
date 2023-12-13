@@ -6,21 +6,15 @@ public class ColorGenerator
     private List<Color> generatedColors = new List<Color>();
     private int runCounter = 0;
     private int alternationCounter = 0;
-    private float minColorDistance = 0.7f;
+    private float minColorDistance = 0.2f;
 
     public Dictionary<string, Color> GenerateColors(HashSet<string> activities)
     {
         Dictionary<string, Color> colorDictionary = new Dictionary<string, Color>();
         foreach (var id in activities)
         {
-            /*
-            Color newColor;
-            do
-            {
-                newColor = GenerateColor();
-            } while (!IsColorSufficientlyDistant(newColor));
-            */
             Color newColor = GenerateColor();
+            AdjustColor(ref newColor); // Adjust the color as per new conditions
 
             colorDictionary[id] = newColor;
             generatedColors.Add(newColor);
@@ -59,6 +53,23 @@ public class ColorGenerator
         return new Color(r, g, b);
     }
 
+    private void AdjustColor(ref Color color)
+    {
+        if (color.r == 1f && color.b == 0f) // R is 255 and B is 0
+            color.g = Mathf.Max(color.g, 128f / 255f);
+        if (color.r == 1f && color.g == 0f) // R is 255 and G is 0
+            color.b = Mathf.Max(color.b, 128f / 255f);
+        if (color.g == 1f && color.r == 0f) // G is 255 and R is 0
+            color.b = Mathf.Max(color.b, 128f / 255f);
+        if (color.g == 1f && color.b == 0f) // G is 255 and B is 0
+            color.r = Mathf.Max(color.r, 128f / 255f);
+        if (color.b == 1f && color.r == 0f) // B is 255 and R is 0
+            color.g = Mathf.Max(color.g, 128f / 255f);
+        if (color.b == 1f && color.g == 0f) // B is 255 and G is 0
+            color.r = Mathf.Max(color.r, 128f / 255f); 
+    }
+    // B is 255 and G is 0
+/*
     private bool IsColorSufficientlyDistant(Color color)
     {
         foreach (Color existingColor in generatedColors)
@@ -70,5 +81,5 @@ public class ColorGenerator
             }
         }
         return true;
-    }
+    }*/
 }
