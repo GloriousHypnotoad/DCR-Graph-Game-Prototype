@@ -29,12 +29,12 @@ public class Model : MonoBehaviour
     public Dictionary<string, HashSet<string>> Includes { get; private set; } = new Dictionary<string, HashSet<string>>();
     public Dictionary<string, HashSet<string>> Milestones { get; private set; } = new Dictionary<string, HashSet<string>>();
 
-    private List<ModelState> history = new List<ModelState>();
+    private List<ModelState> _history = new List<ModelState>();
     
     public void ParseXmlFile(string fileName)
     {
         // Read the XML file into a string
-        string xmlContent = File.ReadAllText(Path.Combine(Application.dataPath, "GameData", fileName));
+        string xmlContent = File.ReadAllText(Path.Combine(Application.dataPath, "GameData", $"{fileName}.xml"));
 
         // Load the XML content into an XmlDocument
         XmlDocument doc = new XmlDocument();
@@ -43,7 +43,7 @@ public class Model : MonoBehaviour
         // Convert the XML to JSON
         string jsonText = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
         // Define the path for the output file
-        string outputPath = Path.Combine(Application.persistentDataPath, $"{GameSettings.Scene[0]}.json");
+        string outputPath = Path.Combine(Application.persistentDataPath, $"{fileName}.json");
 
         // Save the JSON to a file
         File.WriteAllText(outputPath, jsonText);
@@ -55,7 +55,7 @@ public class Model : MonoBehaviour
         {
             Directory.CreateDirectory(resourcesFolderPath);
         }
-        string resourcesPath = Path.Combine(resourcesFolderPath, $"{GameSettings.Scene[0]}.json");
+        string resourcesPath = Path.Combine(resourcesFolderPath, $"{fileName}.json");
         File.WriteAllText(resourcesPath, jsonText);
         #endif
     }
@@ -283,8 +283,7 @@ public class Model : MonoBehaviour
         }
         
 
-        history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
-
+        _history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
     }
     public Dictionary<string, string> GetActivityLabels()
     {
@@ -349,6 +348,12 @@ public class Model : MonoBehaviour
     {
         return CloneDictionary(Includes);
     }
+
+    // Method overload to enable history update on refused executions.
+    public void ExecuteActivity()
+    {
+        _history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
+    }
     
     public void ExecuteActivity(string clickedActivityId)
     {
@@ -382,17 +387,28 @@ public class Model : MonoBehaviour
                 Included.Add(activity);
             }
         }
-        history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
+        _history.Add(new ModelState(GetExecuted(), GetIncluded(), GetPending()));
+
     }
 
     // Get specific state in history
     public ModelState GetStateAt(int index)
     {
-        return history[index];
+        return _history[index];
     }
     public int GetHistoryLength()
     {
-        return history.Count;
+        return _history.Count;
+    }
+    public void RevertHistoryBackTo(int revertPoint)
+    {
+        _history.RemoveRange(revertPoint + 1, _history.Count - revertPoint - 1);
+
+        var stateAtRevertPoint = _history[revertPoint];
+
+        Executed = new HashSet<string>(stateAtRevertPoint.Executed);
+        Included = new HashSet<string>(stateAtRevertPoint.Included);
+        Pending = new HashSet<string>(stateAtRevertPoint.Pending);
     }
 
     // Helper methods

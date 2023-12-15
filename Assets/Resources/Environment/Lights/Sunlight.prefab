@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5558126960664576911
+--- !u!1 &8634137310710382717
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5765104478152554499}
-  - component: {fileID: 4562121582667261557}
+  - component: {fileID: 3375520465305325680}
+  - component: {fileID: 8465540223673746736}
   m_Layer: 0
   m_Name: Sunlight
   m_TagString: Untagged
@@ -17,34 +17,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5765104478152554499
+--- !u!4 &3375520465305325680
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5558126960664576911}
+  m_GameObject: {fileID: 8634137310710382717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.39999744, y: -0.4308047, z: 0.26657653, w: -0.7637712}
-  m_LocalPosition: {x: 27.574734, y: 22.572977, z: -93.45868}
+  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: 20.7, y: 21.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 122.785995, y: 595.229, z: 173.365}
---- !u!108 &4562121582667261557
+  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
+--- !u!108 &8465540223673746736
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5558126960664576911}
+  m_GameObject: {fileID: 8634137310710382717}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9774894, g: 1, b: 0.4198113, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

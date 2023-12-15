@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5000169563437391235}
   - component: {fileID: 5786884037411526200}
   - component: {fileID: 5374775310903893695}
+  - component: {fileID: 4480924867753142038}
   m_Layer: 0
   m_Name: Glitter
   m_TagString: Untagged
@@ -4830,3 +4831,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4480924867753142038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943633900491303917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b46ceac82105a4dbab62965182fa71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

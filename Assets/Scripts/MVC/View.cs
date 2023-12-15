@@ -19,7 +19,7 @@ public class View : MonoBehaviour
     private event Action<string> _activityExecuted;
     private event Action<string> _activityExecuteRefused;
     private Dictionary<string, GameObject> _activities = new Dictionary<string, GameObject>();
-    
+    private event Action<bool> _activitySimulationIsExecuting;
 
     void Awake()
     {
@@ -42,9 +42,6 @@ public class View : MonoBehaviour
         _topDownCamera.SetCameraMode(CameraMode.TopDown);
         _birdsEyeCamera.SetCameraMode(CameraMode.BirdsEye);
 
-        // Initally set player controls for first person
-        _playerObjectController.SetCameraMode(CameraMode.FirstPerson);
-
         // Enable first person camera
         SetCamerasAreEnabled(new bool[]{true, false, true, false});
     }
@@ -64,21 +61,21 @@ public class View : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             SetCamerasAreEnabled(new bool[]{true, false, true, false});
-            _playerObjectController.SetCameraMode(CameraMode.FirstPerson);
+            GameSettings.ActiveCamera = CameraMode.FirstPerson;
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, true, true, false});
-            _playerObjectController.SetCameraMode(CameraMode.ThirdPerson);
+            GameSettings.ActiveCamera = CameraMode.ThirdPerson;
         }
         else if (Input.GetKeyDown(KeyCode.F3))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, false, false, true});
-            _playerObjectController.SetCameraMode(CameraMode.BirdsEye);
+            GameSettings.ActiveCamera = CameraMode.BirdsEye;
         }
         else if (Input.GetKeyDown(KeyCode.F4))
         {
@@ -94,6 +91,8 @@ public class View : MonoBehaviour
     {
         foreach (KeyValuePair<string, string> kvp in idsAndLabels)
         {
+            try
+            {
             // Get pre-configured activity object from game space
             GameObject activtyObject = transform.Find("ViewActivityContainer").Find(kvp.Value).gameObject;
             ViewActivity activity = activtyObject.GetComponent<ViewActivity>();
@@ -107,10 +106,23 @@ public class View : MonoBehaviour
             activity.SubscribeToActivityMouseExit(OnActivityMouseExit);
             activity.SubscribeToOnExecuted(OnActivityExecuted);
             activity.SubscribeToPressButtonRefused(OnPressButtonRefused);
+            activity.SubscribeToSimulatedExecution(OnSimulatedExecution);
 
             // Configure proximity detector for player object.
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
+                
+            }
+            catch (System.Exception)
+            {
+                
+                Debug.Log(kvp.Value);
+            }
         }
+    }
+
+    private void OnSimulatedExecution(bool isExecuting)
+    {
+        _activitySimulationIsExecuting?.Invoke(isExecuting);
     }
 
     // Methods for passing state data to Activities
@@ -139,14 +151,30 @@ public class View : MonoBehaviour
     // Method for updating the global lighting when activities are pending or milestones are unmet
     public void UpdateGlobalEnvironment(bool hasPendingActivities)
     {
-        string skyBoxesPath = FileStrings.SkyBoxesPath;
-        string environmentLightsPath = FileStrings.EnvironmentLightsPath;
+        string activeLight;
+        string deactiveLight;
+
+        if (hasPendingActivities)
+        {
+            activeLight = FileStrings.Moonlight;
+            deactiveLight = FileStrings.Sunlight;
+        }
+        else
+        {
+            activeLight = FileStrings.Sunlight;
+            deactiveLight = FileStrings.Moonlight;
+        }
             
-        string skybox = hasPendingActivities ? Path.Combine(skyBoxesPath, FileStrings.SkyBoxPendingName) : Path.Combine(skyBoxesPath, FileStrings.SkyBoxAllClearName);
-        string sun = hasPendingActivities ? Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsPendingName) : Path.Combine(environmentLightsPath, FileStrings.EnvironmentLightsAllClearName);
+        string skybox = hasPendingActivities ? Path.Combine(FileStrings.SkyBoxesPath, FileStrings.SkyBoxDaytime) : Path.Combine(FileStrings.SkyBoxesPath, FileStrings.SkyBoxNighttime);
+        string lightPath = Path.Combine(FileStrings.EnvironmentLightsPath, activeLight);
         
         RenderSettings.skybox = Resources.Load<Material>(skybox);
-        RenderSettings.sun = Resources.Load<Light>(sun);
+        RenderSettings.sun = Resources.Load<Light>(lightPath);
+        RenderSettings.reflectionIntensity = 0;
+        
+        transform.Find(activeLight).gameObject.SetActive(true);
+        transform.Find(deactiveLight).gameObject.SetActive(false);
+
         DynamicGI.UpdateEnvironment(); 
     }
     
@@ -160,6 +188,11 @@ public class View : MonoBehaviour
     {
         _activityExecuteRefused+=subscriber;
     } 
+
+    public void SubscribeToActivitySimulationIsExecuting(Action<bool> subscriber)
+    {
+        _activitySimulationIsExecuting += subscriber;
+    }
 
     // Helper method for toggling cameras on/off
     internal void SetCamerasAreEnabled(bool[] isEnabled)

@@ -1,4 +1,4 @@
-static class GameSettings
+public static class GameSettings
 {
-    public static string[] Scene = new string[]{"Abstract", "DCR", "Office", "OfficeAbstract"};
+    public static CameraMode ActiveCamera { get; internal set; }
 }

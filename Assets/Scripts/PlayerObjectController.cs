@@ -10,13 +10,6 @@ public class PlayerObjectController : MonoBehaviour
 
     private Vector3 moveDirection;
     private CharacterController controller;
-    private CameraMode _currentMode;
-
-
-        public void SetCameraMode(CameraMode mode)
-    {
-        _currentMode = mode;
-    }
 
     void Start()
     {
@@ -30,7 +23,7 @@ public class PlayerObjectController : MonoBehaviour
 
     void Update()
     {
-        switch (_currentMode)
+        switch (GameSettings.ActiveCamera)
         {
             case CameraMode.FirstPerson:
                 HandleFirstPersonInput();

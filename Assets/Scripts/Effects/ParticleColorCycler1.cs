@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ColorCycler : MonoBehaviour
+
+public class ParticleColorCycler : MonoBehaviour
 {
     private HashSet<Color> _colors;
-    private Material _material;
+    private ParticleSystem _particleSystem;
     private float _waitTime = 1f;
     private Coroutine _colorCycleCoroutine;
     private bool _isCycling = true;
 
     void Awake()
     {
-        // Get the Renderer component and its material
-        _material = GetComponent<Renderer>().material;
+        // Get the ParticleSystem component
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
     public void StartCycle(HashSet<Color> colors)
@@ -28,22 +29,14 @@ public class ColorCycler : MonoBehaviour
         {
             foreach (var color in _colors)
             {
-                // Set material color
-                _material.color = color;
-
-                // Enable emission and set emission color
-                _material.EnableKeyword("_EMISSION");
-                _material.SetColor("_EmissionColor", color);
+                // Change Particle System's start color
+                var mainModule = _particleSystem.main;
+                mainModule.startColor = color;
 
                 // Wait for the specified time
                 yield return new WaitForSeconds(_waitTime);
             }
         }
-    }
-
-    public bool IsRunning()
-    {
-        return _isCycling;
     }
 
     public void StopCycle()

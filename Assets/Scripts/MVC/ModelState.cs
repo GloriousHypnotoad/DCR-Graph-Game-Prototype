@@ -12,4 +12,16 @@ public class ModelState
         Included = new HashSet<string>(included);
         Pending = new HashSet<string>(pending);
     }
+    public HashSet<string> GetExecuted()
+    {
+        return Executed;
+    }
+    public HashSet<string> GetIncluded()
+    {
+        return Included;
+    }
+    public HashSet<string> GetPending()
+    {
+        return Pending;
+    }
 }

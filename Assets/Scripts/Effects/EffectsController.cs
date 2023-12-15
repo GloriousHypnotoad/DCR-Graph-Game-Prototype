@@ -8,7 +8,6 @@ public class EffectsController : MonoBehaviour
     private GameObject _fog;
     private GameObject _glitter;
     private GameObject _sceneryLight;
-    private GameObject _firework;
     private GameObject _glitterBurst;
     private GameObject _godray;
     private ParticleSystem _particleSystem;
@@ -20,19 +19,11 @@ public class EffectsController : MonoBehaviour
         _fog = transform.Find(FileStrings.Fog).gameObject;
         _glitter = transform.Find(FileStrings.Glitter).gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
-        _firework = transform.Find(FileStrings.Firework).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
         _godray = transform.Find(FileStrings.GodRay).gameObject;
         _particleSystem =_glitter.GetComponent<ParticleSystem>();
         _emissionModule = _particleSystem.emission;
         _initialEmissionRate = _emissionModule.rateOverTime.constant;
-    }
-
-    public void ChangehGlitterColor(Color color)
-    {
-        ParticleSystem ps = _glitter.GetComponent<ParticleSystem>();
-        ParticleSystem.MainModule mainModule = ps.main;
-        mainModule.startColor = color;
     }
 
     public void ToggleFog(bool isActive)
@@ -47,7 +38,8 @@ public class EffectsController : MonoBehaviour
 
     public void ChangeGlitterColor(Color color)
     {
-        var mainModule = _glitter.GetComponent<ParticleSystem>().main;
+        ParticleSystem ps = _glitter.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule mainModule = ps.main;
         mainModule.startColor = color;
     }
 
@@ -59,10 +51,6 @@ public class EffectsController : MonoBehaviour
     public void ToggleSceneryLight(bool isPending)
     {
         _sceneryLight.SetActive(isPending);
-    }
-    public void LauchFirework()
-    {
-        _firework.GetComponent<Firework>().LaunchOne();
     }
 
     public void GlitterBurst(float duration)
@@ -94,8 +82,13 @@ public class EffectsController : MonoBehaviour
         _emissionModule.rateOverTime = _initialEmissionRate;
     }
 
-    internal void StartPushButtonColorCycle(HashSet<Color> colors)
+    internal void StartGlitterColorCycle(HashSet<Color> colors)
     {
-        _glitter.GetComponent<ColorCycler>().StartCycle(colors);
+        _glitter.GetComponent<ParticleColorCycler>().StartCycle(colors);
+    }
+
+    internal void StopGlitterColorCycle()
+    {
+        _glitter.GetComponent<ParticleColorCycler>().StopCycle();
     }
 }

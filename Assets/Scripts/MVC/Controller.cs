@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Controller : MonoBehaviour
     private ColorGenerator _colorGenerator;
     private Dictionary<string, Color> _activityColors;
     private Dictionary<string, HashSet<string>> _activitiesWithActiveConditionsAndOrMilestones;
+    private string _sceneName;
     
 
     private
@@ -23,12 +25,14 @@ public class Controller : MonoBehaviour
         _view = GetComponentInChildren<View>();
         _model = transform.Find("Model").gameObject.GetComponent<Model>();
         _colorGenerator = new ColorGenerator();
+        _sceneName = SceneManager.GetActiveScene().name;
+
     }
 
     void Start()
     {
         //Run(Path.Combine(Application.dataPath, FileStrings.GameDataPath, $"{FileStrings.GetActiveSceneName()}{FileStrings.GraphFileExtension}"));
-        Run($"{GameSettings.Scene[0]}.xml");
+        Run($"{_sceneName}");
     }
     
     public void Run(string selectedGraphName)
@@ -36,11 +40,12 @@ public class Controller : MonoBehaviour
         // Listen for executed events from the view
         _view.SubscribeToActivityExecuted(OnActivityExecuted);
         _view.SubscribeToActivityExecuteRefused(OnExecuteRefused);
+        _view.SubscribeToActivitySimulationIsExecuting(OnActivitySimulationIsExecuting);
 
 
         // Parse graph XML file -> JSON -> Local data structures.
         _model.ParseXmlFile(selectedGraphName);
-        _model.ProcessJsonFile($"{GameSettings.Scene[0]}.json");
+        _model.ProcessJsonFile($"{_sceneName}.json");
 
         _activityColors = GenerateColorsHelper();
 
@@ -50,6 +55,16 @@ public class Controller : MonoBehaviour
         // Once created call private method to set Activity states to initial values.
         UpdateView();
         
+    }
+
+    private void OnActivitySimulationIsExecuting(bool isExecuting)
+    {
+        if(!isExecuting)
+        {
+            int simulatedHistoryLength = _model.GetHistoryLength();
+            _model.RevertHistoryBackTo(simulatedHistoryLength-2);
+            UpdateView();
+        }
     }
 
     private Dictionary<string, Color> GenerateColorsHelper(){
@@ -102,8 +117,10 @@ public class Controller : MonoBehaviour
 
     private void OnExecuteRefused(string activityId)
     {
-        _view.ClearSignals();
+        _model.ExecuteActivity();
+
         UpdateView();
+
         foreach (string activity in _activitiesWithActiveConditionsAndOrMilestones[activityId])
         {
             _view.SignalActivity(activity);
@@ -113,6 +130,7 @@ public class Controller : MonoBehaviour
     // Gets data from the Model, process and forward to the View for rendering.
     private void UpdateView()
     {
+        Debug.Log($"History length is now {_model.GetHistoryLength()}");
         HashSet<string> activities = _model.GetActivityIds();
         HashSet<string> included = _model.GetIncluded();
         HashSet<string> executed = _model.GetExecuted();
@@ -139,18 +157,27 @@ public class Controller : MonoBehaviour
             _view.SetActivityIncluded(activityId, included.Contains(activityId));
         }
 
-        bool unMetPending = false;
+        /*
+        bool unMetMilestones = false;
         foreach (KeyValuePair<string, HashSet<string>> kvp in _model.GetMilestones())
         {
             if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
             {
-                unMetPending = true;
+                foreach (string value in kvp.Value)
+                {
+                    Debug.Log($"{value} has unmet milestone {kvp.Key}");
+                }
+                
+                unMetMilestones = true;
                 break;
             }            
         }
 
-        _view.UpdateGlobalEnvironment(unMetPending);
-    
+        _view.UpdateGlobalEnvironment(unMetMilestones);
+        */
+
+        _view.UpdateGlobalEnvironment(pending.Count() > 0);
+
         int currentStateIndex = _model.GetHistoryLength() - 1;
         int previousStateIndex = currentStateIndex - 1;
         
@@ -171,7 +198,7 @@ public class Controller : MonoBehaviour
 
             var removedFromDisabledOrMilestones = previousStateHasActiveConditionsAndOrMilestones.Except(currentStateHasActiveConditionsAndOrMilestones).ToList();
             var addedToDisabledOrMilestones = currentStateHasActiveConditionsAndOrMilestones.Except(previousStateHasActiveConditionsAndOrMilestones).ToList();
-
+/*
             // Pass these lists to the view
             UpdateDeltaLists(addedToIncluded, removedFromIncluded, addedToPending, removedFromDisabledOrMilestones, addedToDisabledOrMilestones);
 
@@ -185,7 +212,7 @@ public class Controller : MonoBehaviour
                     }
                 }
             }
-        }
+*/        }
     }
 
     private Dictionary<string, HashSet<string>> CalculateActivitiesWithActiveConditionsAndOrMilestones(HashSet<string> included, HashSet<string> executed, HashSet<string> pending, Dictionary<string, HashSet<string>> dictionary)

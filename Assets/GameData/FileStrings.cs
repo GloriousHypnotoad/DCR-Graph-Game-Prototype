@@ -17,10 +17,10 @@ static class FileStrings
     // ENVIRONMENT
     public static string SkyBoxesPath = "Environment/Skyboxes";
     public static string EnvironmentLightsPath = "Environment/Lights";
-    public static string SkyBoxAllClearName = "Daytime";
-    public static string SkyBoxPendingName = "Nighttime";
-    public static string EnvironmentLightsAllClearName = "Sunlight";
-    public static string EnvironmentLightsPendingName = "Moonlight";
+    public static string SkyBoxNighttime = "Daytime";
+    public static string SkyBoxDaytime = "Nighttime";
+    public static string Moonlight = "Moonlight";
+    public static string Sunlight = "Sunlight";
 
     // BUTTON CONTROLLER
     public static string ButtonOpaque = "ButtonOpaque";

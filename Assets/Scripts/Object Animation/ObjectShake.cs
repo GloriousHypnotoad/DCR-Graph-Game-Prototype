@@ -4,8 +4,8 @@ using System.Collections;
 public class ObjectShake : MonoBehaviour
 {
     // Duration and intensity of shake
-    public float shakeDuration = 0.5f;
-    public float shakeIntensity = 0.1f;
+    private float _shakeDuration = 0.5f;
+    private float _shakeIntensity = 0.5f;
 
     private Vector3 originalPosition;
     private bool isShaking = false;
@@ -21,13 +21,13 @@ public class ObjectShake : MonoBehaviour
     IEnumerator Shake()
     {
         isShaking = true;
-        float endTime = Time.time + shakeDuration;
+        float endTime = Time.time + _shakeDuration;
 
         while (Time.time < endTime)
         {
-            float x = Random.Range(-shakeIntensity, shakeIntensity) + originalPosition.x;
-            float y = Random.Range(-shakeIntensity, shakeIntensity) + originalPosition.y;
-            float z = Random.Range(-shakeIntensity, shakeIntensity) + originalPosition.z;
+            float x = Random.Range(-_shakeIntensity, _shakeIntensity) + originalPosition.x;
+            float y = Random.Range(-_shakeIntensity, _shakeIntensity) + originalPosition.y;
+            float z = Random.Range(-_shakeIntensity, _shakeIntensity) + originalPosition.z;
 
             transform.position = new Vector3(x, y, z);
             yield return null;

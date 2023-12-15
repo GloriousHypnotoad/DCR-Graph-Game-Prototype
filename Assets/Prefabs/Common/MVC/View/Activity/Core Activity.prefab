@@ -38,7 +38,6 @@ Transform:
   - {fileID: 1678956744566175994}
   - {fileID: 2863320394319213632}
   - {fileID: 1387658674296884526}
-  - {fileID: 1210629335547346055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &997001025796956278
@@ -82,11 +81,11 @@ Transform:
   m_GameObject: {fileID: 5946404851136402071}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -2}
-  m_LocalScale: {x: 15, y: 2, z: 16}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8067672033229793234}
+  m_Father: {fileID: 2952905882113147475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1689824243749027809
 MeshFilter:
@@ -232,7 +231,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1afdb37e917f5bd4d8858ffb902330bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -316,7 +315,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1afdb37e917f5bd4d8858ffb902330bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -368,22 +367,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8067672033229793234}
     m_Modifications:
-    - target: {fileID: 1206827075929236038, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206827075929236038, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206827075929236038, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300160617788663512, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.14
-      objectReference: {fileID: 0}
     - target: {fileID: 2803298534827161207, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -424,10 +407,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5536706691111971301, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      propertyPath: m_Name
-      value: GodRay
-      objectReference: {fileID: 0}
     - target: {fileID: 7090382752858353287, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
       propertyPath: m_Name
       value: EffectsContainer
@@ -435,28 +414,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2354283873719541651, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8623046736596669421}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
---- !u!1 &2353084977102565492 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2354283873719541651, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
-  m_PrefabInstance: {fileID: 3323705069039591}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8623046736596669421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2353084977102565492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a24b77847760f4fb6802ff96eeaf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2804792376470837648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2803298534827161207, guid: 6e71897029428dd4e82e6761a83d30ab, type: 3}
@@ -524,7 +483,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3582986999363806558, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1210629335547346055}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6957ac01e013a9d4d9faf1d34a16a07c, type: 3}
 --- !u!4 &2952905882113147475 stripped

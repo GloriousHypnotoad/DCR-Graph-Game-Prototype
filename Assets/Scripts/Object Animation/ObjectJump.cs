@@ -1,11 +1,12 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class ObjectJump : MonoBehaviour, IAnimatable
 {
-    private float _jumpHeight = 20f;
-    private float _jumpDuration = 2f;
+    private float _jumpHeight = 1f;
+    private float _jumpDuration = 1f;
     private float _waitTime = 2f;
     private Vector3 startPosition;
     private Coroutine jumpCoroutine;

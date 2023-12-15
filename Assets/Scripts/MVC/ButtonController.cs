@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,6 +14,7 @@ public class ButtonController : MonoBehaviour
     private GameObject _buttonOpaque;
     private GameObject _buttonTransparent;
     private GameObject _buttonOpaquePushButton;
+    private GameObject _buttonTransparentPushButton;
     private ObjectShake _objectShake;
 
     void Awake()
@@ -23,6 +25,7 @@ public class ButtonController : MonoBehaviour
         _buttonOpaque = transform.Find(FileStrings.ButtonOpaque).gameObject;
         _buttonTransparent = transform.Find(FileStrings.ButtonTransparent).gameObject;
         _buttonOpaquePushButton = transform.Find(FileStrings.ButtonOpaquePushButton).gameObject;
+        _buttonTransparentPushButton = transform.Find(FileStrings.ButtonTransparentPushButton).gameObject;
     }
     void Start()
     {
@@ -72,21 +75,41 @@ public class ButtonController : MonoBehaviour
     internal void StartPushButtonColorCycle(HashSet<Color> colors)
     {
         _buttonOpaquePushButton.GetComponent<ColorCycler>().StartCycle(colors);
+
+        if (colors.First() != Color.white)
+        {
+            _buttonTransparentPushButton.GetComponent<ColorCycler>().StartCycle(colors);
+        }
+        
     }
 
     internal void SetPushButtonColor(Color color)
     {
-        Material material = _buttonOpaquePushButton.GetComponent<Renderer>().material;
-        
-        material.color = color;
-        
-        material.EnableKeyword("_EMISSION");
-        material.SetColor("_EmissionColor", color);
+        if (color != Color.white)
+        {
+            Material materialTransparent = _buttonTransparentPushButton.GetComponent<Renderer>().material;
+            materialTransparent.color = color;
+            materialTransparent.EnableKeyword("_EMISSION");
+            materialTransparent.SetColor("_EmissionColor", color);
+        }
+
+        Material materialOpaque = _buttonOpaquePushButton.GetComponent<Renderer>().material;
+        materialOpaque.color = color;
+        materialOpaque.EnableKeyword("_EMISSION");
+        materialOpaque.SetColor("_EmissionColor", color);
     }
 
     internal void StopPushButtonColorCycle()
     {
-        _buttonOpaquePushButton.GetComponent<ColorCycler>().StopCycle();
+        if(_buttonOpaquePushButton.GetComponent<ColorCycler>().IsRunning())
+        {
+            _buttonOpaquePushButton.GetComponent<ColorCycler>().StopCycle();
+        }
+
+        if(_buttonTransparentPushButton.GetComponent<ColorCycler>().IsRunning())
+        {
+            _buttonTransparentPushButton.GetComponent<ColorCycler>().StopCycle();
+        }
     }
     /*
 
