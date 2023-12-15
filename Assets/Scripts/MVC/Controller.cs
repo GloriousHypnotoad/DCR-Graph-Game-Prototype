@@ -130,7 +130,6 @@ public class Controller : MonoBehaviour
     // Gets data from the Model, process and forward to the View for rendering.
     private void UpdateView()
     {
-        Debug.Log($"History length is now {_model.GetHistoryLength()}");
         HashSet<string> activities = _model.GetActivityIds();
         HashSet<string> included = _model.GetIncluded();
         HashSet<string> executed = _model.GetExecuted();

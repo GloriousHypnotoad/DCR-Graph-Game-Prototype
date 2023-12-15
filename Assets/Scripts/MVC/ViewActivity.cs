@@ -11,6 +11,7 @@ public class ViewActivity : MonoBehaviour
     public string Description { get; private set; }
     public Color Color { get; private set; }
     public bool Disabled { get; private set; }
+    private Color _buttonColor;
     
     private ButtonController _buttonController;
     private EffectsController _effectsController;
@@ -79,6 +80,7 @@ public class ViewActivity : MonoBehaviour
         Label = label;
         Description = description;
         Color = color;
+        _buttonColor = color;
     }
 
     // Public methods to set the visual state of the Activity
@@ -87,7 +89,8 @@ public class ViewActivity : MonoBehaviour
         // Toggle Glitter off
         if(isExecuted)
         {
-            _buttonController.SetPushButtonColor(Color.green);
+            _buttonColor = Color.green;
+            _buttonController.SetPushButtonColor(_buttonColor);
             _effectsController.ChangeGlitterColor(Color.white);
         }
 
@@ -130,7 +133,7 @@ public class ViewActivity : MonoBehaviour
         }
         else
         {
-            _buttonController.SetPushButtonColor(Color);
+            _buttonController.SetPushButtonColor(_buttonColor);
         }
 
         // Toggle effects
