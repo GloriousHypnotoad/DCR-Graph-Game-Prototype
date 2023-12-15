@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     private float _xRotation = 0f;
     private float _thirdPersonZoomSpeend = 4f;
     private float _birdsEyeZoomSpeend = 40f;
-    private float _birdsEyeMovementSpeend = 10f;
+    private float _birdsEyeMovementSpeend = 40f;
     private float sprintMultiplier = 2f;
 
     public void SetCameraMode(CameraMode mode)

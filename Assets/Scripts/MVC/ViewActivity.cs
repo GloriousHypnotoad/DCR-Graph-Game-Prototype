@@ -53,6 +53,7 @@ public class ViewActivity : MonoBehaviour
         {
             _cursorIsOneActivity = true;
             _simulatedExecution?.Invoke(true);
+            OnActivityMouseOver();
             OnActivityMouseDown();
         }
     }

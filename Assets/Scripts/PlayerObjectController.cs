@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerObjectController : MonoBehaviour
 {
 
-    public float moveSpeed = 10f;
-    public float sprintMultiplier = 2f;
-    public float fixedVerticalPosition = 1f;
+    private float moveSpeed = 15f;
+    private float sprintMultiplier = 2f;
+    private float fixedVerticalPosition = 1f;
 
     private Vector3 moveDirection;
     private CharacterController controller;
