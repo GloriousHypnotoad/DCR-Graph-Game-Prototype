@@ -16,6 +16,8 @@ public class Controller : MonoBehaviour
     private Dictionary<string, Color> _activityColors;
     private Dictionary<string, HashSet<string>> _activitiesWithActiveConditionsAndOrMilestones;
     private string _sceneName;
+    private AudioSource _audioSource;
+    private List<AudioClip> _soundEffects;
     
 
     private
@@ -26,6 +28,13 @@ public class Controller : MonoBehaviour
         _model = transform.Find("Model").gameObject.GetComponent<Model>();
         _colorGenerator = new ColorGenerator();
         _sceneName = SceneManager.GetActiveScene().name;
+        _audioSource = transform.GetComponent<AudioSource>();
+        _soundEffects = new List<AudioClip>();
+
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/bells"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/fence"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-short"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-long"));
 
     }
 
@@ -109,7 +118,17 @@ public class Controller : MonoBehaviour
     }
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
-    {       
+    {
+        Debug.Log(activityId);
+        if(activityId == "Activity8")
+        {
+            _audioSource.clip = _soundEffects[3];
+        }
+        else {
+            _audioSource.clip = _soundEffects[0];
+        }
+        _audioSource.Play();
+
         _model.ExecuteActivity(activityId);
 
         UpdateView();
@@ -117,6 +136,11 @@ public class Controller : MonoBehaviour
 
     private void OnExecuteRefused(string activityId)
     {
+        
+        _audioSource.clip = _soundEffects[1];
+
+        _audioSource.Play();
+
         _model.ExecuteActivity();
 
         UpdateView();

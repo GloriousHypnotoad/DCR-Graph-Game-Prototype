@@ -91,6 +91,7 @@ public class View : MonoBehaviour
     {
         foreach (KeyValuePair<string, string> kvp in idsAndLabels)
         {
+            Debug.Log($"{kvp.Key}: {kvp.Value}");
             try
             {
             // Get pre-configured activity object from game space
@@ -126,7 +127,8 @@ public class View : MonoBehaviour
     }
 
     // Methods for passing state data to Activities
-    public void SetActivityExecuted(string activityId, bool isExecuted){
+    public void SetActivityExecuted(string activityId, bool isExecuted)
+    {
         _activities[activityId].GetComponent<ViewActivity>().SetExecuted(isExecuted);
     }
     public void SetActivityPending(string activityId, bool isPending){

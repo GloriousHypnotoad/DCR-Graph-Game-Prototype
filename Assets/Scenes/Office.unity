@@ -34501,7 +34501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893131173938941264, guid: a776c11453c0ad24980036ad8344a518, type: 3}
       propertyPath: m_Name
-      value: Tag imod sygemelding
+      value: Noter sygemelding
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67491,6 +67491,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250647256232731103, guid: aca9d98e594c2b74f9df5813c6660c37, type: 3}
+      propertyPath: m_Intensity
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1485053852703377683, guid: aca9d98e594c2b74f9df5813c6660c37, type: 3}
       propertyPath: m_LocalPosition.y
       value: 100
