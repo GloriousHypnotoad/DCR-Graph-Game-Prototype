@@ -86,7 +86,7 @@ public class ViewActivity : MonoBehaviour
     // Public methods to set the visual state of the Activity
     internal void SetExecuted(bool isExecuted){
 
-        // Toggle Glitter off
+        // Toggle Glitter
         if(isExecuted)
         {
             _buttonColor = Color.green;
@@ -105,9 +105,9 @@ public class ViewActivity : MonoBehaviour
     internal void SetPending(bool isPending)
     {
         _effectsController.ToggleSceneryLight(isPending);
-        _effectsController.ToggleGlitter(isPending);
         
         if(isPending){
+        _effectsController.ToggleGlitter(true);
             _effectsController.ChangeSceneryLightColor(Color);
             _effectsController.TogglePulseOnSceneryLight(true);
         }   
