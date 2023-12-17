@@ -30,6 +30,10 @@ static class FileStrings
     public static string SceneryOpaque = "SceneryOpaque";
     public static string SceneryTransparent = "SceneryTransparent";
 
+    // CONSTRAINTS OBJECT
+    public static string Lock = "Lock";
+    public static string Key = "Key";
+
     // EFFECTSCONTAINER
     public static string Glitter = "Glitter";
     public static string GlitterBurst = "GlitterBurst";

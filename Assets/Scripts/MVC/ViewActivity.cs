@@ -9,7 +9,7 @@ public class ViewActivity : MonoBehaviour
     public string Id { get; private set; }
     public string Label { get; private set; }
     public string Description { get; private set; }
-    public Color Color { get; private set; }
+    public Color ActivityColor { get; private set; }
     public bool Disabled { get; private set; }
     private Color _buttonColor;
     
@@ -17,6 +17,7 @@ public class ViewActivity : MonoBehaviour
     private EffectsController _effectsController;
     private ProximityDetector _proximityDetector;
     private SceneryController _sceneryController;
+    private ConstraintsController _constraintsController;
     private ActivityDetectionTrigger _activityDetectionTrigger;
     private event Action<ViewActivity> _activityMouseOver;
     private event Action<ViewActivity> _activityMouseExit;
@@ -33,6 +34,7 @@ public class ViewActivity : MonoBehaviour
         _effectsController = GetComponentInChildren<EffectsController>();
         _proximityDetector = GetComponentInChildren<ProximityDetector>();
         _sceneryController = GetComponentInChildren<SceneryController>();
+        _constraintsController = GetComponentInChildren<ConstraintsController>();
         _activityDetectionTrigger = GetComponentInChildren<ActivityDetectionTrigger>();
 
         // Subscribe to sub component events
@@ -74,13 +76,15 @@ public class ViewActivity : MonoBehaviour
     }
 
     // Initialize object with activity data from graph
-    internal void Initialize(string id, string label, string description, Color color)
+    internal void Initialize(string id, string label, string description, Color activityColor)
     {
         Id = id;
         Label = label;
         Description = description;
-        Color = color;
-        _buttonColor = color;
+        ActivityColor = activityColor;
+        _buttonColor = Color.white;
+        _constraintsController.ToggleKey(activityColor != Color.white);
+        _constraintsController.SetKeyColor(activityColor);
     }
 
     // Public methods to set the visual state of the Activity
@@ -95,7 +99,7 @@ public class ViewActivity : MonoBehaviour
         }
 
         _effectsController.ToggleGlitter(!isExecuted);
-        _effectsController.ToggleSceneryLight(isExecuted);       
+        //_effectsController.ToggleSceneryLight(isExecuted);       
         
         // Toggle animated elements on/off
         _sceneryController.ToggleAnimatedElements(isExecuted);
@@ -105,10 +109,11 @@ public class ViewActivity : MonoBehaviour
     internal void SetPending(bool isPending)
     {
         _effectsController.ToggleSceneryLight(isPending);
+        _effectsController.ToggleGlitter(isPending);
         
         if(isPending){
-        _effectsController.ToggleGlitter(true);
-            _effectsController.ChangeSceneryLightColor(Color);
+//            _effectsController.ToggleGlitter(true);
+            _effectsController.ChangeSceneryLightColor(ActivityColor);
             _effectsController.TogglePulseOnSceneryLight(true);
         }   
     }
@@ -118,22 +123,27 @@ public class ViewActivity : MonoBehaviour
         _disabledColors = colors;
 
         bool isDisabled = false;
-        
         if (_disabledColors.Count != 0){
+            _constraintsController.ToggleLock(true);
             isDisabled = true;
             if (_disabledColors.Count == 1)
             {
-                _buttonController.StopPushButtonColorCycle();
-                _buttonController.SetPushButtonColor(_disabledColors.First());
+                _constraintsController.StopLockColorCycle();
+                _constraintsController.SetLockColor(_disabledColors.First());
+
+                //_buttonController.StopPushButtonColorCycle();
+                //_buttonController.SetPushButtonColor(_disabledColors.First());
             }
             else
             {
-                _buttonController.StartPushButtonColorCycle(_disabledColors);
+                _constraintsController.StartLockColorCycle(_disabledColors);
+                //_buttonController.StartPushButtonColorCycle(_disabledColors);
             }
         }
         else
         {
-            _buttonController.SetPushButtonColor(_buttonColor);
+            _constraintsController.ToggleLock(false);
+            //_buttonController.SetPushButtonColor(_buttonColor);
         }
 
         // Toggle effects
@@ -259,7 +269,7 @@ public class ViewActivity : MonoBehaviour
         _effectsController.StopGlitterColorCycle();
         _effectsController.ToggleGlitter(true);
         _effectsController.SetGlitterRate(50f);
-        _effectsController.ChangeGlitterColor(Color);
+        _effectsController.ChangeGlitterColor(ActivityColor);
     }
 
     internal void ResetSignal()
