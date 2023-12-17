@@ -62592,6 +62592,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 5674911661165704133, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 5846766516533643246, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 6130836524103459854, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 6723764665592128944, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 6746664017122125605, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 7264157254272121586, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
     - target: {fileID: 7823153751584824569, guid: a776c11453c0ad24980036ad8344a518, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -62604,6 +62628,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8200502822173220944, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
+    - target: {fileID: 8797544812354816708, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
     - target: {fileID: 8893131173938941264, guid: a776c11453c0ad24980036ad8344a518, type: 3}
       propertyPath: m_Name
       value: Medarbejder melder sig syg
@@ -62612,6 +62644,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9161759020860607393, guid: a776c11453c0ad24980036ad8344a518, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4664510751d74394c9f80abb37128010, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -40,6 +40,7 @@ static class FileStrings
     public static string SceneryLight = "SceneryLight";
     public static string PulsatingLight = "PulsatingLight";
     public static string Fog = "Fog";
+    public static string DoorAndWalls = "DoorAndWalls";
     public static string Firework = "Firework";
     public static string GodRay = "GodRay";
 

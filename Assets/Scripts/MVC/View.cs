@@ -91,9 +91,6 @@ public class View : MonoBehaviour
     {
         foreach (KeyValuePair<string, string> kvp in idsAndLabels)
         {
-            Debug.Log($"{kvp.Key}: {kvp.Value}");
-            try
-            {
             // Get pre-configured activity object from game space
             GameObject activtyObject = transform.Find("ViewActivityContainer").Find(kvp.Value).gameObject;
             ViewActivity activity = activtyObject.GetComponent<ViewActivity>();
@@ -111,13 +108,6 @@ public class View : MonoBehaviour
 
             // Configure proximity detector for player object.
             activity.SetProximityDetectorTarget(transform.Find("PlayerObject/PlayerBody").gameObject.layer);
-                
-            }
-            catch (System.Exception)
-            {
-                
-                Debug.Log(kvp.Value);
-            }
         }
     }
 

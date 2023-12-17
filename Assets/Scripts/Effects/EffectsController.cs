@@ -6,6 +6,7 @@ using UnityEngine;
 public class EffectsController : MonoBehaviour
 {
     private GameObject _fog;
+    private GameObject _doorAndWalls;
     private GameObject _glitter;
     private GameObject _sceneryLight;
     private GameObject _glitterBurst;
@@ -17,6 +18,7 @@ public class EffectsController : MonoBehaviour
     void Awake()
     {
         _fog = transform.Find(FileStrings.Fog).gameObject;
+        _doorAndWalls = transform.Find(FileStrings.DoorAndWalls).gameObject;
         _glitter = transform.Find(FileStrings.Glitter).gameObject;
         _sceneryLight = transform.Find(FileStrings.SceneryLight).gameObject;
         _glitterBurst = transform.Find(FileStrings.GlitterBurst).gameObject;
@@ -29,6 +31,11 @@ public class EffectsController : MonoBehaviour
     public void ToggleFog(bool isActive)
     {
         _fog.SetActive(isActive);
+    }
+
+    internal void ToggleDoorAndWalls(bool isActive)
+    {
+        _doorAndWalls.SetActive(isActive);
     }
 
     public void ToggleGlitter(bool isActive)

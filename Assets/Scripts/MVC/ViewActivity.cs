@@ -26,6 +26,7 @@ public class ViewActivity : MonoBehaviour
     private event Action<bool> _simulatedExecution;
     private HashSet<Color> _disabledColors;
     private bool _cursorIsOneActivity;
+    private string _sceneName;
 
     void Awake()
     {
@@ -47,7 +48,15 @@ public class ViewActivity : MonoBehaviour
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseDown(OnActivitySimulatedMouseDown);
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseExit(OnActivitySimulatedMouseExit);
 
+
+
         _cursorIsOneActivity = false;
+    }
+
+    void Start()
+    {
+        _sceneName = GameSettings.SceneName;
+        Debug.Log(_sceneName);
     }
 
     private void OnActivitySimulatedMouseOver()
@@ -147,7 +156,21 @@ public class ViewActivity : MonoBehaviour
         }
 
         // Toggle effects
-        _effectsController.ToggleFog(isDisabled);
+        switch(_sceneName)
+        {
+            case "Rpg": 
+                _effectsController.ToggleFog(isDisabled);
+                _effectsController.ToggleDoorAndWalls(false);
+                break;
+            case "Office":
+                _effectsController.ToggleDoorAndWalls(isDisabled);
+                _effectsController.ToggleFog(false);
+                break;
+            default:
+                _effectsController.ToggleFog(isDisabled);
+                _effectsController.ToggleDoorAndWalls(false);
+                break;
+        }
         _buttonController.ToggleRotation(!isDisabled);
 
         // Set class variable

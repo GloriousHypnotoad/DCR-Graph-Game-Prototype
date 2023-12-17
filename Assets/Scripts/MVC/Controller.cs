@@ -24,10 +24,11 @@ public class Controller : MonoBehaviour
 
     void Awake()
     {
+        GameSettings.SceneName = SceneManager.GetActiveScene().name;
+        _sceneName = GameSettings.SceneName;
         _view = GetComponentInChildren<View>();
         _model = transform.Find("Model").gameObject.GetComponent<Model>();
         _colorGenerator = new ColorGenerator();
-        _sceneName = SceneManager.GetActiveScene().name;
         _audioSource = transform.GetComponent<AudioSource>();
         _soundEffects = new List<AudioClip>();
 
