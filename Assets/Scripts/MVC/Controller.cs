@@ -36,6 +36,15 @@ public class Controller : MonoBehaviour
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/fence"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-short"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-long"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/0. Call in sick"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/1. Register notification of sickness"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/2. Assign shiftplanner"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/3. Roster exceeds budget"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/4. Roster is within budget"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/5. Inform the manager"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/6. An employee works over-time"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/7. Call in replacement"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/8. Complete process"));
 
     }
 
@@ -121,12 +130,39 @@ public class Controller : MonoBehaviour
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
     {
-        if(activityId == "Activity8")
-        {
-            _audioSource.clip = _soundEffects[3];
+        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
+        {   
+            if(activityId == "Activity8")
+            {
+                _audioSource.clip = _soundEffects[3];
+            }
+            else {
+                _audioSource.clip = _soundEffects[0];
+            }
         }
-        else {
-            _audioSource.clip = _soundEffects[0];
+        else
+        {
+            switch(activityId)
+            {
+                case "Activity0": _audioSource.clip = _soundEffects[4];
+                break;
+                case "Activity1": _audioSource.clip = _soundEffects[5];
+                break;
+                case "Activity2": _audioSource.clip = _soundEffects[6];
+                break;
+                case "Activity3": _audioSource.clip = _soundEffects[7];
+                break;
+                case "Activity4": _audioSource.clip = _soundEffects[8];
+                break;
+                case "Activity5": _audioSource.clip = _soundEffects[9];
+                break;
+                case "Activity6": _audioSource.clip = _soundEffects[10];
+                break;
+                case "Activity7": _audioSource.clip = _soundEffects[11];
+                break;
+                case "Activity8": _audioSource.clip = _soundEffects[12];
+                break;
+            }
         }
         _audioSource.Play();
 
@@ -137,7 +173,35 @@ public class Controller : MonoBehaviour
     
     private void OnActivityExecuteRefused(string activityId)
     {
-        _audioSource.clip = _soundEffects[1];
+        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
+        {   
+            _audioSource.clip = _soundEffects[1];
+        }
+        else
+        {
+            switch(activityId)
+            {
+                case "Activity0": _audioSource.clip = _soundEffects[4];
+                break;
+                case "Activity1": _audioSource.clip = _soundEffects[5];
+                break;
+                case "Activity2": _audioSource.clip = _soundEffects[6];
+                break;
+                case "Activity3": _audioSource.clip = _soundEffects[7];
+                break;
+                case "Activity4": _audioSource.clip = _soundEffects[8];
+                break;
+                case "Activity5": _audioSource.clip = _soundEffects[9];
+                break;
+                case "Activity6": _audioSource.clip = _soundEffects[10];
+                break;
+                case "Activity7": _audioSource.clip = _soundEffects[11];
+                break;
+                case "Activity8": _audioSource.clip = _soundEffects[12];
+                break;
+            }
+        }
+        
         _audioSource.Play();
         _model.ExecuteActivity();
         UpdateView();
