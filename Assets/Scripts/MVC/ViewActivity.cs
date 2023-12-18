@@ -161,7 +161,6 @@ public class ViewActivity : MonoBehaviour
             }
             else
             {
-                Debug.Log($"{Label} has multiple disabled colors");
                 _constraintsController.StartLockColorCycle(_disabledColors);
                 //_buttonController.StartPushButtonColorCycle(_disabledColors);
             }
@@ -178,11 +177,17 @@ public class ViewActivity : MonoBehaviour
         // Toggle effects
         switch(_sceneName)
         {
-            case "Rpg": 
+            case "Rpg":
+            case "Rpg Abstract":
+            case "Rpg English":
+            case "Rpg English Abstract":
                 _effectsController.ToggleFog(isDisabled);
                 _effectsController.ToggleDoorAndWalls(false);
                 break;
             case "Office":
+            case "Office Abstract":
+            case "Office English":
+            case "Office English Abstract":
                 _effectsController.ToggleDoorAndWalls(isDisabled);
                 _effectsController.ToggleFog(false);
                 break;

@@ -243,10 +243,12 @@ public class Controller : MonoBehaviour
             
             if(_activitiesWithActiveConditionsAndOrMilestones.TryGetValue(activityId, out var conditionsOrMilestones))
             {
+                Debug.Log($"Controller.UpdateView(): {activityId} has the following constraints:");
                 foreach (string activity in conditionsOrMilestones)
                 {
                     Color color = _activityColors[activity];
                     colors.Add(color);
+                    Debug.Log($"{activity} - Color: {color}");
                 }
             }
             
