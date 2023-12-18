@@ -30,11 +30,7 @@ public class ColorCycler : MonoBehaviour
             {
                 // Set material color
                 _material.color = color;
-
-                // Enable emission and set emission color
-                _material.EnableKeyword("_EMISSION");
-                _material.SetColor("_EmissionColor", color);
-
+                
                 // Wait for the specified time
                 yield return new WaitForSeconds(_waitTime);
             }

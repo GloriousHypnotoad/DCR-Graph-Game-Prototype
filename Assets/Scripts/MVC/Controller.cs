@@ -49,7 +49,8 @@ public class Controller : MonoBehaviour
     {
         // Listen for executed events from the view
         _view.SubscribeToActivityExecuted(OnActivityExecuted);
-        _view.SubscribeToActivityExecuteRefused(OnExecuteRefused);
+        _view.SubscribeToActivityExecuteRefused(OnActivityExecuteRefused);
+        _view.SubscribeToActivityLockSelected(OnLockSelected);
         _view.SubscribeToActivitySimulationIsExecuting(OnActivitySimulationIsExecuting);
 
 
@@ -120,7 +121,6 @@ public class Controller : MonoBehaviour
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
     {
-        Debug.Log(activityId);
         if(activityId == "Activity8")
         {
             _audioSource.clip = _soundEffects[3];
@@ -134,21 +134,32 @@ public class Controller : MonoBehaviour
 
         UpdateView();
     }
-
-    private void OnExecuteRefused(string activityId)
+    
+    private void OnActivityExecuteRefused(string activityId)
     {
-        
         _audioSource.clip = _soundEffects[1];
-
         _audioSource.Play();
-
         _model.ExecuteActivity();
-
         UpdateView();
+    }
+
+    private void OnLockSelected(string activityId)
+    {
+        foreach (KeyValuePair<string, HashSet<string>> kvp in _activitiesWithActiveConditionsAndOrMilestones)
+        {
+            _view.ClearLockSignal(kvp.Key);
+
+            foreach (string activity in kvp.Value)
+            {
+                _view.ClearKeySignal(activity);
+            }            
+        }
+
+        _view.ActivityLockSignal(activityId);
 
         foreach (string activity in _activitiesWithActiveConditionsAndOrMilestones[activityId])
         {
-            _view.SignalActivity(activity);
+            _view.ActivityKeySignal(activity);
         }
     }
 

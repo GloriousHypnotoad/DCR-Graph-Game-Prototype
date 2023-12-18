@@ -22,10 +22,12 @@ public class ViewActivity : MonoBehaviour
     private event Action<ViewActivity> _activityMouseOver;
     private event Action<ViewActivity> _activityMouseExit;
     private event Action<ViewActivity> _onExecuted;
-    private event Action<ViewActivity> _pressButtonRefused;
+    private event Action<ViewActivity> _onExecuteRefused;
+    private event Action<ViewActivity> _lockSelected;
     private event Action<bool> _simulatedExecution;
     private HashSet<Color> _disabledColors;
     private bool _cursorIsOneActivity;
+    private bool _lockSignalRunning;
     private string _sceneName;
 
     void Awake()
@@ -47,8 +49,7 @@ public class ViewActivity : MonoBehaviour
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseOver(OnActivitySimulatedMouseOver);
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseDown(OnActivitySimulatedMouseDown);
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseExit(OnActivitySimulatedMouseExit);
-
-
+        _constraintsController.SubscribeToOnLockMouseDown(OnLockSelected);
 
         _cursorIsOneActivity = false;
     }
@@ -56,7 +57,8 @@ public class ViewActivity : MonoBehaviour
     void Start()
     {
         _sceneName = GameSettings.SceneName;
-        Debug.Log(_sceneName);
+        _effectsController.ToggleGlitterKey(false);
+        _effectsController.ToggleGlitterLock(false);
     }
 
     private void OnActivitySimulatedMouseOver()
@@ -92,8 +94,12 @@ public class ViewActivity : MonoBehaviour
         Description = description;
         ActivityColor = activityColor;
         _buttonColor = Color.white;
-        _constraintsController.ToggleKey(activityColor != Color.white);
-        _constraintsController.SetKeyColor(activityColor);
+        bool isConditionOrRequiresResponse = activityColor != Color.white;
+        _constraintsController.ToggleKey(isConditionOrRequiresResponse);
+        if(isConditionOrRequiresResponse)
+        {
+            _constraintsController.SetKeyColor(ActivityColor);
+        }
     }
 
     // Public methods to set the visual state of the Activity
@@ -105,6 +111,12 @@ public class ViewActivity : MonoBehaviour
             _buttonColor = Color.green;
             _buttonController.SetPushButtonColor(_buttonColor);
             _effectsController.ChangeGlitterColor(Color.white);
+            _effectsController.ToggleGlitterKey(false);
+        }
+        else
+        {
+            _buttonColor = Color.white;
+            _buttonController.SetPushButtonColor(_buttonColor);
         }
 
         _effectsController.ToggleGlitter(!isExecuted);
@@ -112,18 +124,18 @@ public class ViewActivity : MonoBehaviour
         
         // Toggle animated elements on/off
         _sceneryController.ToggleAnimatedElements(isExecuted);
-
     }
 
     internal void SetPending(bool isPending)
     {
         _effectsController.ToggleSceneryLight(isPending);
-        _effectsController.ToggleGlitter(isPending);
         
         if(isPending){
 //            _effectsController.ToggleGlitter(true);
+        _effectsController.ToggleGlitter(true);
             _effectsController.ChangeSceneryLightColor(ActivityColor);
             _effectsController.TogglePulseOnSceneryLight(true);
+
         }   
     }
 
@@ -135,6 +147,10 @@ public class ViewActivity : MonoBehaviour
         if (_disabledColors.Count != 0){
             _constraintsController.ToggleLock(true);
             isDisabled = true;
+            if (_lockSignalRunning)
+            {
+                LockSignal();
+            }
             if (_disabledColors.Count == 1)
             {
                 _constraintsController.StopLockColorCycle();
@@ -145,6 +161,7 @@ public class ViewActivity : MonoBehaviour
             }
             else
             {
+                Debug.Log($"{Label} has multiple disabled colors");
                 _constraintsController.StartLockColorCycle(_disabledColors);
                 //_buttonController.StartPushButtonColorCycle(_disabledColors);
             }
@@ -152,6 +169,9 @@ public class ViewActivity : MonoBehaviour
         else
         {
             _constraintsController.ToggleLock(false);
+            _effectsController.ToggleGlitterLock(false);
+            _lockSignalRunning = false;
+
             //_buttonController.SetPushButtonColor(_buttonColor);
         }
 
@@ -189,6 +209,7 @@ public class ViewActivity : MonoBehaviour
             Disabled = true;
 
             _buttonController.ToggleRotation(false);
+            _constraintsController.ToggleKey(false);
         }
     }
     // Allow subscribtion to Activity mouse events
@@ -200,9 +221,9 @@ public class ViewActivity : MonoBehaviour
     {
         _activityMouseExit += subscriber;
     }
-    internal void SubscribeToPressButtonRefused(Action<ViewActivity> subscriber)
+    internal void SubscribeToLockSelected(Action<ViewActivity> subscriber)
     {
-        _pressButtonRefused += subscriber;
+        _lockSelected += subscriber;
     }
     internal void SubscribeToSimulatedExecution(Action<bool> subscriber)
     {
@@ -219,6 +240,9 @@ public class ViewActivity : MonoBehaviour
     // Allows View to subscribe to activity execution event
     internal void SubscribeToOnExecuted(Action<ViewActivity> subscriber){
         _onExecuted+=subscriber;
+    }
+    internal void SubscribeToOnExecuteRefused(Action<ViewActivity> subscriber){
+        _onExecuteRefused+=subscriber;
     }
 
     // Forward MouseOver event to View
@@ -240,7 +264,8 @@ public class ViewActivity : MonoBehaviour
         if(Disabled)
         {
             _buttonController.PressButtonRefuse();
-            _pressButtonRefused?.Invoke(this);
+            _onExecuteRefused?.Invoke(this);
+
             /*
             if (_disabledColors.Count != 0){
                 if (_disabledColors.Count == 1)
@@ -257,14 +282,16 @@ public class ViewActivity : MonoBehaviour
             {
                 _buttonController.SetPushButtonColor(Color.white);
             }*/
-            _effectsController.ToggleGlitter(true);
-            _effectsController.SetGlitterRate(50f);
-            _effectsController.StartGlitterColorCycle(_disabledColors);
         }
         else
         {
             _buttonController.PressButton();
         }
+    }
+
+    internal void OnLockSelected()
+    {
+        _lockSelected?.Invoke(this);
     }
 
     // Inform Button Controller on event from Proximity Detector
@@ -287,17 +314,35 @@ public class ViewActivity : MonoBehaviour
         _effectsController.ToggleGodray(true);
     }
 
-    internal void Signal()
+    internal void KeySignal()
     {
-        _effectsController.StopGlitterColorCycle();
-        _effectsController.ToggleGlitter(true);
-        _effectsController.SetGlitterRate(50f);
-        _effectsController.ChangeGlitterColor(ActivityColor);
+        _effectsController.ToggleGlitterKey(true);
+        _effectsController.ChangeGlitterKeyColor(ActivityColor);
     }
 
-    internal void ResetSignal()
+    internal void LockSignal()
     {
-        _effectsController.ResetGlitterRate();
-        _effectsController.ChangeGlitterColor(Color.white);
+        _lockSignalRunning = true;
+        _effectsController.ToggleGlitterLock(true);
+        if(_disabledColors.Count > 1)
+        {
+            _effectsController.StartGlitterLockColorCycle(_disabledColors);
+        }
+        else
+        {
+            _effectsController.StopGlitterLockColorCycle();
+            _effectsController.ChangeGlitterLockColor(_disabledColors.First());
+
+        }
+    }
+    internal void DisableKeySignal()
+    {
+        _effectsController.ToggleGlitterKey(false);
+    }
+
+    internal void DisableLockSignal()
+    {
+        _lockSignalRunning = false;
+         _effectsController.ToggleGlitterLock(false);
     }
 }

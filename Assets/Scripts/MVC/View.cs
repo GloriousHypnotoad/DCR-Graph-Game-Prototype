@@ -18,6 +18,7 @@ public class View : MonoBehaviour
     private Image _reticule;
     private event Action<string> _activityExecuted;
     private event Action<string> _activityExecuteRefused;
+    private event Action<string> _activityLockSelected;
     private Dictionary<string, GameObject> _activities = new Dictionary<string, GameObject>();
     private event Action<bool> _activitySimulationIsExecuting;
 
@@ -103,7 +104,8 @@ public class View : MonoBehaviour
             activity.SubscribeToActivityMouseOver(OnActivityMouseOver);
             activity.SubscribeToActivityMouseExit(OnActivityMouseExit);
             activity.SubscribeToOnExecuted(OnActivityExecuted);
-            activity.SubscribeToPressButtonRefused(OnPressButtonRefused);
+            activity.SubscribeToOnExecuteRefused(OnActivityExecuteRefused);
+            activity.SubscribeToLockSelected(OnLockSelected);
             activity.SubscribeToSimulatedExecution(OnSimulatedExecution);
 
             // Configure proximity detector for player object.
@@ -175,10 +177,14 @@ public class View : MonoBehaviour
     {
         _activityExecuted+=subscriber;
     }
-
     public void SubscribeToActivityExecuteRefused(Action<string> subscriber)
     {
         _activityExecuteRefused+=subscriber;
+    }
+
+    public void SubscribeToActivityLockSelected(Action<string> subscriber)
+    {
+        _activityLockSelected+=subscriber;
     } 
 
     public void SubscribeToActivitySimulationIsExecuting(Action<bool> subscriber)
@@ -212,9 +218,9 @@ public class View : MonoBehaviour
         DisplayActivityText(label, description);
     }
 
-    private void OnPressButtonRefused(ViewActivity activity)
+    private void OnLockSelected(ViewActivity activity)
     {
-        _activityExecuteRefused?.Invoke(activity.Id);
+        _activityLockSelected?.Invoke(activity.Id);
     }
 
     internal void DisplayActivityText(string label, string description)
@@ -234,6 +240,11 @@ public class View : MonoBehaviour
     // Method for passing on Activity ID to the Controller when Activity executes
     internal void OnActivityExecuted(ViewActivity activity){
         _activityExecuted?.Invoke(activity.Id);
+    }
+
+    private void OnActivityExecuteRefused(ViewActivity activity)
+    {
+        _activityExecuteRefused?.Invoke(activity.Id);
     }
 
     internal void UpdateDeltaLists(List<string> addedToIncluded, List<string> removedFromIncluded, List<string> addedToPending, List<string> removedFromPending, List<string> addedToHaveUnmetMilestones, List<string> removedFromHaveUnmetMilestones, List<string> addedToDisabled, List<string> removedFromDisabled)
@@ -280,16 +291,23 @@ public class View : MonoBehaviour
         }
     }
 
-    internal void SignalActivity(string activityId)
+    internal void ActivityKeySignal(string activityId)
     {
-        _activities[activityId].GetComponent<ViewActivity>().Signal();
+        _activities[activityId].GetComponent<ViewActivity>().KeySignal();
     }
 
-    internal void ClearSignals()
+    internal void ActivityLockSignal(string activityId)
     {
-        foreach (KeyValuePair<string, GameObject> kvp in _activities)
-        {
-            kvp.Value.GetComponent<ViewActivity>().ResetSignal();
-        };
+         _activities[activityId].GetComponent<ViewActivity>().LockSignal();
+    }
+
+    internal void ClearKeySignal(string activityId)
+    {
+        _activities[activityId].GetComponent<ViewActivity>().DisableKeySignal();
+    }
+
+    internal void ClearLockSignal(string activityId)
+    {
+        _activities[activityId].GetComponent<ViewActivity>().DisableLockSignal();
     }
 }

@@ -17,8 +17,8 @@ static class FileStrings
     // ENVIRONMENT
     public static string SkyBoxesPath = "Environment/Skyboxes";
     public static string EnvironmentLightsPath = "Environment/Lights";
-    public static string SkyBoxNighttime = "Daytime";
-    public static string SkyBoxDaytime = "Nighttime";
+    public static string SkyBoxNighttime = "Sunset";
+    public static string SkyBoxDaytime = "Night";
     public static string Moonlight = "Moonlight";
     public static string Sunlight = "Sunlight";
 
@@ -36,6 +36,8 @@ static class FileStrings
 
     // EFFECTSCONTAINER
     public static string Glitter = "Glitter";
+    public static string GlitterKey = "GlitterKey";
+    public static string GlitterLock = "GlitterLock";
     public static string GlitterBurst = "GlitterBurst";
     public static string SceneryLight = "SceneryLight";
     public static string PulsatingLight = "PulsatingLight";

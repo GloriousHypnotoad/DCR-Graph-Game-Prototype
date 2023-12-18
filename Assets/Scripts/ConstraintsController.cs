@@ -7,12 +7,27 @@ public class ConstraintsController : MonoBehaviour
 {
     GameObject _lock;
     GameObject _key;
+    OnMouseEventEmitter _lockOnMouseEventEmitter;
+    private event Action lockMouseDown;
+
 
 void Awake()
 {
     _lock = transform.Find(FileStrings.Lock).gameObject;
     _key = transform.Find(FileStrings.Key).gameObject;
+    _lockOnMouseEventEmitter = _lock.GetComponent<OnMouseEventEmitter>();
+
+    _lockOnMouseEventEmitter.SubscribeToOnMouseDown(OnLockMouseDown);
 }
+
+    private void OnLockMouseDown()
+    {
+        lockMouseDown?.Invoke();
+    }
+    public void SubscribeToOnLockMouseDown(Action subscriber)
+    {
+        lockMouseDown += subscriber;
+    }
 
     internal void StartLockColorCycle(HashSet<Color> colors)
     {
@@ -33,8 +48,6 @@ void Awake()
         {
             Material lockMaterial = _lock.GetComponent<Renderer>().material;
             lockMaterial.color = color;
-            lockMaterial.EnableKeyword("_EMISSION");
-            lockMaterial.SetColor("_EmissionColor", color);
         }
     }
 
@@ -50,12 +63,7 @@ void Awake()
 
     internal void SetKeyColor(Color color)
     {
-        if (_key.activeSelf)
-        {
-            Material lockMaterial = _lock.GetComponent<Renderer>().material;
-            lockMaterial.color = color;
-            lockMaterial.EnableKeyword("_EMISSION");
-            lockMaterial.SetColor("_EmissionColor", color);
-        }
+        Material keyMaterial = _key.GetComponent<Renderer>().material;
+        keyMaterial.color = color;
     }
 }
