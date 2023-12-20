@@ -33,7 +33,7 @@ public class Controller : MonoBehaviour
         _soundEffects = new List<AudioClip>();
 
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/bells"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/fence"));
+        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/alert"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-short"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-long"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/0. Call in sick"));
@@ -127,7 +127,7 @@ public class Controller : MonoBehaviour
     }
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
-    {
+    {/*
         if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
         {   
             if(activityId == "Activity8")
@@ -163,7 +163,19 @@ public class Controller : MonoBehaviour
             }
         }
         _audioSource.Play();
+*/
 
+        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
+        {   
+            if(activityId == "Activity8")
+            {
+                _audioSource.clip = _soundEffects[3];
+            }
+            else {
+                _audioSource.clip = _soundEffects[0];
+            }
+            _audioSource.Play();
+        }
         _model.ExecuteActivity(activityId);
 
         UpdateView();
@@ -171,6 +183,7 @@ public class Controller : MonoBehaviour
     
     private void OnActivityExecuteRefused(string activityId)
     {
+        /*
         if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
         {   
             _audioSource.clip = _soundEffects[1];
@@ -201,6 +214,12 @@ public class Controller : MonoBehaviour
         }
         
         _audioSource.Play();
+        */
+        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
+        {   
+            _audioSource.clip = _soundEffects[1];
+            _audioSource.Play();
+        }
         _model.ExecuteActivity();
         UpdateView();
     }
@@ -250,12 +269,10 @@ public class Controller : MonoBehaviour
             
             if(_activitiesWithActiveConditionsAndOrMilestones.TryGetValue(activityId, out var conditionsOrMilestones))
             {
-                Debug.Log($"Controller.UpdateView(): {activityId} has the following constraints:");
                 foreach (string activity in conditionsOrMilestones)
                 {
                     Color color = _activityColors[activity];
                     colors.Add(color);
-                    Debug.Log($"{activity} - Color: {color}");
                 }
             }
             
@@ -320,7 +337,7 @@ public class Controller : MonoBehaviour
                     }
                 }
             }
-*/        }
+*/      }
     }
 
     private Dictionary<string, HashSet<string>> CalculateActivitiesWithActiveConditionsAndOrMilestones(HashSet<string> included, HashSet<string> executed, HashSet<string> pending, Dictionary<string, HashSet<string>> dictionary)
@@ -346,13 +363,13 @@ public class Controller : MonoBehaviour
 
     private void ValuesToKeysKeyToValue(KeyValuePair<string, HashSet<string>> kvp, Dictionary<string, HashSet<string>> target)
     {
-            foreach (string value in kvp.Value)
+        foreach (string value in kvp.Value)
+        {
+            if (!target.ContainsKey(value))
             {
-                if (!target.ContainsKey(value))
-                {
-                    target[value] = new HashSet<string>();
-                }
-                target[value].Add(kvp.Key);
+                target[value] = new HashSet<string>();
             }
+            target[value].Add(kvp.Key);
+        }
     }
 }

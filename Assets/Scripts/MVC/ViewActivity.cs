@@ -30,7 +30,7 @@ public class ViewActivity : MonoBehaviour
     private bool _cursorIsOneActivity;
     private bool _lockSignalRunning;
     private bool _keySignalRunning;
-    private bool _isConditionOrRequiresResponse;
+    private bool _isConditionOrMilestone;
     private string _sceneName;
 
     void Awake()
@@ -102,9 +102,9 @@ public class ViewActivity : MonoBehaviour
         Description = description;
         DisabledColor = disabledColor;
         _buttonColor = Color.white;
-        _isConditionOrRequiresResponse = disabledColor != Color.white;
-        _constraintsController.ToggleKey(_isConditionOrRequiresResponse);
-        if(_isConditionOrRequiresResponse)
+        _isConditionOrMilestone = disabledColor != Color.white;
+        _constraintsController.ToggleKey(_isConditionOrMilestone);
+        if(_isConditionOrMilestone)
         {
             _constraintsController.SetKeyColor(DisabledColor);
         }
@@ -120,6 +120,7 @@ public class ViewActivity : MonoBehaviour
             _buttonController.SetPushButtonColor(_buttonColor);
             _effectsController.ChangeGlitterColor(Color.white);
             _effectsController.ToggleGlitterKey(false);
+            _constraintsController.ToggleKey(false);
         }
         else
         {
@@ -230,7 +231,7 @@ public class ViewActivity : MonoBehaviour
             }
         } else
         {
-            _constraintsController.ToggleKey(_isConditionOrRequiresResponse);
+            _constraintsController.ToggleKey(_isConditionOrMilestone);
         }
     }
     // Allow subscribtion to Activity mouse events
