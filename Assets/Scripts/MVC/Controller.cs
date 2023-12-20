@@ -60,12 +60,13 @@ public class Controller : MonoBehaviour
         _view.SubscribeToActivityExecuted(OnActivityExecuted);
         _view.SubscribeToActivityExecuteRefused(OnActivityExecuteRefused);
         _view.SubscribeToActivityLockSelected(OnLockSelected);
+        _view.SubscribeToActivityLockExcluded(OnSignalLockExcluded);
         _view.SubscribeToActivitySimulationIsExecuting(OnActivitySimulationIsExecuting);
 
 
         // Parse graph XML file -> JSON -> Local data structures.
-        _model.ParseXmlFile(selectedGraphName);
-        _model.ProcessJsonFile($"{_sceneName}.json");
+        string jsonFile = _model.ParseXmlFile(selectedGraphName);
+        _model.ProcessJsonFile(jsonFile);
 
         _activityColors = GenerateColorsHelper();
 
@@ -90,8 +91,8 @@ public class Controller : MonoBehaviour
     private Dictionary<string, Color> GenerateColorsHelper(){
         
         Dictionary<string, HashSet<string>> Conditions = _model.GetConditions();
-        Dictionary<string, HashSet<string>> Responses = _model.GetResponses();
-        HashSet<string> pending = _model.GetPending();
+        Dictionary<string, HashSet<string>> Milestones = _model.GetMilestones();
+        //HashSet<string> pending = _model.GetPending();
         
         Dictionary<string, Color> activityColors = new Dictionary<string, Color>();
 
@@ -106,18 +107,15 @@ public class Controller : MonoBehaviour
         {
             rgbs.Add(kvp.Key);
         }
-
+    /*
         foreach (string item in pending)
         {
             rgbs.Add(item);
         }
-
-        foreach (KeyValuePair<string, HashSet<string>> kvp in Responses)
+*/
+        foreach (KeyValuePair<string, HashSet<string>> kvp in Milestones)
         {
-            foreach (string value in kvp.Value)
-            {
-                rgbs.Add(value);                
-            }
+            rgbs.Add(kvp.Key);
         }
         Dictionary<string, Color> rgbColors = _colorGenerator.GenerateColors(rgbs);
         foreach (KeyValuePair<string, Color> kvp in rgbColors)
@@ -225,6 +223,15 @@ public class Controller : MonoBehaviour
         {
             _view.ActivityKeySignal(activity);
         }
+    }
+
+    private void OnSignalLockExcluded(string activityId){
+
+        foreach (string activity in _activitiesWithActiveConditionsAndOrMilestones[activityId])
+        {
+            _view.ClearKeySignal(activity);
+        }
+        
     }
 
     // Gets data from the Model, process and forward to the View for rendering.

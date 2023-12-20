@@ -12,8 +12,8 @@ public class ObjectRotationContinuous : MonoBehaviour
 
     void Update()
     {
-        // Object now rotates continuously without a flag check
-        transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+        // Object now rotates continuously around the global Y-axis
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
     }
 
     public void PerformQuickRotation()

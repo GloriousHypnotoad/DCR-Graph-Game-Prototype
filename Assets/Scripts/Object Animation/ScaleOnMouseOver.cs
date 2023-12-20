@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class ScaleOnMouseOver : MonoBehaviour
+public class ContinuousScaleOnMouseOver : MonoBehaviour
 {
-    public float scaleFactor = 1.1f; // Uniform scale factor
-    public float transitionSpeed = 0.5f; // Speed of scaling
+    private float scaleFactor = 2f; // Uniform scale factor
+    private float transitionSpeed = 2f; // Speed of scaling
 
     private Vector3 originalScale; // Original scale of the object
     private Vector3 targetScale; // Target scale when mouse is over
     private bool isMouseOver = false; // Flag to check if mouse is over the object
+
+    // Additional variables for continuous scaling
+    private bool scalingUp = true; // Flag to check the direction of scaling
 
     void Start()
     {
@@ -19,12 +22,27 @@ public class ScaleOnMouseOver : MonoBehaviour
     {
         if (isMouseOver)
         {
-            // Scale up the object
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, transitionSpeed * Time.deltaTime);
+            // Continuously scale up and down
+            if (scalingUp)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, transitionSpeed * Time.deltaTime);
+                if (transform.localScale == targetScale)
+                {
+                    scalingUp = false; // Change direction of scaling
+                }
+            }
+            else
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, originalScale, transitionSpeed * Time.deltaTime);
+                if (transform.localScale == originalScale)
+                {
+                    scalingUp = true; // Change direction of scaling
+                }
+            }
         }
         else
         {
-            // Scale down the object
+            // Return to original scale when mouse exits
             transform.localScale = Vector3.Lerp(transform.localScale, originalScale, transitionSpeed * Time.deltaTime);
         }
     }
@@ -36,6 +54,7 @@ public class ScaleOnMouseOver : MonoBehaviour
 
     void OnMouseExit()
     {
-        isMouseOver = false; // Set flag to false when mouse exits
+        isMouseOver = false; // Reset scaling direction and set flag to false when mouse exits
+        scalingUp = true;
     }
 }

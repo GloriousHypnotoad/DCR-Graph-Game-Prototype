@@ -31,23 +31,27 @@ public class Model : MonoBehaviour
 
     private List<ModelState> _history = new List<ModelState>();
     
-    public void ParseXmlFile(string fileName)
+    public string ParseXmlFile(string fileName)
     {
         // Read the XML file into a string
-        string xmlContent = File.ReadAllText(Path.Combine(Application.dataPath, "GameData", $"{fileName}.xml"));
+        //string xmlContent = File.ReadAllText(Path.Combine(Application.dataPath, "Resources/GameData", $"{fileName}.xml"));
+        TextAsset xmlFile = Resources.Load<TextAsset>($"GameData/{fileName}");
+        Debug.Log(xmlFile.text);
 
         // Load the XML content into an XmlDocument
         XmlDocument doc = new XmlDocument();
-        doc.LoadXml(xmlContent);
+        doc.LoadXml(xmlFile.text);
 
         // Convert the XML to JSON
-        string jsonText = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
+        //string jsonText = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
+        string jsonText = JsonConvert.SerializeXmlNode(doc);
+        /*
         // Define the path for the output file
         string outputPath = Path.Combine(Application.persistentDataPath, $"{fileName}.json");
 
         // Save the JSON to a file
         File.WriteAllText(outputPath, jsonText);
-
+        */
         #if UNITY_EDITOR
         // Save to the Assets/Resources folder (for development use)
         string resourcesFolderPath = Path.Combine(Application.dataPath, "GameData");
@@ -58,11 +62,13 @@ public class Model : MonoBehaviour
         string resourcesPath = Path.Combine(resourcesFolderPath, $"{fileName}.json");
         File.WriteAllText(resourcesPath, jsonText);
         #endif
+
+        return jsonText;
     }
     
-    public void ProcessJsonFile(string filePath)
+    public void ProcessJsonFile(string jsonText)
     {
-        string jsonText = "";
+        //string jsonText = "";
         JObject jsonObject = new JObject();
         JToken resources = new JObject();
         JToken constraints = new JObject();
@@ -71,7 +77,7 @@ public class Model : MonoBehaviour
         try
         {
             // Create JSON objects
-            jsonText = File.ReadAllText(Application.persistentDataPath + $"/{filePath}");
+            //jsonText = File.ReadAllText(filePath);
             jsonObject = JObject.Parse(jsonText);
         }
         catch (JsonReaderException jsonEx)

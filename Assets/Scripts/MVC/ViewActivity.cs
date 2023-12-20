@@ -9,7 +9,7 @@ public class ViewActivity : MonoBehaviour
     public string Id { get; private set; }
     public string Label { get; private set; }
     public string Description { get; private set; }
-    public Color ActivityColor { get; private set; }
+    public Color DisabledColor { get; private set; }
     public bool Disabled { get; private set; }
     private Color _buttonColor;
     
@@ -26,8 +26,11 @@ public class ViewActivity : MonoBehaviour
     private event Action<ViewActivity> _lockSelected;
     private event Action<bool> _simulatedExecution;
     private HashSet<Color> _disabledColors;
+    private Color _pendingColor;
     private bool _cursorIsOneActivity;
     private bool _lockSignalRunning;
+    private bool _keySignalRunning;
+    private bool _isConditionOrRequiresResponse;
     private string _sceneName;
 
     void Awake()
@@ -50,6 +53,11 @@ public class ViewActivity : MonoBehaviour
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseDown(OnActivitySimulatedMouseDown);
         _activityDetectionTrigger.SubscribeToOnSimulatedMouseExit(OnActivitySimulatedMouseExit);
         _constraintsController.SubscribeToOnLockMouseDown(OnLockSelected);
+
+        _pendingColor = Color.yellow;
+        
+        _lockSignalRunning = false;
+        _keySignalRunning = false;
 
         _cursorIsOneActivity = false;
     }
@@ -87,18 +95,18 @@ public class ViewActivity : MonoBehaviour
     }
 
     // Initialize object with activity data from graph
-    internal void Initialize(string id, string label, string description, Color activityColor)
+    internal void Initialize(string id, string label, string description, Color disabledColor)
     {
         Id = id;
         Label = label;
         Description = description;
-        ActivityColor = activityColor;
+        DisabledColor = disabledColor;
         _buttonColor = Color.white;
-        bool isConditionOrRequiresResponse = activityColor != Color.white;
-        _constraintsController.ToggleKey(isConditionOrRequiresResponse);
-        if(isConditionOrRequiresResponse)
+        _isConditionOrRequiresResponse = disabledColor != Color.white;
+        _constraintsController.ToggleKey(_isConditionOrRequiresResponse);
+        if(_isConditionOrRequiresResponse)
         {
-            _constraintsController.SetKeyColor(ActivityColor);
+            _constraintsController.SetKeyColor(DisabledColor);
         }
     }
 
@@ -133,7 +141,7 @@ public class ViewActivity : MonoBehaviour
         if(isPending){
 //            _effectsController.ToggleGlitter(true);
         _effectsController.ToggleGlitter(true);
-            _effectsController.ChangeSceneryLightColor(ActivityColor);
+            _effectsController.ChangeSceneryLightColor(_pendingColor);
             _effectsController.TogglePulseOnSceneryLight(true);
 
         }   
@@ -178,16 +186,16 @@ public class ViewActivity : MonoBehaviour
         switch(_sceneName)
         {
             case "Rpg":
-            case "Rpg Abstract":
-            case "Rpg English":
-            case "Rpg English Abstract":
+            case "Rpg_Abstract":
+            case "Rpg_English":
+            case "Rpg_English_Abstract":
                 _effectsController.ToggleFog(isDisabled);
                 _effectsController.ToggleDoorAndWalls(false);
                 break;
             case "Office":
-            case "Office Abstract":
-            case "Office English":
-            case "Office English Abstract":
+            case "Office_Abstract":
+            case "Office_English":
+            case "Office_English_Abstract":
                 _effectsController.ToggleDoorAndWalls(isDisabled);
                 _effectsController.ToggleFog(false);
                 break;
@@ -215,6 +223,14 @@ public class ViewActivity : MonoBehaviour
 
             _buttonController.ToggleRotation(false);
             _constraintsController.ToggleKey(false);
+            if (_keySignalRunning)
+            {
+                _keySignalRunning = false;
+                _effectsController.ToggleGlitterKey(false);
+            }
+        } else
+        {
+            _constraintsController.ToggleKey(_isConditionOrRequiresResponse);
         }
     }
     // Allow subscribtion to Activity mouse events
@@ -321,8 +337,9 @@ public class ViewActivity : MonoBehaviour
 
     internal void KeySignal()
     {
+        _keySignalRunning = true;
         _effectsController.ToggleGlitterKey(true);
-        _effectsController.ChangeGlitterKeyColor(ActivityColor);
+        _effectsController.ChangeGlitterKeyColor(DisabledColor);
     }
 
     internal void LockSignal()

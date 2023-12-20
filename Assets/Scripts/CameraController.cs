@@ -67,11 +67,11 @@ public class CameraController : MonoBehaviour
         // Check for sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            movement = new Vector3(horizontal, 0, vertical) * _birdsEyeMovementSpeend * sprintMultiplier;
+            movement = new Vector3(-horizontal, 0, -vertical) * _birdsEyeMovementSpeend * sprintMultiplier;
         }
         else
         {
-            movement = new Vector3(horizontal, 0, vertical) * _birdsEyeMovementSpeend;
+            movement = new Vector3(-horizontal, 0, -vertical) * _birdsEyeMovementSpeend;
         }
 
         

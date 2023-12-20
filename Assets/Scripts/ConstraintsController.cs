@@ -6,6 +6,7 @@ using UnityEngine;
 public class ConstraintsController : MonoBehaviour
 {
     GameObject _lock;
+    
     GameObject _key;
     OnMouseEventEmitter _lockOnMouseEventEmitter;
     private event Action lockMouseDown;

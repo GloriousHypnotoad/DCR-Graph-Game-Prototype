@@ -19,6 +19,7 @@ public class View : MonoBehaviour
     private event Action<string> _activityExecuted;
     private event Action<string> _activityExecuteRefused;
     private event Action<string> _activityLockSelected;
+    private event Action<string> _activityLockExcluded;
     private Dictionary<string, GameObject> _activities = new Dictionary<string, GameObject>();
     private event Action<bool> _activitySimulationIsExecuting;
 
@@ -57,28 +58,28 @@ public class View : MonoBehaviour
     void Update()
     {
         // Configurations for each camera mode
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             SetCamerasAreEnabled(new bool[]{true, false, true, false});
             GameSettings.ActiveCamera = CameraMode.FirstPerson;
         }
-        else if (Input.GetKeyDown(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, true, true, false});
             GameSettings.ActiveCamera = CameraMode.ThirdPerson;
         }
-        else if (Input.GetKeyDown(KeyCode.F3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SetCamerasAreEnabled(new bool[]{false, false, false, true});
             GameSettings.ActiveCamera = CameraMode.BirdsEye;
         }
-        else if (Input.GetKeyDown(KeyCode.F4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             // Toggle topdown feed on/off
             if (!_birdsEyeCamera.gameObject.activeSelf){
@@ -185,7 +186,12 @@ public class View : MonoBehaviour
     public void SubscribeToActivityLockSelected(Action<string> subscriber)
     {
         _activityLockSelected+=subscriber;
-    } 
+    }
+
+    internal void SubscribeToActivityLockExcluded(Action<string> subscriber)
+    {
+        _activityLockExcluded+=subscriber;
+    }
 
     public void SubscribeToActivitySimulationIsExecuting(Action<bool> subscriber)
     {
@@ -221,6 +227,11 @@ public class View : MonoBehaviour
     private void OnLockSelected(ViewActivity activity)
     {
         _activityLockSelected?.Invoke(activity.Id);
+    }
+
+    private void OnLockExcluded(ViewActivity activity)
+    {
+        _activityLockExcluded?.Invoke(activity.Id);
     }
 
     internal void DisplayActivityText(string label, string description)
