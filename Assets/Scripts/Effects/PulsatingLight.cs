@@ -20,8 +20,9 @@ public class PulsatingLight : MonoBehaviour
     {
         if (_isPulsating)
         {
-            // Adjust the intensity to oscillate between 0 and the maximum value
-            _lightComponent.intensity = (Mathf.Sin(Time.time * _pulseSpeed) * 0.5f + 0.5f) * _pulseIntensity;
+            float sinValue = Mathf.Sin(Time.time * _pulseSpeed);
+            float intensityModifier = (sinValue + 1) / 2 * 0.5f + 0.5f;
+            _lightComponent.intensity = _initialIntensity * intensityModifier;
         }
     }
 

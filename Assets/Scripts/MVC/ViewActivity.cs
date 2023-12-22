@@ -138,6 +138,7 @@ public class ViewActivity : MonoBehaviour
     internal void SetPending(bool isPending)
     {
         _effectsController.ToggleSceneryLight(isPending);
+        _effectsController.ToggleGodray(isPending);
         
         if(isPending){
 //            _effectsController.ToggleGlitter(true);
@@ -270,7 +271,6 @@ public class ViewActivity : MonoBehaviour
     // Forward MouseOver event to View
     internal void OnActivityMouseOver()
     { 
-        _effectsController.ToggleGodray(false);
         _activityMouseOver?.Invoke(this);
     }
 
@@ -331,11 +331,13 @@ public class ViewActivity : MonoBehaviour
         // Highlight outgoing constraints
     }
 
-    internal void SetStateChanged()
+    internal void SetStateAdded()
     {
-        _effectsController.ToggleGodray(true);
     }
 
+    internal void SetStateRemoved()
+    {
+    }
     internal void KeySignal()
     {
         _keySignalRunning = true;

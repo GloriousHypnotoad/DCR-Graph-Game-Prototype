@@ -323,21 +323,21 @@ public class Controller : MonoBehaviour
 
             var removedFromDisabledOrMilestones = previousStateHasActiveConditionsAndOrMilestones.Except(currentStateHasActiveConditionsAndOrMilestones).ToList();
             var addedToDisabledOrMilestones = currentStateHasActiveConditionsAndOrMilestones.Except(previousStateHasActiveConditionsAndOrMilestones).ToList();
-/*
-            // Pass these lists to the view
-            UpdateDeltaLists(addedToIncluded, removedFromIncluded, addedToPending, removedFromDisabledOrMilestones, addedToDisabledOrMilestones);
 
-            void UpdateDeltaLists(params List<string>[] lists)
+            // Right now we are only use the addedToPending delta, since these require the most attention.
+            // UpdateAddedDeltaLists(addedToPending);
+            void UpdateAddedDeltaLists(params List<string>[] lists)
             {
                 foreach (var list in lists)
                 {
                     foreach (var id in list)
                     {
-                        _view.SetActivityStateChanged(id);
+                        Debug.Log($"{id} was added to pending list");
+                        _view.SetActivityStateAdded(id);
                     }
                 }
             }
-*/      }
+      }
     }
 
     private Dictionary<string, HashSet<string>> CalculateActivitiesWithActiveConditionsAndOrMilestones(HashSet<string> included, HashSet<string> executed, HashSet<string> pending, Dictionary<string, HashSet<string>> dictionary)

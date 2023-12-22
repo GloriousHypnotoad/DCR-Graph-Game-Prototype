@@ -133,14 +133,21 @@ public class View : MonoBehaviour
     public void SetActivityIncluded(string activityId, bool isIncluded){
         _activities[activityId].GetComponent<ViewActivity>().SetIncluded(isIncluded);
     }
-    public void SetActivityStateChanged(string activityId)
+    public void SetActivityStateAdded(string activityId)
     {
         // Perform your action
         if (_activities.TryGetValue(activityId, out var activity))
         {
-            activity.GetComponent<ViewActivity>().SetStateChanged();
+            activity.GetComponent<ViewActivity>().SetStateAdded();
         }
-
+    }
+    public void SetActivityStateRemoved(string activityId)
+    {
+        // Perform your action
+        if (_activities.TryGetValue(activityId, out var activity))
+        {
+            activity.GetComponent<ViewActivity>().SetStateRemoved();
+        }
     }
 
     // Method for updating the global lighting when activities are pending or milestones are unmet
