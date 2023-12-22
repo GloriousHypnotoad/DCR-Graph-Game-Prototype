@@ -143,8 +143,8 @@ public class ViewActivity : MonoBehaviour
         if(isPending){
 //            _effectsController.ToggleGlitter(true);
         _effectsController.ToggleGlitter(true);
-            _effectsController.ChangeSceneryLightColor(_pendingColor);
-            _effectsController.TogglePulseOnSceneryLight(true);
+        _effectsController.ChangeSceneryLightColor(DisabledColor);
+        _effectsController.TogglePulseOnSceneryLight(true);
 
         }   
     }

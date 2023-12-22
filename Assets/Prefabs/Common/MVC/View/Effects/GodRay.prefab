@@ -56,7 +56,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 673161931187244769, guid: 0ca86aae421eadc4bbb70c8455da054b, type: 3}
       propertyPath: m_Name
-      value: LightColumnOnStateChanged
+      value: GodrayColumn
       objectReference: {fileID: 0}
     - target: {fileID: 1231578484429065453, guid: 0ca86aae421eadc4bbb70c8455da054b, type: 3}
       propertyPath: m_LocalScale.x
@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943633900491303917, guid: 453d13ce0c4c3b84eb78db0d32f2bf17, type: 3}
       propertyPath: m_Name
-      value: GlitterColumnOnStateChanged
+      value: GodrayGlitter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -107,6 +107,15 @@ public class EffectsController : MonoBehaviour
         }
     }
 
+    internal void ChangeGodrayColor(Color color)
+    {
+        GameObject godRay = transform.Find("GodRay/GodrayColumn").gameObject;
+        Material godRayMaterial = godRay.GetComponent<Renderer>().material;
+        godRayMaterial.color = color;
+        godRayMaterial.EnableKeyword("_EMISSION");
+        godRayMaterial.SetColor("_EmissionColor", color);
+    }
+
     internal void SetGlitterRate(float v)
     {
         _emissionModule.rateOverTime = v;
