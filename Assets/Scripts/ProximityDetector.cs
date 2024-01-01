@@ -31,7 +31,6 @@ public class ProximityDetector : MonoBehaviour
         _onIsTargetNearby += subscriber;
     }
 
-    // Visualize the detection radius in the editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

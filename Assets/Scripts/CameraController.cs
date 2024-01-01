@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        // Note: Add any additional first-person camera logic here
     }
 
     private void HandleThirdPersonModeInput()
@@ -55,16 +54,12 @@ public class CameraController : MonoBehaviour
     {
         HandleCameraZoom(_birdsEyeZoomSpeend);
 
-        // Example camera adjustment for zoom
-        // transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -cameraZoom);
 
-        // Movement along the x and z axes
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 movement;
 
-        // Check for sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
             movement = new Vector3(-horizontal, 0, -vertical) * _birdsEyeMovementSpeend * sprintMultiplier;
@@ -82,32 +77,5 @@ public class CameraController : MonoBehaviour
     {
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         transform.Translate(Vector3.forward * scrollInput * movementSpeed, Space.Self);
-
-        /*
-        switch (axis.ToLower())
-        {
-
-            
-            case "x":
-                // Move along the local X-axis
-                transform.Translate(Vector3.right * scrollInput * movementSpeed, Space.Self);
-                break;
-
-            case "y":
-                // Move along the local Y-axis (inverted for natural feel)
-                transform.Translate(Vector3.down * scrollInput * movementSpeed, Space.Self);
-                break;
-
-            case "z":
-                // Move along the local Z-axis
-                transform.Translate(Vector3.forward * scrollInput * movementSpeed, Space.Self);
-                break;
-
-            default:
-                Debug.LogError("Invalid axis input. Please use 'x', 'y', or 'z'.");
-                break;
-            
-        }
-        */
     }
 }

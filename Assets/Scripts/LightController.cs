@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class ActivtyExecuteButtonLightController : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

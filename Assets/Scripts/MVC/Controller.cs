@@ -36,21 +36,10 @@ public class Controller : MonoBehaviour
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/alert"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-short"));
         _soundEffects.Add(Resources.Load<AudioClip>("Sounds/choir-long"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/0. Call in sick"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/1. Register notification of sickness"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/2. Assign shiftplanner"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/3. Roster exceeds budget"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/4. Roster is within budget"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/5. Inform the manager"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/6. An employee works over-time"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/7. Call in replacement"));
-        _soundEffects.Add(Resources.Load<AudioClip>("Sounds/8. Complete process"));
-
     }
 
     void Start()
     {
-        //Run(Path.Combine(Application.dataPath, FileStrings.GameDataPath, $"{FileStrings.GetActiveSceneName()}{FileStrings.GraphFileExtension}"));
         Run($"{_sceneName}");
     }
     
@@ -107,12 +96,7 @@ public class Controller : MonoBehaviour
         {
             rgbs.Add(kvp.Key);
         }
-    /*
-        foreach (string item in pending)
-        {
-            rgbs.Add(item);
-        }
-*/
+
         foreach (KeyValuePair<string, HashSet<string>> kvp in Milestones)
         {
             rgbs.Add(kvp.Key);
@@ -127,43 +111,7 @@ public class Controller : MonoBehaviour
     }
     // Listens to events emitted by the View when an Activity is clicked, then update the Model and the View.
     private void OnActivityExecuted(string activityId)
-    {/*
-        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
-        {   
-            if(activityId == "Activity8")
-            {
-                _audioSource.clip = _soundEffects[3];
-            }
-            else {
-                _audioSource.clip = _soundEffects[0];
-            }
-        }
-        else
-        {
-            switch(activityId)
-            {
-                case "Activity0": _audioSource.clip = _soundEffects[4];
-                break;
-                case "Activity1": _audioSource.clip = _soundEffects[5];
-                break;
-                case "Activity2": _audioSource.clip = _soundEffects[6];
-                break;
-                case "Activity3": _audioSource.clip = _soundEffects[7];
-                break;
-                case "Activity4": _audioSource.clip = _soundEffects[8];
-                break;
-                case "Activity5": _audioSource.clip = _soundEffects[9];
-                break;
-                case "Activity6": _audioSource.clip = _soundEffects[10];
-                break;
-                case "Activity7": _audioSource.clip = _soundEffects[11];
-                break;
-                case "Activity8": _audioSource.clip = _soundEffects[12];
-                break;
-            }
-        }
-        _audioSource.Play();
-*/
+    {
 
         if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
         {   
@@ -183,38 +131,6 @@ public class Controller : MonoBehaviour
     
     private void OnActivityExecuteRefused(string activityId)
     {
-        /*
-        if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
-        {   
-            _audioSource.clip = _soundEffects[1];
-        }
-        else
-        {
-            switch(activityId)
-            {
-                case "Activity0": _audioSource.clip = _soundEffects[4];
-                break;
-                case "Activity1": _audioSource.clip = _soundEffects[5];
-                break;
-                case "Activity2": _audioSource.clip = _soundEffects[6];
-                break;
-                case "Activity3": _audioSource.clip = _soundEffects[7];
-                break;
-                case "Activity4": _audioSource.clip = _soundEffects[8];
-                break;
-                case "Activity5": _audioSource.clip = _soundEffects[9];
-                break;
-                case "Activity6": _audioSource.clip = _soundEffects[10];
-                break;
-                case "Activity7": _audioSource.clip = _soundEffects[11];
-                break;
-                case "Activity8": _audioSource.clip = _soundEffects[12];
-                break;
-            }
-        }
-        
-        _audioSource.Play();
-        */
         if(GameSettings.ActiveCamera != CameraMode.BirdsEye)
         {   
             _audioSource.clip = _soundEffects[1];
@@ -282,26 +198,7 @@ public class Controller : MonoBehaviour
             _view.SetActivityIncluded(activityId, included.Contains(activityId));
         }
 
-        /*
-        bool unMetMilestones = false;
-        foreach (KeyValuePair<string, HashSet<string>> kvp in _model.GetMilestones())
-        {
-            if (included.Contains(kvp.Key) && pending.Contains(kvp.Key))
-            {
-                foreach (string value in kvp.Value)
-                {
-                    Debug.Log($"{value} has unmet milestone {kvp.Key}");
-                }
-                
-                unMetMilestones = true;
-                break;
-            }            
-        }
-
-        _view.UpdateGlobalEnvironment(unMetMilestones);
-        */
-
-        _view.UpdateGlobalEnvironment(pending.Count() > 0);
+        _view.UpdateGlobalEnvironment(HasIncludedPendingActivities());
 
         int currentStateIndex = _model.GetHistoryLength() - 1;
         int previousStateIndex = currentStateIndex - 1;
@@ -338,6 +235,19 @@ public class Controller : MonoBehaviour
                 }
             }
       }
+    }
+
+    private bool HasIncludedPendingActivities(){
+            
+        foreach (string pendingActivity in _model.GetPending())
+        {
+            if (_model.GetIncluded().Contains(pendingActivity))
+            {
+                return true;
+            }            
+        }
+        return false;
+
     }
 
     private Dictionary<string, HashSet<string>> CalculateActivitiesWithActiveConditionsAndOrMilestones(HashSet<string> included, HashSet<string> executed, HashSet<string> pending, Dictionary<string, HashSet<string>> dictionary)

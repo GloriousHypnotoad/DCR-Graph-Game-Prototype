@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ObjectShake : MonoBehaviour
 {
-    // Duration and intensity of shake
     private float _shakeDuration = 0.5f;
     private float _shakeIntensity = 0.5f;
 

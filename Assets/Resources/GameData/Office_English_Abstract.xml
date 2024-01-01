@@ -1,12 +1,12 @@
-<dcrgraph title="Office English" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
+<dcrgraph title="Office English new version" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="5" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
     <meta>
-        <graph id="1704760" hash="91767FB7E2C8579B472A95BB4EA1025B" guid="26AAC7AE-F641-453D-A7E6-F4E8B8615E1F" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
-        <revision id="3560949" type="minor" date="2023-12-23T19:04:35.673"/>
+        <graph id="1705090" hash="5B5892EC4AEE60A0D6232D6CE77700DC" guid="DE49FE72-0E4D-432C-B7B9-8A4B876FE999" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
+        <revision id="3562482" type="minor" date="2023-12-31T23:03:20.640"/>
         <organization id="18" name="DTU - Danish Technical University" type="Demonstration"/>
     </meta>
     <meta>
-        <graph id="1704760" hash="91767FB7E2C8579B472A95BB4EA1025B" guid="26AAC7AE-F641-453D-A7E6-F4E8B8615E1F" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
-        <revision id="3560949" type="minor" date="2023-12-23T19:04:35.673"/>
+        <graph id="1705090" hash="5B5892EC4AEE60A0D6232D6CE77700DC" guid="DE49FE72-0E4D-432C-B7B9-8A4B876FE999" OwnerName="Simon James Jensen" OwnerId="136208" categoryId="7309" categoryTitle="Default" Keywords=""/>
+        <revision id="3562482" type="minor" date="2023-12-31T23:03:20.640"/>
         <organization id="18" name="DTU - Danish Technical University" type="Demonstration"/>
     </meta>
     <specification>
@@ -16,7 +16,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="300" yLoc="275"/>
+                            <location xLoc="600" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -34,7 +34,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription>&lt;p&gt;An employee must assigned to perform the task of finding a replacement for the sick employee in the duty roster.&lt;/p&gt;</eventDescription>
+                        <eventDescription>&lt;p&gt;An employee must assigned to perform the task of finding a replacement sick employees in the duty roster.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>
@@ -49,7 +49,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="500" yLoc="275"/>
+                            <location xLoc="750" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -82,7 +82,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="700" yLoc="475"/>
+                            <location xLoc="750" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -100,7 +100,7 @@
                         <eventType/>
                         <eventScope>private</eventScope>
                         <eventTypeData/>
-                        <eventDescription>&lt;p&gt;An employee must register the notification of sickness in the system.&lt;/p&gt;</eventDescription>
+                        <eventDescription>&lt;p&gt;An employee must register the notification of any sickness in the system.&lt;/p&gt;</eventDescription>
                         <purpose/>
                         <guide/>
                         <insight use="false"/>
@@ -115,7 +115,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="500" yLoc="675"/>
+                            <location xLoc="750" yLoc="675"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -148,7 +148,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="300" yLoc="675"/>
+                            <location xLoc="600" yLoc="675"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -181,7 +181,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="-50" yLoc="475"/>
+                            <location xLoc="450" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -214,7 +214,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="100" yLoc="675"/>
+                            <location xLoc="450" yLoc="675"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -247,7 +247,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="100" yLoc="275"/>
+                            <location xLoc="450" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -280,7 +280,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="300" yLoc="475"/>
+                            <location xLoc="600" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -371,8 +371,8 @@
             </conditions>
             <responses>
                 <response sourceId="Activity1" targetId="Activity2" filterLevel="1" description="" time="" groups=""/>
-                <response sourceId="Activity6" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
-                <response sourceId="Activity7" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
+                <response sourceId="Activity2" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
+                <response sourceId="Activity2" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
             </responses>
             <coresponses/>
             <excludes>
@@ -384,16 +384,17 @@
             </excludes>
             <includes>
                 <include sourceId="Activity3" targetId="Activity5" filterLevel="1" description="" time="" groups=""/>
-                <include sourceId="Activity2" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
-                <include sourceId="Activity1" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
                 <include sourceId="Activity1" targetId="Activity2" filterLevel="1" description="" time="" groups=""/>
                 <include sourceId="Activity3" targetId="Activity4" filterLevel="1" description="" time="" groups=""/>
                 <include sourceId="Activity4" targetId="Activity3" filterLevel="1" description="" time="" groups=""/>
                 <include sourceId="Activity6" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
                 <include sourceId="Activity7" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
+                <include sourceId="Activity2" targetId="Activity6" filterLevel="1" description="" time="" groups=""/>
+                <include sourceId="Activity2" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
             </includes>
             <milestones>
-                <milestone sourceId="Activity2" targetId="Activity7" filterLevel="1" description="" time="" groups=""/>
+                <milestone sourceId="Activity6" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
+                <milestone sourceId="Activity7" targetId="Activity8" filterLevel="1" description="" time="" groups=""/>
             </milestones>
             <updates/>
             <spawns/>
@@ -410,8 +411,7 @@
             <included>
                 <event id="Activity0"/>
                 <event id="Activity1"/>
-                <event id="Activity5"/>
-                <event id="Activity4"/>
+                <event id="Activity3"/>
             </included>
             <pendingResponses/>
         </marking>

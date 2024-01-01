@@ -129,7 +129,6 @@ public class ViewActivity : MonoBehaviour
         }
 
         _effectsController.ToggleGlitter(!isExecuted);
-        //_effectsController.ToggleSceneryLight(isExecuted);       
         
         // Toggle animated elements on/off
         _sceneryController.ToggleAnimatedElements(isExecuted);
@@ -141,7 +140,6 @@ public class ViewActivity : MonoBehaviour
         _effectsController.ToggleGodray(isPending);
         
         if(isPending){
-//            _effectsController.ToggleGlitter(true);
         _effectsController.ToggleGlitter(true);
         _effectsController.ChangeSceneryLightColor(DisabledColor);
         _effectsController.TogglePulseOnSceneryLight(true);
@@ -166,13 +164,10 @@ public class ViewActivity : MonoBehaviour
                 _constraintsController.StopLockColorCycle();
                 _constraintsController.SetLockColor(_disabledColors.First());
 
-                //_buttonController.StopPushButtonColorCycle();
-                //_buttonController.SetPushButtonColor(_disabledColors.First());
             }
             else
             {
                 _constraintsController.StartLockColorCycle(_disabledColors);
-                //_buttonController.StartPushButtonColorCycle(_disabledColors);
             }
         }
         else
@@ -180,8 +175,6 @@ public class ViewActivity : MonoBehaviour
             _constraintsController.ToggleLock(false);
             _effectsController.ToggleGlitterLock(false);
             _lockSignalRunning = false;
-
-            //_buttonController.SetPushButtonColor(_buttonColor);
         }
 
         // Toggle effects
@@ -287,23 +280,6 @@ public class ViewActivity : MonoBehaviour
         {
             _buttonController.PressButtonRefuse();
             _onExecuteRefused?.Invoke(this);
-
-            /*
-            if (_disabledColors.Count != 0){
-                if (_disabledColors.Count == 1)
-                {
-                    _buttonController.SetPushButtonColor(_disabledColors.First());
-                    _buttonController.StopPushButtonColorCycle();
-                }
-                else
-                {
-                    _buttonController.StartPushButtonColorCycle(_disabledColors);
-                }
-            }
-            else
-            {
-                _buttonController.SetPushButtonColor(Color.white);
-            }*/
         }
         else
         {
@@ -328,7 +304,6 @@ public class ViewActivity : MonoBehaviour
     {
         _onExecuted?.Invoke(this);
         _effectsController.GlitterBurst(quickRotationDuration);
-        // Highlight outgoing constraints
     }
 
     internal void SetStateAdded()

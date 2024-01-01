@@ -34,7 +34,6 @@ public class Model : MonoBehaviour
     public string ParseXmlFile(string fileName)
     {
         // Read the XML file into a string
-        //string xmlContent = File.ReadAllText(Path.Combine(Application.dataPath, "Resources/GameData", $"{fileName}.xml"));
         TextAsset xmlFile = Resources.Load<TextAsset>($"GameData/{fileName}");
         Debug.Log(xmlFile.text);
 
@@ -43,15 +42,8 @@ public class Model : MonoBehaviour
         doc.LoadXml(xmlFile.text);
 
         // Convert the XML to JSON
-        //string jsonText = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
         string jsonText = JsonConvert.SerializeXmlNode(doc);
-        /*
-        // Define the path for the output file
-        string outputPath = Path.Combine(Application.persistentDataPath, $"{fileName}.json");
 
-        // Save the JSON to a file
-        File.WriteAllText(outputPath, jsonText);
-        */
         #if UNITY_EDITOR
         // Save to the Assets/Resources folder (for development use)
         string resourcesFolderPath = Path.Combine(Application.dataPath, "GameData");
@@ -68,7 +60,6 @@ public class Model : MonoBehaviour
     
     public void ProcessJsonFile(string jsonText)
     {
-        //string jsonText = "";
         JObject jsonObject = new JObject();
         JToken resources = new JObject();
         JToken constraints = new JObject();
@@ -77,7 +68,6 @@ public class Model : MonoBehaviour
         try
         {
             // Create JSON objects
-            //jsonText = File.ReadAllText(filePath);
             jsonObject = JObject.Parse(jsonText);
         }
         catch (JsonReaderException jsonEx)
@@ -86,28 +76,23 @@ public class Model : MonoBehaviour
         }
         catch (FileNotFoundException fnfEx)
         {
-            // Handle the case where the file is not found
             Debug.Log($"File not found: {fnfEx.Message}\n");
         }
         catch (DirectoryNotFoundException dnfEx)
         {
-            // Handle the case where the directory is not found
             Debug.Log($"Directory not found: {dnfEx.Message}\n");
         }
         catch (IOException ioEx)
         {
-            // Handle other I/O errors
             Debug.Log($"I/O error: {ioEx.Message}\n");
         }
         catch (Exception ex)
         {
-            // Handle any other unforeseen errors
             Debug.Log($"An error occurred: {ex.Message}\n");
         }
         try
         {
             resources = jsonObject["dcrgraph"]["specification"]["resources"];
-            // ... Additional processing for 'resources'
         }
         catch (InvalidOperationException e)
         {

@@ -43,7 +43,6 @@ public class ObjectRotation : MonoBehaviour
         rotationSpeed = originalSpeed;
     }
 
-    // Method to check if the animation is running
     public bool IsAnimationRunning()
     {
         return _isRotating;

@@ -38,20 +38,17 @@ public class PlayerObjectController : MonoBehaviour
 
     void HandleFirstPersonInput()
     {
-        // Original Input Handling
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
         MoveCharacter(moveX, moveZ);
 
-        // New Rotation Handling
         float rotateY = Input.GetAxis("Mouse X");
         RotateCharacter(rotateY);
     }
 
     void HandleThirdPersonInput()
     {
-        // Tank Mode: Horizontal input for rotation, Vertical for forward/backward
         float rotateY = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
@@ -63,7 +60,6 @@ public class PlayerObjectController : MonoBehaviour
     {
         moveDirection = transform.right * moveX + transform.forward * moveZ;
         
-        // Check for sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
             moveDirection *= moveSpeed * sprintMultiplier;
@@ -75,7 +71,6 @@ public class PlayerObjectController : MonoBehaviour
 
         controller.Move(moveDirection * Time.deltaTime);
 
-        // Fixed vertical position
         if (Mathf.Abs(transform.position.y - fixedVerticalPosition) > 0.01f)
         {
             transform.position = new Vector3(transform.position.x, fixedVerticalPosition, transform.position.z);
@@ -84,11 +79,9 @@ public class PlayerObjectController : MonoBehaviour
 
     void RotateCharacter(float rotateY)
     {
-        // Assuming a sensitivity factor for rotation speed
         float sensitivity = 100f;
         float rotationAmount = rotateY * sensitivity * Time.deltaTime;
 
-        // Apply rotation around the y-axis
         transform.Rotate(0, rotationAmount, 0);
     }
 }

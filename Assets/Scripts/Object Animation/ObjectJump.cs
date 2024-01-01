@@ -32,14 +32,12 @@ public class ObjectJump : MonoBehaviour, IAnimatable
         }
     }
 
-    // Start the animation
     private void StartAnimation()
     {
         jumpCoroutine = StartCoroutine(JumpRoutine());
         isAnimationRunning = true;
     }
 
-    // Stop the animation
     private void StopAnimation()
     {
         stopRequested = true;
@@ -54,7 +52,6 @@ public class ObjectJump : MonoBehaviour, IAnimatable
             bool apexReached = false;
             while (timer <= _jumpDuration)
             {
-                // Vertical movement with parabolic trajectory
                 float height = _jumpHeight * (1 - Mathf.Pow(2 * timer / _jumpDuration - 1, 2));
                 transform.position = startPosition + new Vector3(0, height, 0);
                 
@@ -67,17 +64,15 @@ public class ObjectJump : MonoBehaviour, IAnimatable
                 yield return null;
             }
 
-            // Reset to start position
             ResetPosition();
 
             if (stopRequested)
             {
                 stopRequested = false;
                 isAnimationRunning = false;
-                yield break; // Exit the coroutine
+                yield break;
             }
 
-            // Wait before the next jump
             yield return new WaitForSeconds(_waitTime);
         }
     }

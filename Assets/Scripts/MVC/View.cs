@@ -135,7 +135,6 @@ public class View : MonoBehaviour
     }
     public void SetActivityStateAdded(string activityId)
     {
-        // Perform your action
         if (_activities.TryGetValue(activityId, out var activity))
         {
             activity.GetComponent<ViewActivity>().SetStateAdded();
@@ -143,7 +142,6 @@ public class View : MonoBehaviour
     }
     public void SetActivityStateRemoved(string activityId)
     {
-        // Perform your action
         if (_activities.TryGetValue(activityId, out var activity))
         {
             activity.GetComponent<ViewActivity>().SetStateRemoved();
@@ -255,7 +253,6 @@ public class View : MonoBehaviour
 
     }
 
-    // Method for passing on Activity ID to the Controller when Activity executes
     internal void OnActivityExecuted(ViewActivity activity){
         _activityExecuted?.Invoke(activity.Id);
     }
