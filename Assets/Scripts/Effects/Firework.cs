@@ -60,7 +60,7 @@ public class Firework : MonoBehaviour
     {
         ResetFirework();
         Launch();
-        isFiring = false; // Ensure continuous firing is stopped after one launch
+        isFiring = false;
     }
 
     private void ResetFirework()

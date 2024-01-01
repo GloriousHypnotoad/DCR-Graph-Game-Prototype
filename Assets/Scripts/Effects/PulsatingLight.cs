@@ -32,7 +32,6 @@ public class PulsatingLight : MonoBehaviour
         
         if (!shouldPulsate)
         {
-            // Reset the light's intensity to zero when pulsation is stopped
             _lightComponent.intensity = _initialIntensity;
         }
     }

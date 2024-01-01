@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Office_English.unity
     guid: 8dd938f591b4652438496c56376d97e5
+  - enabled: 1
+    path: Assets/Scenes/Office_English_Abstract.unity
+    guid: 8efd728968fe412479f4d8010a880d82
   m_configObjects: {}

@@ -9,12 +9,10 @@ public class GodRay : MonoBehaviour
     }
     public void toggleActive(bool isActive)
     {
-        // Set GameObject active and toggle children
         if (isActive)
         {
             gameObject.SetActive(true);
         }
-        // Deactivate GameObject
         else
         {
             StartCoroutine(ToggleChildrenAndDeactivateSelf());
@@ -23,14 +21,12 @@ public class GodRay : MonoBehaviour
 
     private IEnumerator ToggleChildrenAndDeactivateSelf()
     {
-        // Flicker effect for children
         for (int i = 0; i < 10; i++)
         {
             SetChildrenActive(i % 2 == 0);
             yield return new WaitForSeconds(0.1f);
         }
 
-        // Ensure children are active before deactivating self
         SetChildrenActive(true);
         gameObject.SetActive(false);
     }

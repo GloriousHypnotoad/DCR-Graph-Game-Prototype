@@ -11,7 +11,6 @@ public class ColorCycler : MonoBehaviour
 
     void Awake()
     {
-        // Get the Renderer component and its material
         _material = GetComponent<Renderer>().material;
     }
 
@@ -28,10 +27,8 @@ public class ColorCycler : MonoBehaviour
         {
             foreach (var color in _colors)
             {
-                // Set material color
                 _material.color = color;
                 
-                // Wait for the specified time
                 yield return new WaitForSeconds(_waitTime);
             }
         }

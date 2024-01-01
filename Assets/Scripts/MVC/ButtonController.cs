@@ -39,7 +39,6 @@ public class ButtonController : MonoBehaviour
     {
         _objectRotation.ToggleAnimation(isRotating);       
     }
-    // TODO: Should just emit onSelected and let the View inform the controller for approval.
     public void PressButton()
     {
         PerformQuickRotation();
@@ -111,10 +110,4 @@ public class ButtonController : MonoBehaviour
             _buttonTransparentPushButton.GetComponent<ColorCycler>().StopCycle();
         }
     }
-    /*
-
-void OnDestroy()
-{
-}
-*/
 }

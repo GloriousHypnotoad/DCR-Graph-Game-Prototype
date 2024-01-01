@@ -12,7 +12,6 @@ public class ParticleColorCycler : MonoBehaviour
 
     void Awake()
     {
-        // Get the ParticleSystem component
         _particleSystem = GetComponent<ParticleSystem>();
     }
 
@@ -29,11 +28,9 @@ public class ParticleColorCycler : MonoBehaviour
         {
             foreach (var color in _colors)
             {
-                // Change Particle System's start color
                 var mainModule = _particleSystem.main;
                 mainModule.startColor = color;
 
-                // Wait for the specified time
                 yield return new WaitForSeconds(_waitTime);
             }
         }
